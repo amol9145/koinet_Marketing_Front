@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { baseUrl } from "../../Constant/ConstantFiles";
 
 function Infographics() {
     const [infographics, setInfographics] = useState([]);
@@ -11,7 +12,7 @@ function Infographics() {
         // Fetch infographics from the API
         const fetchInfographics = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/get_infographics");
+                const response = await axios.get(`${baseUrl}/get_infographics`);
                 if (Array.isArray(response.data.data)) {
                     setInfographics(response.data.data);
                 } else {

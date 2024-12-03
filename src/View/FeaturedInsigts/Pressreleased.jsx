@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import striptags from "striptags";
+import { baseUrl } from "../../Constant/ConstantFiles";
 
 function Pressreleased() {
     const [pressReleases, setPressReleases] = useState([]);
@@ -18,7 +19,7 @@ function Pressreleased() {
 
     useEffect(() => {
         // Fetch data from API
-        fetch("http://localhost:3000/get_data_press_releases")
+        fetch(`${baseUrl}/get_data_press_releases`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("Failed to fetch press releases");
