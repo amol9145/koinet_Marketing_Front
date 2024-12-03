@@ -42,7 +42,7 @@ const HomeDashboard = () => {
                 <div className="h-full  px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
                     <ul className="space-y-2 font-medium mt-5">
                         <li className='py-2 ms-4 text-start hover:bg-slate-800 hover:text-white hover:rounded-md px-2'>
-                            <Link> My Dashboard</Link>
+                            <Link>Dashboard</Link>
                         </li>
                         <li className='py-2 ms-4 text-start hover:bg-slate-800 hover:text-white hover:rounded-md px-2'>
 
