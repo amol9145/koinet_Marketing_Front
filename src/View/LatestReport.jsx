@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { baseUrl } from "../Constant/ConstantFiles";
 
 function LatestReport() {
     const [reports, setReports] = useState([]);
@@ -10,7 +11,7 @@ function LatestReport() {
     useEffect(() => {
         // Fetch reports data from the API
         axios
-            .get("http://localhost:3000/get_reports")
+            .get(`${baseUrl}/get_reports`)
             .then((response) => {
                 setReports(response.data.data); // Assuming the response data is an array of reports
                 setLoading(false);
