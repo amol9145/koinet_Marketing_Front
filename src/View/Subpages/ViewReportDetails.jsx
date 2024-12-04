@@ -4,6 +4,7 @@ import axios from "axios"; // For making API calls
 // import ReCAPTCHA from "react-google-recaptcha";
 import { baseUrl } from "../../Constant/ConstantFiles";
 import { useRazorpay } from "react-razorpay";
+import {process} from "dotenv";
 
 
 function ViewReportDetails() {
@@ -48,7 +49,7 @@ function ViewReportDetails() {
         }
 
         const options = {
-            key: "rzp_test_cUDdmmAIerYlSG", // Replace with your Razorpay test/live key
+            key: process.env.REACT_APP_RAZORPAY_KEY_ID, // Replace with your Razorpay test/live key
             amount, // Amount in paise
             currency: "INR",
             name: "Report Purchase",
