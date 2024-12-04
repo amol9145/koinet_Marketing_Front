@@ -3,15 +3,20 @@ import { Link, useParams } from "react-router-dom"; // For accessing URL params
 import axios from "axios"; // For making API calls
 // import ReCAPTCHA from "react-google-recaptcha";
 import { baseUrl } from "../../Constant/ConstantFiles";
+import { useRazorpay } from "react-razorpay";
 
 
 function ViewReportDetails() {
     const { id } = useParams(); // Get the report ID from the URL
     const [reportDetails, setReportDetails] = useState(null);
     const [activeTab, setActiveTab] = useState("summary");
+    const [selectedLicense, setSelectedLicense] = useState(null);
+
+
+    const { Razorpay } = useRazorpay();
 
     useEffect(() => {
-        // Function to fetch report details by ID
+        // Fetch report details by ID
         const fetchReportDetails = async () => {
             try {
                 const response = await axios.get(`${baseUrl}/get_report/${id}`);
@@ -21,18 +26,52 @@ function ViewReportDetails() {
             }
         };
 
-        // Only fetch report details if ID is available
         if (id) {
             fetchReportDetails();
         }
     }, [id]);
 
-    // const handleReCAPTCHAChange = (value) => {
-    //     return value
-    // };
+    const handlePayment = () => {
+        if (!selectedLicense || !reportDetails) {
+            alert("Please select a license before proceeding.");
+            return;
+        }
+
+        // Determine amount based on the selected license
+        let amount;
+        if (selectedLicense === "single-user") {
+            amount = reportDetails.singleUserPrice * 100; // Convert to paise
+        } else if (selectedLicense === "multi-user") {
+            amount = reportDetails.multiUserPrice * 100; // Convert to paise
+        } else if (selectedLicense === "enterprise") {
+            amount = reportDetails.enterprisePrice * 100; // Convert to paise
+        }
+
+        const options = {
+            key: "rzp_test_cUDdmmAIerYlSG", // Replace with your Razorpay test/live key
+            amount, // Amount in paise
+            currency: "INR",
+            name: "Report Purchase",
+            description: `Purchase ${selectedLicense} license`,
+            handler: (response) => {
+                alert(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
+                // Handle post-payment actions like saving payment details in DB
+            },
+            prefill: {
+                name: "Customer Name", // Replace with actual user data
+                email: "customer@example.com", // Replace with actual user data
+            },
+            theme: {
+                color: "#3399cc",
+            },
+        };
+
+        const razorpayInstance = new Razorpay(options);
+        razorpayInstance.open();
+    };
 
     if (!reportDetails) {
-        return <div>Loading report details...</div>;
+        return <p>Loading...</p>;
     }
     function formatDate(dateString) {
         const options = { day: '2-digit', month: 'short', year: 'numeric' };
@@ -180,38 +219,52 @@ function ViewReportDetails() {
                                     <ul className="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-600 dark:text-white transition-all duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-700">
                                         <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
                                             <div className="flex items-center ps-3">
-                                                <input id="vue-checkbox" type="checkbox" value="" className="w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                                <label className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Single-User License: US$ {reportDetails.singleUserPrice}</label>
+                                                <input
+                                                    id="single-user-checkbox"
+                                                    type="radio"
+                                                    name="license"
+                                                    value="single-user"
+                                                    onChange={(e) => setSelectedLicense(e.target.value)}
+                                                    className="w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                                />
+                                                <label className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                    Single-User License: US$ {reportDetails.singleUserPrice}
+                                                </label>
                                             </div>
                                         </li>
                                         <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
                                             <div className="flex items-center ps-3">
-                                                <input id="react-checkbox" type="checkbox" value="" className="w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                                <label className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Multi-User License: US$ {reportDetails.multiUserPrice}</label>
+                                                <input
+                                                    id="multi-user-checkbox"
+                                                    type="radio"
+                                                    name="license"
+                                                    value="multi-user"
+                                                    onChange={(e) => setSelectedLicense(e.target.value)}
+                                                    className="w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                                />
+                                                <label className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                    Multi-User License: US$ {reportDetails.multiUserPrice}
+                                                </label>
                                             </div>
                                         </li>
                                         <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
                                             <div className="flex items-center ps-3">
-                                                <input id="angular-checkbox" type="checkbox" value="" className="w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                                <label className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Enterprise License: US$ {reportDetails.enterprisePrice}</label>
+                                                <input
+                                                    id="enterprise-checkbox"
+                                                    type="radio"
+                                                    name="license"
+                                                    value="enterprise"
+                                                    onChange={(e) => setSelectedLicense(e.target.value)}
+                                                    className="w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                                />
+                                                <label className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                    Enterprise License: US$ {reportDetails.enterprisePrice}
+                                                </label>
                                             </div>
                                         </li>
                                     </ul>
                                     <button
-                                        onClick={() => {
-                                            const selectedOption = document.querySelector('input[name="license"]:checked')?.value;
-                                            if (selectedOption) {
-                                                if (selectedOption === "single-user") {
-                                                    window.location.href = "/checkout";
-                                                } else if (selectedOption === "multi-user") {
-                                                    window.location.href = "/checkout";
-                                                } else if (selectedOption === "enterprise") {
-                                                    window.location.href = "/checkout";
-                                                }
-                                            } else {
-                                                alert("Please select a license option before proceeding.");
-                                            }
-                                        }}
+                                        onClick={handlePayment}
                                         className="mt-5 w-full bg-gradient-to-r from-teal-400 to-green-500 text-white p-3 rounded-full text-sm font-semibold tracking-wider uppercase shadow-md hover:shadow-lg hover:scale-105 transform transition duration-300"
                                     >
                                         Buy Now

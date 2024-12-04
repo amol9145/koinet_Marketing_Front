@@ -1,10 +1,11 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { FaFilePdf, FaFileExcel, FaFilePowerpoint, FaChartBar } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
 import { baseUrl } from "../../Constant/ConstantFiles";
 import ReCAPTCHA from "react-google-recaptcha";
+import emailjs from 'emailjs-com';
 
 const ViewPressRelease = () => {
     const [pressRelease, setPressRelease] = useState(null); // State to store API data
@@ -14,6 +15,29 @@ const ViewPressRelease = () => {
 
 
     const { id } = useParams()
+    const form = useRef();
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+
+        emailjs
+            .sendForm(
+                'service_anhnjq1', // Replace with your EmailJS service ID
+                'template_g6wzw9k', // Replace with your EmailJS template ID
+                form.current,
+                '9DlhYScldqmnqrNr1' // Replace with your public key
+            )
+            .then(
+                (result) => {
+                    console.log('SUCCESS!', result.text);
+                    alert('Email sent successfully!');
+                },
+                (error) => {
+                    console.error('FAILED...', error.text);
+                    alert('Failed to send email. Please try again.');
+                }
+            );
+    };
     const handleReCAPTCHAChange = (value) => {
         return value
     };
@@ -37,14 +61,10 @@ const ViewPressRelease = () => {
 
     useEffect(() => {
         // Fetch data from API
-        fetch(`${baseUrl}/get_data_press_releases`)
+        axios
+            .get(`${baseUrl}/get_data_press_releases`)
             .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Failed to fetch press releases");
-                }
-                return response.json();
-            })
-            .then((data) => {
+                const data = response.data; // Axios automatically parses JSON responses
                 if (data && Array.isArray(data.data)) {
                     setPressReleases(data.data); // Use the `data` key from the response
                 } else {
@@ -132,10 +152,10 @@ const ViewPressRelease = () => {
                             </div>
 
                             {/* Enhanced Contact Form */}
-                            <div className="bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-lg p-6 transition duration-200 hover:shadow-xl shadow-lg">
+                            <div className="bg-gradient-to-r from-blue-500 to-blue-700 text-black rounded-lg p-6 transition duration-200 hover:shadow-xl shadow-lg">
                                 <h3 className="text-2xl font-semibold mb-4">Get in <span className="text-yellow-300">Touch</span> with Us</h3>
                                 <p className="mb-4">Were here to help! Fill out the form below, and our market research team will get back to you shortly.</p>
-                                <form className="space-y-4">
+                                <form className="space-y-4" ref={form} onSubmit={sendEmail}>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div>
                                             <label className="block font-medium mb-1">Name</label>
@@ -143,6 +163,7 @@ const ViewPressRelease = () => {
                                                 type="text"
                                                 className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-3 transition duration-200"
                                                 placeholder="Your Name"
+                                                name="user_name"
                                                 required
                                             />
                                         </div>
@@ -152,6 +173,7 @@ const ViewPressRelease = () => {
                                                 type="text"
                                                 className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-3 transition duration-200"
                                                 placeholder="Your Business Email"
+
                                                 required
                                             />
                                         </div>
@@ -163,6 +185,7 @@ const ViewPressRelease = () => {
                                             type="text"
                                             className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-3 transition duration-200"
                                             placeholder="Your Business Email"
+                                            name="user_email"
                                             required
                                         />
                                     </div>
@@ -192,6 +215,7 @@ const ViewPressRelease = () => {
                                     </div>
                                     <button
                                         type="submit"
+                                        value="Send"
                                         className="w-full bg-white text-blue-600 font-semibold py-2 rounded-lg hover:shadow-lg transition duration-200 transform hover:scale-105"
                                     >
                                         Download Sample Report
@@ -202,6 +226,7 @@ const ViewPressRelease = () => {
                     </>
                 )}
             </div>
+
 
             {/* Attractive Recent Market Reports */}
             <div className="mt-10 bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300">
