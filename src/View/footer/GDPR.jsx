@@ -4,7 +4,7 @@ function GDPR() {
         <div>
             <div className="bg-gray-100 min-h-screen p-6">
                 <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg p-8">
-                    <h1 className="text-3xl text-center font-bold text-white mb-4 bg-black p-2 rounded-lg">
+                    <h1 className="text-3xl text-center font-bold text-white mb-4 bg-black p-2 rounded-lg mt-6">
                         GDPR Privacy Policy
                     </h1>
                     <p className="text-gray-700 mb-6">

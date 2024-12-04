@@ -15,9 +15,9 @@ const Footer = () => {
                     <p className="mt-2 text-sm text-gray-300">Air plant banjo lyft occupy retro adaptogen indego</p>
                 </div>
                 <div className="flex-grow flex flex-wrap md:pr-20 -mb-10 md:text-left text-center order-first">
-                    <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-                        <h2 className="title-font font-medium text-white tracking-widest text-lg mb-3">Services</h2>
-                        <nav className="list-none mb-10">
+                    <div className="lg:w-1/4 md:w-1/2 w-full px-4 ">
+                        <h2 className="title-font font-medium text-white tracking-widest text-lg mb-3 text-start">Services</h2>
+                        <nav className="list-none mb-10 text-start ">
                             <li>
                                 <a className="text-gray-300 hover:text-gray-600" >Latest Reports</a>
                             </li>
@@ -33,8 +33,8 @@ const Footer = () => {
                         </nav>
                     </div>
                     <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-                        <h2 className="title-font font-medium text-white tracking-widest text-lg mb-3">Useful Links</h2>
-                        <nav className="list-none mb-10">
+                        <h2 className="title-font font-medium text-white tracking-widest text-lg mb-3 text-start">Useful Links</h2>
+                        <nav className="list-none mb-10 text-start ">
                             <li>
                                 <Link to={"/ccpa"} className="text-gray-300 hover:text-gray-600" >CCPA Privacy Policy</Link>
                             </li>
@@ -53,8 +53,8 @@ const Footer = () => {
                         </nav>
                     </div>
                     <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-                        <h2 className="title-font font-medium text-white tracking-widest text-lg mb-3">Featured Insights</h2>
-                        <nav className="list-none mb-10">
+                        <h2 className="title-font font-medium text-white tracking-widest text-lg mb-3 text-start">Featured Insights</h2>
+                        <nav className="list-none mb-10 text-start ">
                             <li>
                                 <Link to={"/pressreleased"} className="text-gray-300 hover:text-gray-600">Press Release</Link>
                             </li>
@@ -73,8 +73,8 @@ const Footer = () => {
                         </nav>
                     </div>
                     <div className="lg:w-1/4 md:w-1/2 w-full px-2">
-                        <h2 className="title-font font-medium text-white tracking-widest text-lg mb-3">Need help or have a question?</h2>
-                        <nav className="list-none mb-10">
+                        <h2 className="title-font font-medium text-white tracking-widest text-lg mb-3 text-start">Need help or have a question?</h2>
+                        <nav className="list-none mb-10 text-start ">
                             <li>
                                 <a className="text-gray-300 hover:text-gray-600">Kharadi,pune,Maharashtra, <br />India,411014</a>
                             </li>

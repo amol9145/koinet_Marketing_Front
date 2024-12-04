@@ -223,7 +223,7 @@ function Home() {
                             />
                             <button
                                 type="submit"
-                                className="text-white absolute right-2.5 bottom-2.5 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 hover:from-purple-500 hover:to-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 transition-all duration-300 shadow-lg hover:shadow-2xl animate-pulse"
+                                className="text-white absolute right-2.5 bottom-2.5 bg-blue-800 hover:from-purple-500 hover:to-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 transition-all duration-300 shadow-lg hover:shadow-2xl animate-pulse"
                             >
                                 Search
                             </button>
@@ -251,12 +251,12 @@ function Home() {
                 </div>
 
                 {/* Rotating Background */}
-                <div
+                {/* <div
                     className="absolute inset-0 bg-cover bg-center bg-fixed opacity-30 animate-rotate"
                     style={{
                         backgroundImage: "url('https://png.pngtree.com/thumb_back/fw800/background/20230720/pngtree-virtual-office-with-smart-data-platform-businessmen-characters-engaged-in-digital-image_3717439.jpg')",
                     }}
-                ></div>
+                ></div> */}
             </section>
 
             {/* INTRO SECTION */}
