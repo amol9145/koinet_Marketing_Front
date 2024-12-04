@@ -38,6 +38,7 @@ const ViewPressRelease = () => {
                 }
             );
     };
+
     const handleReCAPTCHAChange = (value) => {
         return value
     };

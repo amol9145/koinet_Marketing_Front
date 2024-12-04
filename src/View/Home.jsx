@@ -317,8 +317,8 @@ function Home() {
                             <div
                                 key={index}
                                 className={`absolute inset-0 transition-all duration-700 ease-in-out transform ${index === currentIndex
-                                        ? "translate-x-0 opacity-100"
-                                        : "translate-x-full opacity-0"
+                                    ? "translate-x-0 opacity-100"
+                                    : "translate-x-full opacity-0"
                                     }`}
                             >
                                 <a href={image.link}>
@@ -351,8 +351,8 @@ function Home() {
                                 aria-label={`Slide ${index + 1}`}
                                 onClick={() => setCurrentIndex(index)}
                                 className={`w-4 h-4 rounded-full transition-all duration-300 ${currentIndex === index
-                                        ? "bg-white scale-150 shadow-xl"
-                                        : "bg-white/50 hover:bg-white"
+                                    ? "bg-white scale-150 shadow-xl"
+                                    : "bg-white/50 hover:bg-white"
                                     }`}
                             ></button>
                         ))}
@@ -583,8 +583,7 @@ function Home() {
             {/* Why Choose Us? */}
             <section className="relative bg-gradient-to-b from-gray-100 to-gray-200 py-16">
                 {/* Decorative Background Elements */}
-                <div className="absolute top-0 left-0 w-48 h-48 bg-indigo-400 rounded-full blur-3xl opacity-30 transform -translate-x-1/3 -translate-y-1/3"></div>
-                <div className="absolute bottom-0 right-0 w-64 h-64 bg-sky-400 rounded-full blur-3xl opacity-30 transform translate-x-1/3 translate-y-1/3"></div>
+               
 
                 {/* Main Content */}
                 <div className="container mx-auto px-6 md:px-12 lg:px-20">
@@ -692,9 +691,7 @@ function Home() {
                     </div>
                 </div>
 
-                {/* Background Decorative Elements */}
-                <div className="absolute top-0 left-0 w-48 h-48 bg-indigo-400 rounded-full blur-3xl opacity-30 transform -translate-x-1/3 -translate-y-1/3"></div>
-                <div className="absolute bottom-0 right-0 w-64 h-64 bg-sky-400 rounded-full blur-3xl opacity-30 transform translate-x-1/3 translate-y-1/3"></div>
+              
             </section>
 
 

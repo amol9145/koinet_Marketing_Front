@@ -1,7 +1,11 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { baseUrl } from "../../Constant/ConstantFiles";
+import { useRazorpay } from "react-razorpay";
+
+import emailjs from 'emailjs-com';
+
 
 function ViewInfographics() {
     const { id } = useParams();  // Extract `id` from the URL params
@@ -10,6 +14,41 @@ function ViewInfographics() {
     const [infographic, setInfographic] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const { Razorpay } = useRazorpay();
+
+    const [selectedLicense, setSelectedLicense] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const form = useRef();
+    // Function to open the modal
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+    // Function to close the modal
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
+    const sendEmail = (e) => {
+        e.preventDefault();
+
+        emailjs
+            .sendForm(
+                'service_anhnjq1', // Replace with your EmailJS service ID
+                'template_g6wzw9k', // Replace with your EmailJS template ID
+                form.current,
+                '9DlhYScldqmnqrNr1' // Replace with your public key
+            )
+            .then(
+                (result) => {
+                    console.log('SUCCESS!', result.text);
+                    alert('Email sent successfully!');
+                },
+                (error) => {
+                    console.error('FAILED...', error.text);
+                    alert('Failed to send email. Please try again.');
+                }
+            );
+    };
+
 
     useEffect(() => {
         if (!id) {
@@ -36,12 +75,167 @@ function ViewInfographics() {
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>{error}</div>;
+    const handlePayment = () => {
+        if (!selectedLicense || !infographic) {
+            alert("Please select a license before proceeding.");
+            return;
+        }
 
+        // Determine amount based on the selected license
+        let amount;
+        if (selectedLicense === "single-user") {
+            amount = infographic.singleUserPrice * 100; // Convert to paise
+        } else if (selectedLicense === "multi-user") {
+            amount = infographic.multiUserPrice * 100; // Convert to paise
+        } else if (selectedLicense === "enterprise") {
+            amount = infographic.enterprisePrice * 100; // Convert to paise
+        }
 
+        const options = {
+            key: "rzp_test_cUDdmmAIerYlSG", // Replace with your Razorpay test/live key
+            amount, // Amount in paise
+            currency: "INR",
+            name: "Report Purchase",
+            description: `Purchase ${selectedLicense} license`,
+            handler: (response) => {
+                alert(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
+                // Handle post-payment actions like saving payment details in DB
+            },
+            prefill: {
+                name: "Customer Name", // Replace with actual user data
+                email: "customer@example.com", // Replace with actual user data
+            },
+            theme: {
+                color: "#3399cc",
+            },
+        };
+
+        const razorpayInstance = new Razorpay(options);
+        razorpayInstance.open();
+    };
+
+    if (!infographic) {
+        return <p>Loading...</p>;
+    }
 
 
     return (
         <>
+            <div >
+                {/* Trigger Button */}
+                <button
+                    onClick={handleOpenModal}
+                    className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    type="button"
+                >
+                    Download Sample Report
+                </button>
+
+                {/* Modal */}
+                {isModalOpen && (
+                    <div
+                        className=" fixed top-0 left-0 right-0 bottom-0 z-50 flex justify-center items-center bg-gray-800 bg-opacity-50"
+                    >
+                        <div className="relative p-4 w-full max-w-2xl max-h-full ">
+                            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+
+
+                                {/* Modal Body */}
+                                <div className="bg-blue-200 md:p-2 space-y-4">
+                                    <button
+                                        onClick={handleCloseModal}
+                                        type="button"
+                                        className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                    >
+                                        <svg
+                                            className="w-3 h-3"
+                                            aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 14 14"
+                                        >
+                                            <path
+                                                stroke="currentColor"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                                            />
+                                        </svg>
+                                        <span className="sr-only">Close modal</span>
+                                    </button>
+                                    <h3 className="text-2xl font-semibold mb-4">
+                                        Get in <span className="text-blue-800">Touch</span> with Us
+                                    </h3>
+                                    <p className="mb-3">
+                                        Were here to help! Fill out the form below, and our market research team will get back to you shortly.
+                                    </p>
+
+                                    <form className="space-y-4" ref={form} onSubmit={sendEmail}>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            <div>
+                                                <label className="block font-medium mb-1">Name</label>
+                                                <input
+                                                    type="text"
+                                                    className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-1 transition duration-200"
+                                                    placeholder="Your Name"
+                                                    name="user_name"
+                                                    required
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block font-medium mb-1">Company Name</label>
+                                                <input
+                                                    type="text"
+                                                    className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-1 transition duration-200"
+                                                    placeholder="Your Business Email"
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label className="block font-medium mb-1">Business Email</label>
+                                            <input
+                                                type="email"
+                                                className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-1 transition duration-200"
+                                                placeholder="Your Business Email"
+                                                name="user_email"
+                                                required
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block font-medium mb-1">Phone Number</label>
+                                            <input
+                                                type="tel"
+                                                className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-1 transition duration-200"
+                                                placeholder="+91-1234567890"
+                                                required
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block font-medium mb-1">Message</label>
+                                            <textarea
+                                                className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-1 transition duration-200"
+                                                placeholder="Your Message"
+                                                rows="4"
+                                                required
+                                            ></textarea>
+                                        </div>
+
+                                        <button
+                                            type="submit"
+                                            className=" w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                                        >
+                                            Download Sample Report
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
             <section>
                 {/* Check if infographic exists */}
                 {infographic && (
@@ -152,71 +346,121 @@ function ViewInfographics() {
                     </div>
                 )}
             </section>
-
             <section className="text-gray-600 body-font">
                 <div className="container px-5 py-24 mx-auto">
-                    <div className="flex flex-wrap -m-4 ">
-                        <div className="lg:w-1/3 lg:mb-0 mb-6 p-4">
-                            <div className="h-full text-center">
-                                <p className="bg-blue-700 text-white p-2 rounded-full text-xs font-semibold tracking-widest uppercase title-font">Available Formats</p>
-                                <div className="border-2 border-gray-200  rounded-lg flex gap-4 justify-center mt-3 p-3">
-                                    <img src="https://intentmarketresearch.com/assets/frontend/homepage/images/pdf.svg" alt="EXCEL" className="w-20 h-20" />
-                                    <img src="https://intentmarketresearch.com/assets/frontend/homepage/images/excel.svg" alt="EXCEL" className="w-20 h-20" />
-                                    <img src="https://intentmarketresearch.com/assets/frontend/homepage/images/ppt.svg" alt="EXCEL" className="w-20 h-20" />
+                    <div className="flex flex-wrap justify-center gap-8">
+
+                        {/* Available Formats Card */}
+                        <div className="w-full sm:w-1/2 lg:w-1/4 p-4 transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl hover:shadow-teal-500/50 bg-gradient-to-tl from-teal-100 to-cyan-200 rounded-lg">
+                            <div className="h-full text-center bg-white p-5 rounded-lg shadow-lg">
+                                <p className="bg-gradient-to-r from-teal-400 to-cyan-800 text-white p-3 rounded-full text-xs font-semibold tracking-widest uppercase title-font shadow-md">
+                                    Available Formats
+                                </p>
+                                <div className="border-1 border-gray-200 rounded-lg flex gap-6 justify-center mt-6 p-4 transition-all duration-300 ease-in-out hover:border-teal-600 hover:shadow-lg hover:scale-110">
+                                    <img src="https://intentmarketresearch.com/assets/frontend/homepage/images/pdf.svg" alt="PDF" className="w-16 h-16 transform transition-all duration-300 hover:scale-110" />
+                                    <img src="https://intentmarketresearch.com/assets/frontend/homepage/images/excel.svg" alt="EXCEL" className="w-16 h-16 transform transition-all duration-300 hover:scale-110" />
+                                    <img src="https://intentmarketresearch.com/assets/frontend/homepage/images/ppt.svg" alt="PPT" className="w-16 h-16 transform transition-all duration-300 hover:scale-110" />
                                 </div>
-
-
                             </div>
-
                         </div>
-                        <div className="lg:w-1/3 lg:mb-0 mb-6 p-4">
-                            <div className="h-full text-center">
-                                <p className="bg-blue-700 text-white p-2 rounded-full text-xs font-semibold tracking-widest uppercase title-font">REPORT BUYING OPTIONS</p>
-                                {infographic && (
-                                    <div className="mt-2">
-                                        <ul className=" text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                            <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-                                                <div className="flex items-center ps-3">
-                                                    <input id="vue-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                                    <label className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Single-User License: US$ {infographic.singleUserPrice}</label>
-                                                </div>
-                                            </li>
-                                            <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-                                                <div className="flex items-center ps-3">
-                                                    <input id="react-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                                    <label className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Multi-User License: US$ {infographic.multiUserPrice}</label>
-                                                </div>
-                                            </li>
-                                            <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-                                                <div className="flex items-center ps-3">
-                                                    <input id="angular-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                                    <label className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Enterprise License: US$ {infographic.enterprisePrice}</label>
-                                                </div>
-                                            </li>
 
-                                        </ul>
-                                        <div className="my-2">
-                                            <Link to={"#"} type="button" className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Buy Now</Link>
-                                        </div>
+                        {/* Report Buying Options Card (Different Color) */}
+                        <div className="w-full sm:w-1/2 lg:w-1/4 p-4 transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl hover:shadow-teal-500/50 bg-gradient-to-tl from-indigo-100 to-purple-200 rounded-lg">
+                            <div className="h-full text-center bg-white p-5 rounded-lg shadow-lg">
+                                <p className="bg-gradient-to-r from-indigo-400 to-purple-500 text-white p-3 rounded-full text-xs font-semibold tracking-widest uppercase title-font shadow-md">
+                                    REPORT BUYING OPTIONS
+                                </p>
+                                <div className="mt-5">
+                                    <ul className="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-600 dark:text-white transition-all duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                                            <div className="flex items-center ps-3">
+                                                <input
+                                                    id="single-user-checkbox"
+                                                    type="radio"
+                                                    name="license"
+                                                    value="single-user"
+                                                    onChange={(e) => setSelectedLicense(e.target.value)}
+                                                    className="w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                                />
+                                                <label className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                    Single-User License: US$ {infographic.singleUserPrice}
+                                                </label>
+                                            </div>
+                                        </li>
+                                        <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                                            <div className="flex items-center ps-3">
+                                                <input
+                                                    id="multi-user-checkbox"
+                                                    type="radio"
+                                                    name="license"
+                                                    value="multi-user"
+                                                    onChange={(e) => setSelectedLicense(e.target.value)}
+                                                    className="w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                                />
+                                                <label className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                    Multi-User License: US$ {infographic.multiUserPrice}
+                                                </label>
+                                            </div>
+                                        </li>
+                                        <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                                            <div className="flex items-center ps-3">
+                                                <input
+                                                    id="enterprise-checkbox"
+                                                    type="radio"
+                                                    name="license"
+                                                    value="enterprise"
+                                                    onChange={(e) => setSelectedLicense(e.target.value)}
+                                                    className="w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                                />
+                                                <label className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                    Enterprise License: US$ {infographic.enterprisePrice}
+                                                </label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <button
+                                        onClick={handlePayment}
+                                        className="mt-5 w-full bg-gradient-to-r from-teal-400 to-green-500 text-white p-3 rounded-full text-sm font-semibold tracking-wider uppercase shadow-md hover:shadow-lg hover:scale-105 transform transition duration-300"
+                                    >
+                                        Buy Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Download Sample Reports & Customization Options Card */}
+                        <div className="w-full sm:w-1/2 lg:w-1/4 p-4 transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl hover:shadow-teal-500/50 bg-gradient-to-tl from-teal-100 to-cyan-200 rounded-lg">
+                            <div className="bg-white p-5 rounded-lg shadow-lg">
+
+                                <div>
+                                    {/* Button to open the modal */}
+                                    <div className="mb-4">
+                                        <button
+                                            onClick={handleOpenModal}
+                                            className="block bg-gradient-to-r from-teal-400 to-cyan-500 text-white p-3 rounded-lg text-xs font-semibold tracking-widest uppercase title-font shadow-md text-center"
+                                            type="button"
+                                        >
+                                            Download Sample Report
+                                        </button>
                                     </div>
-                                )}
+
+                                    {/* Modal */}
+
+
+                                    <div className="mb-4">
+                                        <Link to={"/contact"} className="block bg-gradient-to-r from-teal-400 to-cyan-500 text-white p-3 rounded-lg text-xs font-semibold tracking-widest uppercase title-font shadow-md text-center">
+                                            Request Customization
+                                        </Link>
+                                    </div>
+
+                                    <div className="mb-4">
+                                        <Link to={"/contact"} className="block bg-gradient-to-r from-teal-400 to-cyan-500 text-white p-3 rounded-lg text-xs font-semibold tracking-widest uppercase title-font shadow-md text-center">
+                                            Speak to Consultant
+                                        </Link>
+                                    </div>
+                                </div>
                             </div>
 
-
-                        </div>
-                        <div className="lg:w-1/3 lg:mb-0 mb-6 p-4">
-                            <div className="mb-4">
-                                <Link to={"#"} className="bg-pink-600 text-white p-2 rounded-lg  text-xs font-semibold tracking-widest uppercase title-font">Download Sample Reports</Link>
-                            </div>
-
-                            <div className="mb-4">
-                                <Link to={"#"} className="bg-pink-600  text-white p-2 rounded-lg  text-xs font-semibold tracking-widest uppercase title-font">Request Customization</Link>
-                            </div>
-
-                            <div className="mb-4">
-                                <Link to={"#"} className="bg-pink-600  text-white p-2 rounded-lg text-xs font-semibold tracking-widest uppercase title-font">Speek to Cunsultant</Link>
-
-                            </div>
                         </div>
                     </div>
                 </div>

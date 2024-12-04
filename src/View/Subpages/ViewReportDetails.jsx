@@ -1,19 +1,51 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom"; // For accessing URL params
 import axios from "axios"; // For making API calls
 // import ReCAPTCHA from "react-google-recaptcha";
 import { baseUrl } from "../../Constant/ConstantFiles";
 import { useRazorpay } from "react-razorpay";
 
+import emailjs from 'emailjs-com';
+
 
 function ViewReportDetails() {
+    const { Razorpay } = useRazorpay();
     const { id } = useParams(); // Get the report ID from the URL
     const [reportDetails, setReportDetails] = useState(null);
     const [activeTab, setActiveTab] = useState("summary");
     const [selectedLicense, setSelectedLicense] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const form = useRef();
+    // Function to open the modal
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+    // Function to close the modal
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
+    const sendEmail = (e) => {
+        e.preventDefault();
 
+        emailjs
+            .sendForm(
+                'service_anhnjq1', // Replace with your EmailJS service ID
+                'template_g6wzw9k', // Replace with your EmailJS template ID
+                form.current,
+                '9DlhYScldqmnqrNr1' // Replace with your public key
+            )
+            .then(
+                (result) => {
+                    console.log('SUCCESS!', result.text);
+                    alert('Email sent successfully!');
+                },
+                (error) => {
+                    console.error('FAILED...', error.text);
+                    alert('Failed to send email. Please try again.');
+                }
+            );
+    };
 
-    const { Razorpay } = useRazorpay();
 
     useEffect(() => {
         // Fetch report details by ID
@@ -30,6 +62,7 @@ function ViewReportDetails() {
             fetchReportDetails();
         }
     }, [id]);
+
 
     const handlePayment = () => {
         if (!selectedLicense || !reportDetails) {
@@ -81,6 +114,121 @@ function ViewReportDetails() {
 
     return (
         <>
+            <div >
+                {/* Trigger Button */}
+                <button
+                    onClick={handleOpenModal}
+                    className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    type="button"
+                >
+                    Download Sample Report
+                </button>
+
+                {/* Modal */}
+                {isModalOpen && (
+                    <div
+                        className=" fixed top-0 left-0 right-0 bottom-0 z-50 flex justify-center items-center bg-gray-800 bg-opacity-50"
+                    >
+                        <div className="relative p-4 w-full max-w-2xl max-h-full ">
+                            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+
+
+                                {/* Modal Body */}
+                                <div className="bg-blue-200 md:p-2 space-y-4">
+                                    <button
+                                        onClick={handleCloseModal}
+                                        type="button"
+                                        className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                    >
+                                        <svg
+                                            className="w-3 h-3"
+                                            aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 14 14"
+                                        >
+                                            <path
+                                                stroke="currentColor"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                                            />
+                                        </svg>
+                                        <span className="sr-only">Close modal</span>
+                                    </button>
+                                    <h3 className="text-2xl font-semibold mb-4">
+                                        Get in <span className="text-blue-800">Touch</span> with Us
+                                    </h3>
+                                    <p className="mb-3">
+                                        Were here to help! Fill out the form below, and our market research team will get back to you shortly.
+                                    </p>
+
+                                    <form className="space-y-4" ref={form} onSubmit={sendEmail}>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            <div>
+                                                <label className="block font-medium mb-1">Name</label>
+                                                <input
+                                                    type="text"
+                                                    className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-1 transition duration-200"
+                                                    placeholder="Your Name"
+                                                    name="user_name"
+                                                    required
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block font-medium mb-1">Company Name</label>
+                                                <input
+                                                    type="text"
+                                                    className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-1 transition duration-200"
+                                                    placeholder="Your Business Email"
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label className="block font-medium mb-1">Business Email</label>
+                                            <input
+                                                type="email"
+                                                className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-1 transition duration-200"
+                                                placeholder="Your Business Email"
+                                                name="user_email"
+                                                required
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block font-medium mb-1">Phone Number</label>
+                                            <input
+                                                type="tel"
+                                                className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-1 transition duration-200"
+                                                placeholder="+91-1234567890"
+                                                required
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block font-medium mb-1">Message</label>
+                                            <textarea
+                                                className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-1 transition duration-200"
+                                                placeholder="Your Message"
+                                                rows="4"
+                                                required
+                                            ></textarea>
+                                        </div>
+
+                                        <button
+                                            type="submit"
+                                            className=" w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                                        >
+                                            Download Sample Report
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
             {/*1st section*/}
             <section
                 className="relative py-16 px-8 bg-gradient-to-r from-[#f9f5ff] via-[#e0e7ff] to-[#dbeafe] flex flex-col items-center overflow-hidden"
@@ -122,7 +270,7 @@ function ViewReportDetails() {
                                 { id: "summary", label: "SUMMARY" },
                                 { id: "toc", label: "TABLE OF CONTENTS" },
                                 { id: "methodology", label: "METHODOLOGY" },
-                                { id: "dsr", label: "DOWNLOAD SAMPLE REPORTS" },
+                                // { id: "dsr", label: "DOWNLOAD SAMPLE REPORTS" },
                             ].map((tab) => (
                                 <li key={tab.id} className="relative" role="presentation">
                                     <button
@@ -177,13 +325,13 @@ function ViewReportDetails() {
                                 </div>
                             </div>
                         )} */}
-                        {activeTab === "dsr" && (
+                        {/* {activeTab === "dsr" && (
                             <div className="p-6 rounded-lg bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-100 dark:bg-gradient-to-r dark:from-gray-800 dark:via-gray-900 dark:to-black shadow-lg transition-all duration-300 ease-in-out">
                                 <div>
                                     <div dangerouslySetInnerHTML={{ __html: reportDetails.downloadSampleReport }} />
                                 </div>
                             </div>
-                        )}
+                        )} */}
 
 
                     </div>
@@ -277,26 +425,36 @@ function ViewReportDetails() {
                         <div className="w-full sm:w-1/2 lg:w-1/4 p-4 transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl hover:shadow-teal-500/50 bg-gradient-to-tl from-teal-100 to-cyan-200 rounded-lg">
                             <div className="bg-white p-5 rounded-lg shadow-lg">
 
-                                <div className="mb-4">
-                                    <Link to={"/contact"} className="block bg-gradient-to-r from-teal-400 to-cyan-500 text-white p-3 rounded-lg text-xs font-semibold tracking-widest uppercase title-font shadow-md text-center">
-                                        Download Sample Reports
-                                    </Link>
-                                </div>
+                                <div>
+                                    {/* Button to open the modal */}
+                                    <div className="mb-4">
+                                        <button
+                                            onClick={handleOpenModal}
+                                            className="block bg-gradient-to-r from-teal-400 to-cyan-500 text-white p-3 rounded-lg text-xs font-semibold tracking-widest uppercase title-font shadow-md text-center"
+                                            type="button"
+                                        >
+                                            Download Sample Report
+                                        </button>
+                                    </div>
 
-                                <div className="mb-4">
-                                    <Link to={"/contact"} className="block bg-gradient-to-r from-teal-400 to-cyan-500 text-white p-3 rounded-lg text-xs font-semibold tracking-widest uppercase title-font shadow-md text-center">
-                                        Request Customization
-                                    </Link>
-                                </div>
+                                    {/* Modal */}
 
-                                <div className="mb-4">
-                                    <Link to={"/contact"} className="block bg-gradient-to-r from-teal-400 to-cyan-500 text-white p-3 rounded-lg text-xs font-semibold tracking-widest uppercase title-font shadow-md text-center">
-                                        Speak to Consultant
-                                    </Link>
+
+                                    <div className="mb-4">
+                                        <Link to={"/contact"} className="block bg-gradient-to-r from-teal-400 to-cyan-500 text-white p-3 rounded-lg text-xs font-semibold tracking-widest uppercase title-font shadow-md text-center">
+                                            Request Customization
+                                        </Link>
+                                    </div>
+
+                                    <div className="mb-4">
+                                        <Link to={"/contact"} className="block bg-gradient-to-r from-teal-400 to-cyan-500 text-white p-3 rounded-lg text-xs font-semibold tracking-widest uppercase title-font shadow-md text-center">
+                                            Speak to Consultant
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
             </section>

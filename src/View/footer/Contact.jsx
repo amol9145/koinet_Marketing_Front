@@ -1,9 +1,8 @@
-import React from "react";
 
 function Contact() {
   return (
     <div>
-      <section className="py-16 bg-gradient-to-r from-indigo-600 to-blue-500 to-sky-400 text-white min-h-screen">
+      <section className="py-16 bg-gradient-to-r from-indigo-600 to-blue-500  text-white min-h-screen">
         <div className="container mx-auto px-6">
           <div className="flex flex-col-reverse lg:flex-row items-center">
             {/* Left Column - Information */}
@@ -18,8 +17,8 @@ function Contact() {
             </div>
 
             {/* Right Column - Contact Form */}
-            <div className="lg:w-1/2  mt-2">
-              <div className="bg-white shadow-lg p-6 rounded-2xl space-y-4">
+            <div className="lg:w-1/2  mt-4">
+              <div className="bg-white shadow-lg p-4 rounded-2xl space-y-4">
                 <form>
                   {/* Full Name and Company Name Fields */}
                   <div className="mb-4 grid grid-cols-1 lg:grid-cols-2 gap-2">
@@ -178,7 +177,7 @@ function Contact() {
         </div>
       </section>
 
-      
+
     </div>
   );
 }
