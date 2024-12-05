@@ -15,7 +15,7 @@ const HomeDashboard = () => {
                 data-drawer-toggle="default-sidebar"
                 aria-controls="default-sidebar"
                 type="button"
-                className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                className="inline-flex items-center p-2 mt-2 ms-3 text-sm rounded-lg sm:hidden focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400  dark:focus:ring-gray-600"
                 onClick={toggleSidebar}
             >
                 <span className="sr-only">Open sidebar</span>
@@ -39,21 +39,21 @@ const HomeDashboard = () => {
                 className={`mt-12 w-64 h-screen transition-transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} sm:translate-x-0`}
                 aria-label="Sidebar"
             >
-                <div className="h-full  px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+                <div className="h-full  px-3 py-4 overflow-y-auto">
                     <ul className="space-y-2 font-medium mt-5">
-                        <li className='py-2 ms-4 text-start hover:bg-slate-800 hover:text-white hover:rounded-md px-2'>
+                        <li className='py-2 ms-4 text-start hover:bg-slate-800 hover:rounded-md px-2'>
                             <Link>Dashboard</Link>
                         </li>
-                        <li className='py-2 ms-4 text-start hover:bg-slate-800 hover:text-white hover:rounded-md px-2'>
+                        <li className='py-2 ms-4 text-start hover:bg-slate-800  hover:rounded-md px-2'>
 
                             <Link to={"/create_report"}>Upload Report</Link>
                         </li>
 
-                        <li className='py-2 ms-4 text-start hover:bg-slate-800 hover:text-white hover:rounded-md px-2'>
+                        <li className='py-2 ms-4 text-start hover:bg-slate-800  hover:rounded-md px-2'>
 
                             <Link to={"/create_press_release"}>Upload Press Release</Link>
                         </li>
-                        <li className='py-2 ms-4 text-start hover:bg-slate-800 hover:text-white hover:rounded-md px-2'>
+                        <li className='py-2 ms-4 text-start hover:bg-slate-800  hover:rounded-md px-2'>
 
                             <Link to={"/createinfographics"}>Upload Infographics</Link>
                         </li>
