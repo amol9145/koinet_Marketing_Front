@@ -286,8 +286,8 @@ function ViewReportDetails() {
                                 >
                                     <button
                                         className={`inline-block px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-4 transition-all duration-300 ease-in-out rounded-full ${activeTab === tab.id
-                                            ? "bg-gradient-to-r from-indigo-600 to-indigo-400 text-white shadow-xl scale-105"
-                                            : "bg-white text-gray-700 hover:text-indigo-500 hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-300 dark:hover:text-indigo-400 dark:hover:bg-gray-600"
+                                            ? "bg-gradient-to-r from-indigo-600 to-indigo-400 text-black shadow-xl scale-105"
+                                            : "bg-white text-black hover:text-indigo-500 hover:bg-gray-100   dark:hover:text-indigo-400 "
                                             }`}
                                         onClick={() => setActiveTab(tab.id)}
                                         type="button"
