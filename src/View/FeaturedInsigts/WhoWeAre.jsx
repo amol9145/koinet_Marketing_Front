@@ -2,10 +2,10 @@
 function WhoWeAre() {
     return (
         <>
-            <div className=" bg-gradient-to-r from-gray-50 via-white to-gray-100 py-12 px-4 sm:px-6 lg:px-20">
+            <div className=" bg-gradient-to-r  py-12 px-4 sm:px-6 lg:px-20">
                 {/* Header Section */}
                 <div className="text-center mb-12 mt-12">
-                    <h1 className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r text-sky-900 mb-4">
+                    <h1 className="text-4xl sm:text-5xl font-extrabold  bg-clip-text bg-gradient-to-r text-sky-900 mb-4">
                         Who We Are
                     </h1>
                     <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
