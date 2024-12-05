@@ -4,8 +4,7 @@ import axios from "axios"; // For making API calls
 // import ReCAPTCHA from "react-google-recaptcha";
 import { baseUrl } from "../../Constant/ConstantFiles";
 import { useRazorpay } from "react-razorpay";
-
-import emailjs from 'emailjs-com';
+import { toast } from "react-toastify";
 
 
 function ViewReportDetails() {
@@ -15,6 +14,9 @@ function ViewReportDetails() {
     const [activeTab, setActiveTab] = useState("summary");
     const [selectedLicense, setSelectedLicense] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const [loading, setLoading] = useState(false); // State for loading status
+
     const form = useRef();
     // Function to open the modal
     const handleOpenModal = () => {
@@ -24,27 +26,7 @@ function ViewReportDetails() {
     const handleCloseModal = () => {
         setIsModalOpen(false);
     };
-    const sendEmail = (e) => {
-        e.preventDefault();
 
-        emailjs
-            .sendForm(
-                'service_anhnjq1', // Replace with your EmailJS service ID
-                'template_g6wzw9k', // Replace with your EmailJS template ID
-                form.current,
-                '9DlhYScldqmnqrNr1' // Replace with your public key
-            )
-            .then(
-                (result) => {
-                    console.log('SUCCESS!', result.text);
-                    alert('Email sent successfully!');
-                },
-                (error) => {
-                    console.error('FAILED...', error.text);
-                    alert('Failed to send email. Please try again.');
-                }
-            );
-    };
 
 
     useEffect(() => {
@@ -61,8 +43,31 @@ function ViewReportDetails() {
         if (id) {
             fetchReportDetails();
         }
-    }, [id]);
+    }, [id, baseUrl]);
 
+    const sendEmail = async (e) => {
+        e.preventDefault();
+
+        setLoading(true);
+
+
+        const formData = new FormData(form.current);
+
+        // Append the link to the form data
+        formData.append("user_link", "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf");
+
+        try {
+            const response = await axios.post(`${baseUrl}/send-email`, Object.fromEntries(formData));
+            toast.success(response.data.message);
+            form.current.reset();
+
+        } catch (error) {
+            toast.error(error);
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const handlePayment = () => {
         if (!selectedLicense || !reportDetails) {
@@ -218,10 +223,12 @@ function ViewReportDetails() {
 
                                         <button
                                             type="submit"
-                                            className=" w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                                            className="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:shadow-lg transition duration-200 transform hover:scale-105"
+                                            disabled={loading}
                                         >
-                                            Download Sample Report
+                                            {loading ? "Sending..." : "Send Email"}
                                         </button>
+
                                     </form>
                                 </div>
                             </div>
@@ -261,20 +268,24 @@ function ViewReportDetails() {
                 </div>
             </section>
 
-            {/*2nd section*/}
+            {/* 2nd Section */}
             <section>
-                <div className="container mx-auto max-w-screen-xl px-4 py-8 sm:px-4 lg:px-8">
+                <div className="container mx-auto max-w-screen-xl px-4 py-8 sm:px-6 md:px-8 lg:px-12 hidden sm:block">
+                    {/* Tab Navigation */}
                     <div className="mb-8 border-b-2 border-gray-300 dark:border-gray-700">
-                        <ul className="flex justify-center -mb-px text-lg font-semibold text-center space-x-4">
+                        <ul className="flex flex-wrap justify-center -mb-px text-sm font-semibold text-center gap-2 sm:gap-4 md:gap-6">
                             {[
                                 { id: "summary", label: "SUMMARY" },
                                 { id: "toc", label: "TABLE OF CONTENTS" },
                                 { id: "methodology", label: "METHODOLOGY" },
-                                // { id: "dsr", label: "DOWNLOAD SAMPLE REPORTS" },
                             ].map((tab) => (
-                                <li key={tab.id} className="relative" role="presentation">
+                                <li
+                                    key={tab.id}
+                                    className="relative"
+                                    role="presentation"
+                                >
                                     <button
-                                        className={`inline-block px-6 py-3 transition-all duration-300 ease-in-out rounded-full ${activeTab === tab.id
+                                        className={`inline-block px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-4 transition-all duration-300 ease-in-out rounded-full ${activeTab === tab.id
                                             ? "bg-gradient-to-r from-indigo-600 to-indigo-400 text-white shadow-xl scale-105"
                                             : "bg-white text-gray-700 hover:text-indigo-500 hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-300 dark:hover:text-indigo-400 dark:hover:bg-gray-600"
                                             }`}
@@ -284,7 +295,9 @@ function ViewReportDetails() {
                                         aria-controls={tab.id}
                                         aria-selected={activeTab === tab.id}
                                     >
-                                        <span className="relative z-10">{tab.label}</span>
+                                        <span className="relative z-10 text-xs sm:text-sm md:text-base lg:text-lg">
+                                            {tab.label}
+                                        </span>
                                         {activeTab === tab.id && (
                                             <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-indigo-600 rounded-full"></span>
                                         )}
@@ -293,47 +306,26 @@ function ViewReportDetails() {
                             ))}
                         </ul>
                     </div>
+
+                    {/* Tab Content */}
                     <div>
                         {activeTab === "summary" && (
-                            <div className="p-6 rounded-lg bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-100 dark:bg-gradient-to-r dark:from-gray-800 dark:via-gray-900 dark:to-black shadow-lg transition-all duration-300 ease-in-out">
-                                <div>
-                                    <div dangerouslySetInnerHTML={{ __html: reportDetails.summary }} />
-                                </div>
+                            <div className="p-4 sm:p-6 md:p-8 rounded-lg bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-100 dark:bg-gradient-to-r dark:from-gray-800 dark:via-gray-900 dark:to-black shadow-lg transition-all duration-300 ease-in-out">
+                                <div dangerouslySetInnerHTML={{ __html: reportDetails.summary }} />
                             </div>
                         )}
 
                         {activeTab === "toc" && (
-                            <div className="p-6 rounded-lg bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-100 dark:bg-gradient-to-r dark:from-gray-800 dark:via-gray-900 dark:to-black shadow-lg transition-all duration-300 ease-in-out">
-                                <div>
-                                    <div dangerouslySetInnerHTML={{ __html: reportDetails.tableOfContents }} />
-                                </div>
+                            <div className="p-4 sm:p-6 md:p-8 rounded-lg bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-100 dark:bg-gradient-to-r dark:from-gray-800 dark:via-gray-900 dark:to-black shadow-lg transition-all duration-300 ease-in-out">
+                                <div dangerouslySetInnerHTML={{ __html: reportDetails.tableOfContents }} />
                             </div>
                         )}
 
                         {activeTab === "methodology" && (
-                            <div className="p-6 rounded-lg bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-100 dark:bg-gradient-to-r dark:from-gray-800 dark:via-gray-900 dark:to-black shadow-lg transition-all duration-300 ease-in-out">
-                                <div>
-                                    <div dangerouslySetInnerHTML={{ __html: reportDetails.methodology }} />
-                                </div>
+                            <div className="p-4 sm:p-6 md:p-8 rounded-lg bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-100 dark:bg-gradient-to-r dark:from-gray-800 dark:via-gray-900 dark:to-black shadow-lg transition-all duration-300 ease-in-out">
+                                <div dangerouslySetInnerHTML={{ __html: reportDetails.methodology }} />
                             </div>
                         )}
-
-                        {/* {activeTab === "dsr" && (
-                            <div className="p-6 rounded-lg bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-100 dark:bg-gradient-to-r dark:from-gray-800 dark:via-gray-900 dark:to-black shadow-lg transition-all duration-300 ease-in-out">
-                                <div>
-                                    <div dangerouslySetInnerHTML={{ __html: reportDetails.methodology }} />
-                                </div>
-                            </div>
-                        )} */}
-                        {/* {activeTab === "dsr" && (
-                            <div className="p-6 rounded-lg bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-100 dark:bg-gradient-to-r dark:from-gray-800 dark:via-gray-900 dark:to-black shadow-lg transition-all duration-300 ease-in-out">
-                                <div>
-                                    <div dangerouslySetInnerHTML={{ __html: reportDetails.downloadSampleReport }} />
-                                </div>
-                            </div>
-                        )} */}
-
-
                     </div>
                 </div>
             </section>

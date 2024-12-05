@@ -5,42 +5,25 @@ import { FaFilePdf, FaFileExcel, FaFilePowerpoint, FaChartBar } from "react-icon
 import { Link, useParams } from "react-router-dom";
 import { baseUrl } from "../../Constant/ConstantFiles";
 import ReCAPTCHA from "react-google-recaptcha";
-import emailjs from 'emailjs-com';
+// import emailjs from 'emailjs-com';
+
 
 const ViewPressRelease = () => {
     const [pressRelease, setPressRelease] = useState(null); // State to store API data
     const [loading, setLoading] = useState(true); // State for loading status
     const [error, setError] = useState(null); // State for error handling
+    const [captchaVerified, setCaptchaVerified] = useState(false);
     const [pressReleases, setPressReleases] = useState([]);
+    const [message, setMessage] = useState("");
 
 
     const { id } = useParams()
     const form = useRef();
+    console.log(captchaVerified)
 
-    const sendEmail = (e) => {
-        e.preventDefault();
-
-        emailjs
-            .sendForm(
-                'service_anhnjq1', // Replace with your EmailJS service ID
-                'template_g6wzw9k', // Replace with your EmailJS template ID
-                form.current,
-                '9DlhYScldqmnqrNr1' // Replace with your public key
-            )
-            .then(
-                (result) => {
-                    console.log('SUCCESS!', result.text);
-                    alert('Email sent successfully!');
-                },
-                (error) => {
-                    console.error('FAILED...', error.text);
-                    alert('Failed to send email. Please try again.');
-                }
-            );
-    };
 
     const handleReCAPTCHAChange = (value) => {
-        return value
+        setCaptchaVerified(!!value);
     };
     // Fetch API data
     useEffect(() => {
@@ -60,6 +43,7 @@ const ViewPressRelease = () => {
         fetchPressRelease();
     }, []);
 
+
     useEffect(() => {
         // Fetch data from API
         axios
@@ -78,6 +62,29 @@ const ViewPressRelease = () => {
                 setLoading(false);
             });
     }, []);
+
+    const sendEmail = async (e) => {
+        e.preventDefault();
+
+        setLoading(true);
+        setMessage("");
+
+        const formData = new FormData(form.current);
+
+        // Append the link to the form data
+        formData.append("user_link", "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf");
+
+        try {
+            const response = await axios.post(`${baseUrl}/send-email`, Object.fromEntries(formData));
+            setMessage(response.data.message);
+            form.current.reset();
+        } catch (error) {
+            setMessage("Failed to send email. Please try again.");
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     if (loading) {
         return <p>Loading...</p>;
@@ -173,17 +180,16 @@ const ViewPressRelease = () => {
                                             <input
                                                 type="text"
                                                 className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-3 transition duration-200"
-                                                placeholder="Your Business Email"
-
+                                                placeholder="Your Company Name"
+                                                name="user_company"
                                                 required
                                             />
                                         </div>
-
                                     </div>
                                     <div>
                                         <label className="block font-medium mb-1">Business Email</label>
                                         <input
-                                            type="text"
+                                            type="email"
                                             className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-3 transition duration-200"
                                             placeholder="Your Business Email"
                                             name="user_email"
@@ -196,6 +202,7 @@ const ViewPressRelease = () => {
                                             type="tel"
                                             className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-3 transition duration-200"
                                             placeholder="+91-1234567890"
+                                            name="user_phone"
                                             required
                                         />
                                     </div>
@@ -205,22 +212,24 @@ const ViewPressRelease = () => {
                                             className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-3 transition duration-200"
                                             placeholder="Your Message"
                                             rows="4"
+                                            name="user_message"
                                             required
                                         ></textarea>
                                     </div>
                                     <div className="mt-4">
                                         <ReCAPTCHA
-                                            sitekey="HHIJJ"
+                                            sitekey="YOUR_RECAPTCHA_SITE_KEY" // Replace with your site key
                                             onChange={handleReCAPTCHAChange}
                                         />
                                     </div>
                                     <button
                                         type="submit"
-                                        value="Send"
-                                        className="w-full bg-white text-blue-600 font-semibold py-2 rounded-lg hover:shadow-lg transition duration-200 transform hover:scale-105"
+                                        className="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:shadow-lg transition duration-200 transform hover:scale-105"
+                                        disabled={loading}
                                     >
-                                        Download Sample Report
+                                        {loading ? "Sending..." : "Send Email"}
                                     </button>
+                                    {message && <p className="mt-4 text-center">{message}</p>}
                                 </form>
                             </div>
                         </div>
