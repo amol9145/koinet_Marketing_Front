@@ -143,7 +143,7 @@ function ViewReportDetails() {
                                     <button
                                         onClick={handleCloseModal}
                                         type="button"
-                                        className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                        className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-black rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                                     >
                                         <svg
                                             className="w-3 h-3"
@@ -356,7 +356,7 @@ function ViewReportDetails() {
                                     REPORT BUYING OPTIONS
                                 </p>
                                 <div className="mt-5">
-                                    <ul className="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg  dark:border-gray-600 dark:text-white transition-all duration-300 ease-in-out hover:bg-gray-100 ">
+                                    <ul className="text-sm font-medium text-black bg-white border border-gray-200 rounded-lg  dark:border-gray-600 dark:text-white transition-all duration-300 ease-in-out hover:bg-gray-100 ">
                                         <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
                                             <div className="flex items-center ps-3">
                                                 <input
@@ -367,7 +367,7 @@ function ViewReportDetails() {
                                                     onChange={(e) => setSelectedLicense(e.target.value)}
                                                     className="w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                                 />
-                                                <label className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                <label className="w-full py-3 ms-2 text-sm font-medium text-black dark:text-gray-300">
                                                     Single-User License: US$ {reportDetails.singleUserPrice}
                                                 </label>
                                             </div>
@@ -382,7 +382,7 @@ function ViewReportDetails() {
                                                     onChange={(e) => setSelectedLicense(e.target.value)}
                                                     className="w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                                 />
-                                                <label className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                <label className="w-full py-3 ms-2 text-sm font-medium text-black dark:text-gray-300">
                                                     Multi-User License: US$ {reportDetails.multiUserPrice}
                                                 </label>
                                             </div>
@@ -397,7 +397,7 @@ function ViewReportDetails() {
                                                     onChange={(e) => setSelectedLicense(e.target.value)}
                                                     className="w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                                 />
-                                                <label className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                <label className="w-full py-3 ms-2 text-sm font-medium text-black dark:text-gray-300">
                                                     Enterprise License: US$ {reportDetails.enterprisePrice}
                                                 </label>
                                             </div>
