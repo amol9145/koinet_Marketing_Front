@@ -27,7 +27,7 @@ const Navbar = () => {
                 <button
                     onClick={toggleMenu}
                     type="button"
-                    className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                    className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400  dark:focus:ring-gray-600"
                     aria-controls="mega-menu-full"
                     aria-expanded={isMenuOpen}
                 >
@@ -74,7 +74,7 @@ const Navbar = () => {
                             <button
                                 onClick={() => toggleDropdown("dropdown1")}
                                 id="mega-menu-full-dropdown-button"
-                                className="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded md:w-auto hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                                className="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded md:w-auto hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0  md:dark:hover:text-blue-500  dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
                             >
                                 Industry Expertise
                                 <svg
@@ -98,7 +98,7 @@ const Navbar = () => {
                             <button
                                 onClick={() => toggleDropdown("dropdown2")}
                                 id="mega-menu-full-dropdown-button"
-                                className="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded md:w-auto hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                                className="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded md:w-auto hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0  md:dark:hover:text-blue-500  dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
                             >
                                 Featured Insights
                                 <svg
@@ -121,7 +121,7 @@ const Navbar = () => {
                         <li>
                             <Link
                                 to={"/advisory"}
-                                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500  dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
                             >
 
                                 Advisory Services
@@ -130,7 +130,7 @@ const Navbar = () => {
                         <li>
                             <Link
                                 to={"/contact"}
-                                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500  dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
                             >
                                 Contact
                             </Link>
@@ -138,7 +138,7 @@ const Navbar = () => {
                         <li>
                             <Link
                                 to={"/Dashboard"}
-                                className="block py-2 px-3 bg-blue text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                                className="block py-2 px-3 bg-blue text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500  dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
                             >
                                 Dashboard
                             </Link>
@@ -156,7 +156,7 @@ const Navbar = () => {
                             <li>
                                 <Link
                                     to={"Allexpertise"}
-                                    className="block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                                    className="block p-3 rounded-lg hover:bg-gray-100 "
                                 >
                                     <div className="font-semibold ">
                                         <p>Aerospace & Defence Industry</p>
@@ -167,7 +167,7 @@ const Navbar = () => {
                             <li>
                                 <Link
                                     to={"Allexpertise"}
-                                    className="block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                                    className="block p-3 rounded-lg hover:bg-gray-100 "
                                 >
                                     <div className="font-semibold">
                                         <p>Agriculture and Agri Inputs</p>
@@ -177,7 +177,7 @@ const Navbar = () => {
                             <li>
                                 <Link
                                     to={"Allexpertise"}
-                                    className="block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                                    className="block p-3 rounded-lg hover:bg-gray-100 "
                                 >
                                     <div className="font-semibold">
                                         <p>Animal Nutriation and Helth</p>
@@ -187,7 +187,7 @@ const Navbar = () => {
                             <li>
                                 <Link
                                     to={"Allexpertise"}
-                                    className="block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                                    className="block p-3 rounded-lg hover:bg-gray-100 "
                                 >
                                     <div className="font-semibold">
                                         <p>Packadging</p>
@@ -199,7 +199,7 @@ const Navbar = () => {
                             <li>
                                 <Link
                                     to={"/Allexpertise"}
-                                    className="block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                                    className="block p-3 rounded-lg hover:bg-gray-100 "
                                 >
                                     <div className="font-semibold">
                                         <p>Automotive and Transportaion</p>
@@ -209,7 +209,7 @@ const Navbar = () => {
                             <li>
                                 <Link
                                     to={"/Allexpertise"}
-                                    className="block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                                    className="block p-3 rounded-lg hover:bg-gray-100 "
                                 >
                                     <div className="font-semibold">
                                         <p>Building and Construction</p>
@@ -219,7 +219,7 @@ const Navbar = () => {
                             <li>
                                 <Link
                                     to={"/Allexpertise"}
-                                    className="block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                                    className="block p-3 rounded-lg hover:bg-gray-100 "
                                 >
                                     <div className="font-semibold">
                                         <p>Chemicals and Materials</p>
@@ -229,7 +229,7 @@ const Navbar = () => {
                             <li>
                                 <Link
                                     to={"/Allexpertise"}
-                                    className="block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                                    className="block p-3 rounded-lg hover:bg-gray-100 "
                                 >
                                     <div className="font-semibold">
                                         <p>Energy and Power</p>
@@ -239,7 +239,7 @@ const Navbar = () => {
                             <li>
                                 <Link
                                     to={"/Allexpertise"}
-                                    className="block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                                    className="block p-3 rounded-lg hover:bg-gray-100 "
                                 >
                                     <div className="font-semibold">
                                         <p>Food and Beverage</p>
@@ -260,7 +260,7 @@ const Navbar = () => {
                             <li>
                                 <Link
                                     to={"/pressreleased"}
-                                    className="block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                                    className="block p-3 rounded-lg hover:bg-gray-100 "
                                 >
                                     <div className="font-semibold">
                                         <p>Press Releases</p>
@@ -271,7 +271,7 @@ const Navbar = () => {
                             <li>
                                 <Link
                                     to={"/infographics"}
-                                    className="block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                                    className="block p-3 rounded-lg hover:bg-gray-100 "
                                 >
                                     <div className="font-semibold">
                                         <p>Infographics</p>
@@ -281,7 +281,7 @@ const Navbar = () => {
                             <li>
                                 <Link
                                     to={"/whoweare"}
-                                    className="block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                                    className="block p-3 rounded-lg hover:bg-gray-100 "
                                 >
                                     <div className="font-semibold">
                                         <p>Who we are</p>
