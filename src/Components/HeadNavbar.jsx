@@ -149,7 +149,7 @@ const Navbar = () => {
             {activeDropdown === "dropdown1" && (
                 <div
                     id="mega-menu-full-dropdown"
-                    className="mt-1 border-gray-200 shadow-sm bg-gray-50 md:bg-white border-y dark:bg-gray-800 dark:border-gray-600"
+                    className="mt-1 border-gray-200 shadow-sm bg-gray-50 md:bg-white border-y  dark:border-gray-600"
                 >
                     <div className=" bg-customBlue grid max-w-screen-xl px-4 py-5 mx-auto text-gray-900  sm:grid-cols-2 md:px-6">
                         <ul>
@@ -253,7 +253,7 @@ const Navbar = () => {
             {activeDropdown === "dropdown2" && (
                 <div
                     id=""
-                    className="mt-1 text-end w-full border-gray-200 shadow-sm bg-gray-50 md:bg-white border-y dark:bg-gray-800 dark:border-gray-600"
+                    className="mt-1 text-end w-full border-gray-200 shadow-sm bg-gray-50 md:bg-white border-y  dark:border-gray-600"
                 >
                     <div className="grid bg-customBlue text-end text-gray-900  sm:grid-cols-2 md:px-6">
                         <ul>
