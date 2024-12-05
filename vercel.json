@@ -1,14 +1,11 @@
 {
     "version": 2,
     "builds": [{
-        "src": "package.json",
-        "use": "@vercel/static-build",
-        "config": {
-            "distDir": "dist"
-        }
+        "src": "App.jsx",
+        "use": "@vercel/node"
     }],
     "routes": [{
         "src": "/(.*)",
-        "dest": "/$1"
+        "dest": "App.jsx"
     }]
 }
