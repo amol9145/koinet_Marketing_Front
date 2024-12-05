@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../assets/Logo.png"
 
 const Navbar = () => {
+
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState(null); // null indicates no dropdown is open
-
+    const navbarRef = useRef(null);
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
@@ -13,9 +14,21 @@ const Navbar = () => {
     const toggleDropdown = (dropdown) => {
         setActiveDropdown((prev) => (prev === dropdown ? null : dropdown));
     };
+    const handleClickOutside = (event) => {
+        if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+            setActiveDropdown(null); // Close dropdown
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
 
     return (
-        <nav className="bg-white text-black shadow-lg border-gray-200 dark:border-gray-600  fixed top-0 z-50 w-full">
+        <nav  ref={navbarRef} className="bg-white text-black shadow-lg border-gray-200 dark:border-gray-600  fixed top-0 z-50 w-full">
             <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
                 <Link to={"/"} className="flex items-center space-x-3 rtl:space-x-reverse">
                     <img
@@ -57,6 +70,7 @@ const Navbar = () => {
                         <li>
                             <Link
                                 to={"/"}
+                                onClick={() => setActiveDropdown(null)}
                                 className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500  dark:hover:text-blue-500  dark:border-gray-700"
                             >
                                 Home
@@ -65,6 +79,7 @@ const Navbar = () => {
                         <li>
                             <Link
                                 to={"/latest_reports"}
+                                onClick={() => setActiveDropdown(null)}
                                 className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500  dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
                             >
                                 Latest Reports
@@ -121,6 +136,7 @@ const Navbar = () => {
                         <li>
                             <Link
                                 to={"/advisory"}
+                                onClick={() => setActiveDropdown(null)}
                                 className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500  dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
                             >
 
@@ -130,6 +146,7 @@ const Navbar = () => {
                         <li>
                             <Link
                                 to={"/contact"}
+                                onClick={() => setActiveDropdown(null)}
                                 className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500  dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
                             >
                                 Contact
@@ -138,6 +155,7 @@ const Navbar = () => {
                         <li>
                             <Link
                                 to={"/Dashboard"}
+                                onClick={() => setActiveDropdown(null)}
                                 className="block py-2 px-3 bg-blue text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500  dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
                             >
                                 Dashboard
@@ -148,6 +166,7 @@ const Navbar = () => {
             </div>
             {activeDropdown === "dropdown1" && (
                 <div
+
                     id="mega-menu-full-dropdown"
                     className="mt-1 border-gray-200 shadow-sm bg-gray-50 md:bg-white border-y  dark:border-gray-600"
                 >
@@ -157,6 +176,7 @@ const Navbar = () => {
                                 <Link
                                     to={"Allexpertise"}
                                     className="block p-3 rounded-lg hover:bg-gray-100 "
+                                    onClick={() => setActiveDropdown(null)}
                                 >
                                     <div className="font-semibold ">
                                         <p>Aerospace & Defence Industry</p>
@@ -260,6 +280,7 @@ const Navbar = () => {
                             <li>
                                 <Link
                                     to={"/pressreleased"}
+                                    onClick={() => setActiveDropdown(null)}
                                     className="block p-3 rounded-lg hover:bg-gray-100 "
                                 >
                                     <div className="font-semibold">
@@ -271,6 +292,7 @@ const Navbar = () => {
                             <li>
                                 <Link
                                     to={"/infographics"}
+                                    onClick={() => setActiveDropdown(null)}
                                     className="block p-3 rounded-lg hover:bg-gray-100 "
                                 >
                                     <div className="font-semibold">
@@ -281,6 +303,7 @@ const Navbar = () => {
                             <li>
                                 <Link
                                     to={"/whoweare"}
+                                    onClick={() => setActiveDropdown(null)}
                                     className="block p-3 rounded-lg hover:bg-gray-100 "
                                 >
                                     <div className="font-semibold">
