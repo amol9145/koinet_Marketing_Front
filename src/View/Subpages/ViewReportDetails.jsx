@@ -226,7 +226,7 @@ function ViewReportDetails() {
                                             className="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:shadow-lg transition duration-200 transform hover:scale-105"
                                             disabled={loading}
                                         >
-                                            {loading ? "Sending..." : "Send Email"}
+                                            {loading ? "Sending..." : "Get Sample Report"}
                                         </button>
 
                                     </form>
@@ -310,19 +310,19 @@ function ViewReportDetails() {
                     {/* Tab Content */}
                     <div>
                         {activeTab === "summary" && (
-                            <div className="p-4 sm:p-6 md:p-8 rounded-lg bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-100 dark:bg-gradient-to-r dark:from-gray-800 dark:via-gray-900 dark:to-black shadow-lg transition-all duration-300 ease-in-out">
+                            <div className="p-4 sm:p-6 md:p-8 rounded-lg ">
                                 <div dangerouslySetInnerHTML={{ __html: reportDetails.summary }} />
                             </div>
                         )}
 
                         {activeTab === "toc" && (
-                            <div className="p-4 sm:p-6 md:p-8 rounded-lg bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-100 dark:bg-gradient-to-r dark:from-gray-800 dark:via-gray-900 dark:to-black shadow-lg transition-all duration-300 ease-in-out">
+                            <div className="p-4 sm:p-6 md:p-8 rounded-lg ">
                                 <div dangerouslySetInnerHTML={{ __html: reportDetails.tableOfContents }} />
                             </div>
                         )}
 
                         {activeTab === "methodology" && (
-                            <div className="p-4 sm:p-6 md:p-8 rounded-lg bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-100 dark:bg-gradient-to-r dark:from-gray-800 dark:via-gray-900 dark:to-black shadow-lg transition-all duration-300 ease-in-out">
+                            <div className="p-4 sm:p-6 md:p-8 rounded-lg ">
                                 <div dangerouslySetInnerHTML={{ __html: reportDetails.methodology }} />
                             </div>
                         )}
@@ -356,7 +356,7 @@ function ViewReportDetails() {
                                     REPORT BUYING OPTIONS
                                 </p>
                                 <div className="mt-5">
-                                    <ul className="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-600 dark:text-white transition-all duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    <ul className="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg ">
                                         <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
                                             <div className="flex items-center ps-3">
                                                 <input

@@ -5,6 +5,7 @@ import { FaFilePdf, FaFileExcel, FaFilePowerpoint, FaChartBar } from "react-icon
 import { Link, useParams } from "react-router-dom";
 import { baseUrl } from "../../Constant/ConstantFiles";
 import ReCAPTCHA from "react-google-recaptcha";
+import { toast } from "react-toastify";
 // import emailjs from 'emailjs-com';
 
 
@@ -14,7 +15,7 @@ const ViewPressRelease = () => {
     const [error, setError] = useState(null); // State for error handling
     const [captchaVerified, setCaptchaVerified] = useState(false);
     const [pressReleases, setPressReleases] = useState([]);
-    const [message, setMessage] = useState("");
+
 
 
     const { id } = useParams()
@@ -67,7 +68,7 @@ const ViewPressRelease = () => {
         e.preventDefault();
 
         setLoading(true);
-        setMessage("");
+
 
         const formData = new FormData(form.current);
 
@@ -76,10 +77,11 @@ const ViewPressRelease = () => {
 
         try {
             const response = await axios.post(`${baseUrl}/send-email`, Object.fromEntries(formData));
-            setMessage(response.data.message);
+            toast.success(response.data.message);
             form.current.reset();
+
         } catch (error) {
-            setMessage("Failed to send email. Please try again.");
+            toast.error(error);
             console.error(error);
         } finally {
             setLoading(false);
@@ -227,9 +229,9 @@ const ViewPressRelease = () => {
                                         className="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:shadow-lg transition duration-200 transform hover:scale-105"
                                         disabled={loading}
                                     >
-                                        {loading ? "Sending..." : "Send Email"}
+                                        {loading ? "Sending Email..." : "Get Sample Report"}
                                     </button>
-                                    {message && <p className="mt-4 text-center">{message}</p>}
+
                                 </form>
                             </div>
                         </div>
