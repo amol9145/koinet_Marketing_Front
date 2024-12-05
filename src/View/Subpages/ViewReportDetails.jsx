@@ -367,7 +367,7 @@ function ViewReportDetails() {
                                                     onChange={(e) => setSelectedLicense(e.target.value)}
                                                     className="w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                                 />
-                                                <label className="w-full py-3 ms-2 text-sm font-medium text-black dark:text-gray-300">
+                                                <label className="w-full py-3 ms-2 text-sm font-medium text-black ">
                                                     Single-User License: US$ {reportDetails.singleUserPrice}
                                                 </label>
                                             </div>
@@ -382,7 +382,7 @@ function ViewReportDetails() {
                                                     onChange={(e) => setSelectedLicense(e.target.value)}
                                                     className="w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                                 />
-                                                <label className="w-full py-3 ms-2 text-sm font-medium text-black dark:text-gray-300">
+                                                <label className="w-full py-3 ms-2 text-sm font-medium text-black ">
                                                     Multi-User License: US$ {reportDetails.multiUserPrice}
                                                 </label>
                                             </div>
@@ -397,7 +397,7 @@ function ViewReportDetails() {
                                                     onChange={(e) => setSelectedLicense(e.target.value)}
                                                     className="w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                                 />
-                                                <label className="w-full py-3 ms-2 text-sm font-medium text-black dark:text-gray-300">
+                                                <label className="w-full py-3 ms-2 text-sm font-medium text-black ">
                                                     Enterprise License: US$ {reportDetails.enterprisePrice}
                                                 </label>
                                             </div>
