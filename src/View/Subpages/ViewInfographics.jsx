@@ -371,7 +371,7 @@ function ViewInfographics() {
                                     REPORT BUYING OPTIONS
                                 </p>
                                 <div className="mt-5">
-                                    <ul className="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-600 dark:text-white transition-all duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    <ul className="text-sm font-medium text-black bg-white border border-gray-200 rounded-lg  dark:border-gray-600 dark:text-white transition-all duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-700">
                                         <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
                                             <div className="flex items-center ps-3">
                                                 <input
@@ -382,7 +382,7 @@ function ViewInfographics() {
                                                     onChange={(e) => setSelectedLicense(e.target.value)}
                                                     className="w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                                 />
-                                                <label className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                <label className="w-full py-3 ms-2 text-sm font-medium  text-black">
                                                     Single-User License: US$ {infographic.singleUserPrice}
                                                 </label>
                                             </div>
@@ -397,12 +397,12 @@ function ViewInfographics() {
                                                     onChange={(e) => setSelectedLicense(e.target.value)}
                                                     className="w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                                 />
-                                                <label className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                <label className="w-full py-3 ms-2 text-sm font-medium  text-black">
                                                     Multi-User License: US$ {infographic.multiUserPrice}
                                                 </label>
                                             </div>
                                         </li>
-                                        <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                                        <li className="w-full border-b border-gray-200 rounded-t-lg ">
                                             <div className="flex items-center ps-3">
                                                 <input
                                                     id="enterprise-checkbox"
@@ -412,7 +412,7 @@ function ViewInfographics() {
                                                     onChange={(e) => setSelectedLicense(e.target.value)}
                                                     className="w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                                 />
-                                                <label className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                <label className="w-full py-3 ms-2 text-sm font-medium text-black">
                                                     Enterprise License: US$ {infographic.enterprisePrice}
                                                 </label>
                                             </div>
