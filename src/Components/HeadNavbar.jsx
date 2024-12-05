@@ -15,7 +15,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="bg-white shadow-lg border-gray-200 dark:border-gray-600  fixed top-0 z-50 w-full">
+        <nav className="bg-white text-black shadow-lg border-gray-200 dark:border-gray-600  fixed top-0 z-50 w-full">
             <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
                 <Link to={"/"} className="flex items-center space-x-3 rtl:space-x-reverse">
                     <img
