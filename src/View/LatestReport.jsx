@@ -9,6 +9,8 @@ function LatestReport() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
+    const reportsPerPage = 5;
 
     useEffect(() => {
         // Fetch reports data from the API
@@ -28,6 +30,7 @@ function LatestReport() {
     const handleCategoryChange = (e) => {
         const category = e.target.value;
         setSelectedCategory(category);
+        setCurrentPage(1); // Reset to the first page when category changes
         if (category) {
             const filtered = reports.filter(
                 (report) => report.category === category
@@ -42,6 +45,16 @@ function LatestReport() {
         const options = { day: "2-digit", month: "short", year: "numeric" };
         const date = new Date(dateString);
         return date.toLocaleDateString("en-GB", options); // "en-GB" ensures DD MMM YYYY format
+    };
+
+    const indexOfLastReport = currentPage * reportsPerPage;
+    const indexOfFirstReport = indexOfLastReport - reportsPerPage;
+    const currentReports = filteredReports.slice(indexOfFirstReport, indexOfLastReport);
+
+    const totalPages = Math.ceil(filteredReports.length / reportsPerPage);
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
     };
 
     if (loading) {
@@ -65,12 +78,12 @@ function LatestReport() {
             </section>
             <section>
                 <form className="w-full max-w-lg mx-auto my-6">
-                    <label className="block mb-2 text-lg bg-red-600 rounded-lg p-2 text-center font-medium text-white ">
+                    <label className="block mb-2 text-lg bg-red-600 rounded-lg p-2 text-center font-medium text-white">
                         Search Report
                     </label>
                     <select
                         id="reports"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         value={selectedCategory}
                         onChange={handleCategoryChange}
                     >
@@ -90,13 +103,13 @@ function LatestReport() {
                 <section className="text-gray-600 body-font overflow-hidden">
                     <div className="container px-5 py-24 mx-auto">
                         <div className="-my-8 divide-y-2 divide-gray-100">
-                            {filteredReports.length > 0 ? (
-                                filteredReports.map((report) => (
+                            {currentReports.length > 0 ? (
+                                currentReports.map((report) => (
                                     <div className="py-8 flex flex-wrap md:flex-nowrap" key={report.id}>
                                         <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
                                             <span className="font-semibold title-font text-gray-700">{report.category}</span>
-                                            <span className="mt-1 text-gray-500 text-sm">Published: {formatDate(report.createdAt)}</span>
-                                            <span className="mt-1 text-gray-500 text-sm font-bold">Report ID: {report.reportId}</span>
+                                            <span className="mt-1 text-gray-800 text-sm">Published: {formatDate(report.createdAt)}</span>
+                                            <span className="mt-1 text-black text-sm font-bold">Report ID: {report.reportId}</span>
                                         </div>
                                         <div className="md:flex-grow">
                                             <Link to={`/latest_reports/viewreportdetails/${report._id}`}>
@@ -115,33 +128,35 @@ function LatestReport() {
                         <nav aria-label="Page navigation example">
                             <ul className="flex items-center space-x-2">
                                 <li>
-                                    <Link
-                                        to="#"
-                                        className="px-4 py-2 bg-gray-300 rounded-full hover:bg-gray-400 text-gray-700"
+                                    <button
+                                        onClick={() => handlePageChange(currentPage - 1)}
+                                        disabled={currentPage === 1}
+                                        className="px-4 py-2 cursor-pointer bg-gray-300 rounded-full hover:bg-gray-400 text-gray-700"
                                     >
                                         Previous
-                                    </Link>
+                                    </button>
                                 </li>
-                                {[1, 2, 3, 4, 5].map((page) => (
+                                {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
                                     <li key={page}>
-                                        <Link
-                                            to="#"
-                                            className={`px-4 py-2 rounded-full ${page === 1
-                                                    ? "bg-blue-500 text-white"
-                                                    : "bg-gray-200 hover:bg-blue-300"
+                                        <button
+                                            onClick={() => handlePageChange(page)}
+                                            className={`px-4 py-2 rounded-full ${page === currentPage
+                                                ? "bg-blue-500 text-white"
+                                                : "bg-gray-200 hover:bg-blue-300"
                                                 }`}
                                         >
                                             {page}
-                                        </Link>
+                                        </button>
                                     </li>
                                 ))}
                                 <li>
-                                    <Link
-                                        to="#"
-                                        className="px-4 py-2 bg-gray-300 rounded-full hover:bg-gray-400 text-gray-700"
+                                    <button
+                                        onClick={() => handlePageChange(currentPage + 1)}
+                                        disabled={currentPage === totalPages}
+                                        className="px-4 py-2 cursor-pointer bg-gray-300 rounded-full hover:bg-gray-400 text-gray-700"
                                     >
                                         Next
-                                    </Link>
+                                    </button>
                                 </li>
                             </ul>
                         </nav>
