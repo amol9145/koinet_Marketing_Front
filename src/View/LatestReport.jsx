@@ -39,7 +39,7 @@ function LatestReport() {
         <div>
             <section>
                 <div className="bg-sky-900 text-white mt-10 py-5">
-                    <p className="text-4xl font-bold text-start mt-4">Latest Reports</p>
+                    <p className="text-4xl font-bold text-start mt-4">Industry Enpertise</p>
                     <br />
                     <p>Beyond delivering comprehensive reports, we inspire our clients to craft savvy growth strategies using the insights we provide-information that is consistently accurate, reliable, and invaluable.</p>
                 </div>
@@ -49,7 +49,7 @@ function LatestReport() {
                     <label className="block mb-2 text-lg bg-red-600 rounded-lg p-2 text-center font-medium text-gray-900 dark:text-white">Search Report</label>
                     <select
                         id="reports"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     >
                         <option selected>Aerospace & Defense Industry</option>
                         <option value="Agriculture and Agri Inputs">Agriculture and Agri Inputs</option>
@@ -81,25 +81,24 @@ function LatestReport() {
                             ))}
                         </div>
                     </div>
-                    <div className="flex justify-center my-3">
+                    <section className="flex justify-center mt-10 p-5">
                         <nav aria-label="Page navigation example">
-                            <ul className="flex items-center -space-x-px h-8 text-sm">
-                                {/* Pagination can be handled dynamically if required */}
+                            <ul className="flex items-center space-x-2">
                                 <li>
                                     <Link
-                                        to={"#"}
-                                        className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                                        to="#"
+                                        className="px-4 py-2 bg-gray-300 rounded-full hover:bg-gray-400 text-gray-700"
                                     >
                                         Previous
                                     </Link>
                                 </li>
-                                {[1, 2, 3, 4, 5].map((page, index) => (
-                                    <li key={index}>
+                                {[1, 2, 3, 4, 5].map((page) => (
+                                    <li key={page}>
                                         <Link
-                                            to={"#"}
-                                            className={`flex items-center justify-center px-3 h-8 leading-tight ${page === 3
-                                                ? "z-10 text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-                                                : "text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                                            to="#"
+                                            className={`px-4 py-2 rounded-full ${page === 1
+                                                ? "bg-blue-500 text-white"
+                                                : "bg-gray-200 hover:bg-blue-300"
                                                 }`}
                                         >
                                             {page}
@@ -108,15 +107,15 @@ function LatestReport() {
                                 ))}
                                 <li>
                                     <Link
-                                        to={"#"}
-                                        className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                                        to="#"
+                                        className="px-4 py-2 bg-gray-300 rounded-full hover:bg-gray-400 text-gray-700"
                                     >
                                         Next
                                     </Link>
                                 </li>
                             </ul>
                         </nav>
-                    </div>
+                    </section>
                 </section>
             </section>
         </div>

@@ -4,6 +4,7 @@ import Podium from "../assets/podium.png"
 import LightImage from "../assets/light.png"
 import SvgMp4 from "../assets/svg.mp4"
 import './Home.css';
+import { Link } from "react-router-dom";
 
 
 function Home() {
@@ -217,7 +218,7 @@ function Home() {
                             <input
                                 type="text"
                                 id="default"
-                                className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white shadow-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                className="block w-full p-4 pl-10 text-sm border border-gray-300 rounded-lg text-black shadow-lg focus:ring-blue-500 focus:border-blue-500  dark:border-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Search Reports....."
                                 required
                             />
@@ -278,10 +279,11 @@ function Home() {
                             Let’s collaborate to unlock your businesss full potential. Reach out to discuss how we can help you grow.
                         </p>
                         <div className="flex justify-center mt-6">
-                            <button className="relative inline-flex items-center justify-center text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:scale-110 hover:shadow-xl transition-all duration-300 ease-in-out border-0 py-3 px-8 rounded-full text-lg group">
+                            <Link to={"/contact"}
+                                className="relative inline-flex items-center justify-center text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:scale-110 hover:shadow-xl transition-all duration-300 ease-in-out border-0 py-3 px-8 rounded-full text-lg group">
                                 <span className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 opacity-50 blur-md transition-all duration-300 group-hover:opacity-70"></span>
                                 Get in Touch
-                            </button>
+                            </Link>
                         </div>
                     </div>
 
@@ -420,11 +422,11 @@ function Home() {
                     </div>
                     <div
                         className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 rounded-lg"
-                        style={{ backgroundColor: '#F3F0FF', padding: '25px' }}
+                        style={{ backgroundColor: '#F3F0FF' }}
                     >
                         {/* Card 1 */}
-                        <div className="p-6 md:w-1/3 flex flex-col text-center items-center shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 bg-gradient-to-r from-indigo-100 via-purple-100 to-indigo-200 rounded-lg">
-                            <div className="w-24 h-24 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 text-white mb-5">
+                        <div className="p-2 md:w-1/3 flex flex-col text-center items-center shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 bg-gradient-to-r from-indigo-100 via-purple-100 to-indigo-200 rounded-lg">
+                            <div className="w-20 h-20 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 text-white mb-5">
                                 <img src={ServerImage} alt="Unique Data" className="w-16 h-16 object-contain" />
                             </div>
                             <div className="flex-grow">
@@ -453,8 +455,8 @@ function Home() {
                             </div>
                         </div>
                         {/* Card 2 */}
-                        <div className="p-6 md:w-1/3 flex flex-col text-center items-center shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 bg-gradient-to-r from-indigo-100 via-purple-100 to-indigo-200 rounded-lg">
-                            <div className="w-24 h-24 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 text-white mb-5">
+                        <div className="p-2 md:w-1/3 flex flex-col text-center items-center shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 bg-gradient-to-r from-indigo-100 via-purple-100 to-indigo-200 rounded-lg">
+                            <div className="w-20 h-20 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 text-white mb-5">
                                 <img src={Podium} alt="One Platform" className="w-16 h-16 object-contain" />
                             </div>
                             <div className="flex-grow">
@@ -483,8 +485,8 @@ function Home() {
                             </div>
                         </div>
                         {/* Card 3 */}
-                        <div className="p-6 md:w-1/3 flex flex-col text-center items-center shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 bg-gradient-to-r from-indigo-100 via-purple-100 to-indigo-200 rounded-lg">
-                            <div className="w-24 h-24 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 text-white mb-5">
+                        <div className="p-2 md:w-1/3 flex flex-col text-center items-center shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 bg-gradient-to-r from-indigo-100 via-purple-100 to-indigo-200 rounded-lg">
+                            <div className="w-20 h-20 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 text-white mb-5">
                                 <img src={LightImage} alt="Innovative Solutions" className="w-16 h-16 object-contain" />
                             </div>
                             <div className="flex-grow">
@@ -513,6 +515,7 @@ function Home() {
                             </div>
                         </div>
                     </div>
+
                 </div>
             </section>
 
@@ -583,7 +586,7 @@ function Home() {
             {/* Why Choose Us? */}
             <section className="relative bg-gradient-to-b from-gray-100 to-gray-200 py-16">
                 {/* Decorative Background Elements */}
-               
+
 
                 {/* Main Content */}
                 <div className="container mx-auto px-6 md:px-12 lg:px-20">
@@ -691,7 +694,7 @@ function Home() {
                     </div>
                 </div>
 
-              
+
             </section>
 
 

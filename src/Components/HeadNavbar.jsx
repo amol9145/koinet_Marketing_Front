@@ -28,7 +28,7 @@ const Navbar = () => {
     }, []);
 
     return (
-        <nav  ref={navbarRef} className="bg-white text-black shadow-lg border-gray-200 dark:border-gray-600  fixed top-0 z-50 w-full">
+        <nav ref={navbarRef} className="bg-white text-black shadow-lg border-gray-200 dark:border-gray-600  fixed top-0 z-50 w-full">
             <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
                 <Link to={"/"} className="flex items-center space-x-3 rtl:space-x-reverse">
                     <img
@@ -82,11 +82,11 @@ const Navbar = () => {
                                 onClick={() => setActiveDropdown(null)}
                                 className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500  dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
                             >
-                                Latest Reports
+                                Industry Expertise
                             </Link>
                         </li>
-                        <li>
-                            <button
+                        {/* <li>
+                            <Link to={"/Allexpertise"}
                                 onClick={() => toggleDropdown("dropdown1")}
                                 id="mega-menu-full-dropdown-button"
                                 className="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded md:w-auto hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0  md:dark:hover:text-blue-500  dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
@@ -107,8 +107,8 @@ const Navbar = () => {
                                         d="m1 1 4 4 4-4"
                                     />
                                 </svg>
-                            </button>
-                        </li>
+                            </Link>
+                        </li> */}
                         <li>
                             <button
                                 onClick={() => toggleDropdown("dropdown2")}
@@ -166,10 +166,8 @@ const Navbar = () => {
             </div>
             {activeDropdown === "dropdown1" && (
                 <div
-
                     id="mega-menu-full-dropdown"
-                    className="mt-1 border-gray-200 shadow-sm bg-gray-50 md:bg-white border-y  dark:border-gray-600"
-                >
+                    className="mt-1 border-gray-200 shadow-sm bg-gray-50 md:bg-white border-y  dark:border-gray-600" >
                     <div className=" bg-customBlue grid max-w-screen-xl px-4 py-5 mx-auto text-gray-900  sm:grid-cols-2 md:px-6">
                         <ul>
                             <li>
