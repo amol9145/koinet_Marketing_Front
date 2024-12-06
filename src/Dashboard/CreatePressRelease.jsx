@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { TimceApi, baseUrl } from "../Constant/ConstantFiles";
+import { Link } from "react-router-dom";
 
 function CreatePressRelease() {
     const [reportDetails, setReportDetails] = useState({
@@ -78,6 +79,9 @@ function CreatePressRelease() {
             <div className="mx-auto bg-white rounded-xl shadow-lg">
                 <div className="bg-blue-700 text-white py-5">
                     <h1 className="text-4xl font-bold">Create Press Release</h1>
+                </div>
+                <div className="my-10">
+                    <Link to={"/dashboard"} className="p-3 mt-5 bg-red-600 rounded-lg">Back To Dashboard</Link>
                 </div>
                 <form
                     onSubmit={handleSubmit}

@@ -41,23 +41,23 @@ const HomeDashboard = () => {
             >
                 <div className="h-full  px-3 py-4 overflow-y-auto">
                     <ul className="space-y-2 font-medium mt-5">
-                        <li className='py-2 ms-4 text-start hover:bg-slate-800 hover:rounded-md px-2'>
+                        <li className='py-2 ms-4 text-start hover:bg-slate-200 hover:rounded-md px-2'>
                             <Link>Dashboard</Link>
                         </li>
-                        <li className='py-2 ms-4 text-start hover:bg-slate-800  hover:rounded-md px-2'>
+                        <li className='py-2 ms-4 text-start hover:bg-slate-200 hover:rounded-md px-2'>
 
                             <Link to={"/create_report"}>Upload Report</Link>
                         </li>
 
-                        <li className='py-2 ms-4 text-start hover:bg-slate-800  hover:rounded-md px-2'>
+                        <li className='py-2 ms-4 text-start hover:bg-slate-200  hover:rounded-md px-2'>
 
                             <Link to={"/create_press_release"}>Upload Press Release</Link>
                         </li>
-                        <li className='py-2 ms-4 text-start hover:bg-slate-800  hover:rounded-md px-2'>
+                        <li className='py-2 ms-4 text-start hover:bg-slate-200  hover:rounded-md px-2'>
 
                             <Link to={"/createinfographics"}>Upload Infographics</Link>
                         </li>
-                        <li className='py-2 ms-4 text-start hover:bg-slate-800  hover:rounded-md px-2'>
+                        <li className='py-2 ms-4 text-start hover:bg-slate-200  hover:rounded-md px-2'>
 
                             <Link to={"/order_list"}>All Orders</Link>
                         </li>

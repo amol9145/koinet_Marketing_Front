@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import axios from 'axios';
 import { toast } from "react-toastify";
 import { TimceApi } from "../Constant/ConstantFiles";
+import { Link } from "react-router-dom";
 
 
 const CreateReports = () => {
@@ -112,6 +113,9 @@ const CreateReports = () => {
             Create New Report
           </h1>
         </div>
+        <div className="my-10">
+                    <Link to={"/dashboard"} className="p-3 mt-5 bg-red-600 rounded-lg">Back To Dashboard</Link>
+                </div>
         <form onSubmit={handleSubmit} className="space-y-6 rounded-sm border-2 border-gray-200 p-10">
           {/* Report Title */}
           <div>

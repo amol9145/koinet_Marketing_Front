@@ -2,6 +2,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
 import { useRef, useState } from "react";
 import { TimceApi, baseUrl } from "../Constant/ConstantFiles";
+import { Link } from "react-router-dom";
 
 const CreateInfographics = () => {
     const [reportDetails, setReportDetails] = useState({
@@ -97,6 +98,11 @@ const CreateInfographics = () => {
                 <div className="bg-blue-700 text-white py-5">
                     <h1 className="text-4xl font-bold text-center">Create Infographics</h1>
                 </div>
+
+                <div className="my-10">
+                    <Link to={"/dashboard"} className="p-3 mt-5 bg-red-600 rounded-lg">Back To Dashboard</Link>
+                </div>
+
                 <form
                     onSubmit={handleSubmit}
                     className="space-y-6 rounded-sm border-2 border-gray-200 p-10"

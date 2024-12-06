@@ -9,6 +9,7 @@ import { ToastContainer } from "react-toastify";
 import Billing from "./View/Subpages/Billing";
 import ViewPressRelease from "./View/Subpages/ViewPressRelease";
 import OrdersList from "./Dashboard/OrdersList";
+import OrderDetails from "./Dashboard/OrderDetails";
 
 // Lazy loading components
 const Home = lazy(() => import("./View/Home"));
@@ -67,6 +68,7 @@ function App() {
           <Route path="/report_billing/:id" element={<Billing />} />
           <Route path="/view_press_release/:id" element={<ViewPressRelease />} />
           <Route path="/order_list" element={<OrdersList />} />
+          <Route path="/order_details/:id" element={<OrderDetails />} />
         </Routes>
       </Suspense>
       <Footer />
