@@ -68,45 +68,84 @@ function ViewReportDetails() {
             setLoading(false);
         }
     };
-
-    const handlePayment = () => {
+    const handlePayment = async () => {
         if (!selectedLicense || !reportDetails) {
             alert("Please select a license before proceeding.");
             return;
         }
 
-        // Determine amount based on the selected license
-        let amount;
+        // Determine amount and currency based on the selected license
+        let amount, currency;
         if (selectedLicense === "single-user") {
             amount = reportDetails.singleUserPrice * 100; // Convert to paise
+            currency = reportDetails.singleUserCurrency || "INR"; // Set currency
         } else if (selectedLicense === "multi-user") {
             amount = reportDetails.multiUserPrice * 100; // Convert to paise
+            currency = reportDetails.multiUserCurrency || "INR"; // Set currency
         } else if (selectedLicense === "enterprise") {
             amount = reportDetails.enterprisePrice * 100; // Convert to paise
+            currency = reportDetails.enterpriseCurrency || "INR"; // Set currency
         }
 
-        const options = {
-            key: "rzp_test_cUDdmmAIerYlSG", // Replace with your Razorpay test/live key
-            amount, // Amount in paise
-            currency: "INR",
-            name: "Report Purchase",
-            description: `Purchase ${selectedLicense} license`,
-            handler: (response) => {
-                alert(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
-                // Handle post-payment actions like saving payment details in DB
-            },
-            prefill: {
-                name: "Customer Name", // Replace with actual user data
-                email: "customer@example.com", // Replace with actual user data
-            },
-            theme: {
-                color: "#3399cc",
-            },
-        };
+        try {
+            // Step 1: Create Razorpay Order (backend API call)
+            const createOrderResponse = await axios.post(`${baseUrl}/create-order`, {
+                amount,
+                currency,
+            });
 
-        const razorpayInstance = new Razorpay(options);
-        razorpayInstance.open();
+            const { id: order_id, amount: orderAmount, currency: orderCurrency } = createOrderResponse.data.data;
+
+            // Step 2: Configure Razorpay payment options
+            const options = {
+                key: "rzp_test_cUDdmmAIerYlSG", // Replace with your Razorpay test/live key
+                amount: orderAmount,
+                currency: orderCurrency,
+                name: "Report Purchase",
+                description: `Purchase ${selectedLicense} license`,
+                order_id, // Attach Razorpay order ID
+                handler: async (response) => {
+                    const { razorpay_payment_id, razorpay_signature } = response;
+
+                    try {
+                        const verifyResponse = await axios.post(`${baseUrl}/verify-payment`, {
+                            razorpay_order_id: order_id,
+                            razorpay_payment_id,
+                            razorpay_signature,
+                            amount: orderAmount,
+                            currency: orderCurrency,
+                        });
+
+                        alert(verifyResponse.data.message);
+                    } catch (error) {
+                        console.error("Payment verification failed:", error);
+                        alert("Payment verification failed! Please contact support.");
+                    }
+                },
+                prefill: {
+                    name: "Customer Name", // Replace with actual user data
+                    email: "customer@example.com", // Replace with actual user data
+                },
+                theme: {
+                    color: "#3399cc",
+                },
+            };
+
+            // Step 4: Open Razorpay Checkout
+            const razorpayInstance = new Razorpay(options);
+            razorpayInstance.open();
+
+            razorpayInstance.on("payment.failed", (response) => {
+                console.error("Payment failed:", response.error);
+                alert("Payment failed! Please try again.");
+            });
+        } catch (error) {
+            console.error("Error creating order:", error);
+            alert("Unable to create payment order. Please try again later.");
+        }
     };
+
+
 
     if (!reportDetails) {
         return <p>Loading...</p>;

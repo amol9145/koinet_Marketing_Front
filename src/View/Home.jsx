@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ServerImage from "../assets/server.png"
 import Podium from "../assets/podium.png"
 import LightImage from "../assets/light.png"
-import SvgMp4 from "../assets/svg.mp4"
+// import SvgMp4 from "../assets/svg.mp4"
 import './Home.css';
 import { Link } from "react-router-dom";
 
@@ -235,21 +235,7 @@ function Home() {
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black"></div>
 
-                {/* Particle Animation */}
-                <div className="absolute top-0 left-0 w-full h-full z-10 overflow-hidden pointer-events-none">
-                    {[...Array(50)].map((_, i) => (
-                        <div
-                            key={i}
-                            className="absolute w-1 h-1 bg-white rounded-full animate-float"
-                            style={{
-                                animationDelay: `${Math.random() * 2}s`,
-                                animationDuration: `${2 + Math.random() * 4}s`,
-                                top: `${Math.random() * 100}%`,
-                                left: `${Math.random() * 100}%`,
-                            }}
-                        ></div>
-                    ))}
-                </div>
+
 
                 {/* Rotating Background */}
                 {/* <div
@@ -290,17 +276,8 @@ function Home() {
                     {/* Right Video Section */}
                     <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 relative">
                         <div className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
-                            <video
-                                src={SvgMp4}
-                                autoPlay
-                                loop
-                                muted
-                                className="w-full h-auto rounded-lg transform hover:scale-105 transition-transform duration-500"
-                            ></video>
-                            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60"></div>
-                            <div className="absolute top-4 right-4 bg-indigo-600 text-white px-4 py-2 text-sm font-semibold rounded-full shadow-lg">
-                                Watch the Process
-                            </div>
+                            <img src="https://cdni.iconscout.com/illustration/premium/thumb/business-presentation-illustration-download-in-svg-png-gif-file-formats--analytics-logo-client-marketing-financial-meeting-pack-illustrations-4897493.png" alt="" />
+
                         </div>
                     </div>
                 </div>
@@ -422,21 +399,21 @@ function Home() {
                     </div>
                     <div
                         className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 rounded-lg"
-                        style={{ backgroundColor: '#F3F0FF' }}
+                        style={{ backgroundColor: '#F3F0FF', padding: '25px' }}
                     >
                         {/* Card 1 */}
-                        <div className="p-2 md:w-1/3 flex flex-col text-center items-center shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 bg-gradient-to-r from-indigo-100 via-purple-100 to-indigo-200 rounded-lg">
-                            <div className="w-20 h-20 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 text-white mb-5">
+                        <div className="p-2 md:w-1/3 scale-90 flex-col text-center items-center shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 bg-gradient-to-r from-indigo-100 via-purple-100 to-indigo-200 rounded-lg ">
+                            <div className="w-24 h-24 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 text-white mb-5">
                                 <img src={ServerImage} alt="Unique Data" className="w-16 h-16 object-contain" />
                             </div>
                             <div className="flex-grow">
-                                <h2 className="text-gray-900 text-xl font-bold mb-2">Unique Data</h2>
+                                <h2 className="text-gray-900 text-xl font-bold  mb-2 ">Unique Data</h2>
                                 <h3 className="text-indigo-700 text-lg font-semibold mb-3">Your Data-Driven Advantage</h3>
                                 <p className="leading-relaxed text-start text-gray-600">
                                     Our extensive repository of accurate and reliable market research studies sets us apart. We meticulously analyze vast datasets to deliver validated insights that empower your decision-making. With Intent Market Research, you’ll gain a competitive edge and make informed choices at every stage of your business journey.
                                 </p>
                                 <a
-                                    className="mt-4 text-indigo-600 hover:text-indigo-800 inline-flex items-center transition-transform transform hover:scale-105"
+                                    className="mt-4 text-black p-2 rounded-lg bg-red-600 inline-flex items-center transition-transform transform hover:scale-105"
                                     href="#!"
                                 >
                                     Learn More
@@ -455,8 +432,8 @@ function Home() {
                             </div>
                         </div>
                         {/* Card 2 */}
-                        <div className="p-2 md:w-1/3 flex flex-col text-center items-center shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 bg-gradient-to-r from-indigo-100 via-purple-100 to-indigo-200 rounded-lg">
-                            <div className="w-20 h-20 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 text-white mb-5">
+                        <div className="p-6 md:w-1/3 scale-90 flex flex-col text-center items-center shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 bg-gradient-to-r from-indigo-100 via-purple-100 to-indigo-200 rounded-lg">
+                            <div className="w-24 h-24 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 text-white mb-5">
                                 <img src={Podium} alt="One Platform" className="w-16 h-16 object-contain" />
                             </div>
                             <div className="flex-grow">
@@ -466,7 +443,7 @@ function Home() {
                                     Our research goes beyond the report. We provide actionable insights that inspire your team to craft winning growth strategies. With consistently accurate and reliable data, you’ll have the confidence to make informed decisions and drive your business forward.
                                 </p>
                                 <a
-                                    className="mt-4 text-indigo-600 hover:text-indigo-800 inline-flex items-center transition-transform transform hover:scale-105"
+                                    className="mt-4 text-black p-2 rounded-lg bg-red-600 inline-flex items-center transition-transform transform hover:scale-105"
                                     href="#!"
                                 >
                                     Learn More
@@ -485,8 +462,8 @@ function Home() {
                             </div>
                         </div>
                         {/* Card 3 */}
-                        <div className="p-2 md:w-1/3 flex flex-col text-center items-center shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 bg-gradient-to-r from-indigo-100 via-purple-100 to-indigo-200 rounded-lg">
-                            <div className="w-20 h-20 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 text-white mb-5">
+                        <div className="p-6 md:w-1/3 scale-90 flex flex-col text-center items-center shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 bg-gradient-to-r from-indigo-100 via-purple-100 to-indigo-200 rounded-lg">
+                            <div className="w-24 h-24 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 text-white mb-5">
                                 <img src={LightImage} alt="Innovative Solutions" className="w-16 h-16 object-contain" />
                             </div>
                             <div className="flex-grow">
@@ -496,7 +473,7 @@ function Home() {
                                     At Intent Market Research, we offer a unique blend of accessibility, expertise, and cutting-edge methodologies. Our team of seasoned researchers is dedicated to providing you with the tools and insights you need to succeed.
                                 </p>
                                 <a
-                                    className="mt-4 text-indigo-600 hover:text-indigo-800 inline-flex items-center transition-transform transform hover:scale-105"
+                                    className="mt-4 text-black p-2 rounded-lg bg-red-600 inline-flex items-center transition-transform transform hover:scale-105"
                                     href="#!"
                                 >
                                     Learn More
@@ -515,7 +492,6 @@ function Home() {
                             </div>
                         </div>
                     </div>
-
                 </div>
             </section>
 

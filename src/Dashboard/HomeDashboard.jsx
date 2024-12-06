@@ -57,6 +57,10 @@ const HomeDashboard = () => {
 
                             <Link to={"/createinfographics"}>Upload Infographics</Link>
                         </li>
+                        <li className='py-2 ms-4 text-start hover:bg-slate-800  hover:rounded-md px-2'>
+
+                            <Link to={"/order_list"}>All Orders</Link>
+                        </li>
                         {/* More items can be added here */}
                     </ul>
                 </div>

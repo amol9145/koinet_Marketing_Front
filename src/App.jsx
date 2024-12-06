@@ -8,6 +8,7 @@ import CreateInfographics from "./Dashboard/CreateInfographics";
 import { ToastContainer } from "react-toastify";
 import Billing from "./View/Subpages/Billing";
 import ViewPressRelease from "./View/Subpages/ViewPressRelease";
+import OrdersList from "./Dashboard/OrdersList";
 
 // Lazy loading components
 const Home = lazy(() => import("./View/Home"));
@@ -65,6 +66,7 @@ function App() {
           <Route path="/createinfographics" element={<CreateInfographics />} />
           <Route path="/report_billing/:id" element={<Billing />} />
           <Route path="/view_press_release/:id" element={<ViewPressRelease />} />
+          <Route path="/order_list" element={<OrdersList />} />
         </Routes>
       </Suspense>
       <Footer />
