@@ -2,7 +2,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
 import { useRef, useState } from "react";
 import { TimceApi, baseUrl } from "../Constant/ConstantFiles";
-import { Link } from "react-router-dom";
+
 
 const CreateInfographics = () => {
     const [reportDetails, setReportDetails] = useState({
@@ -93,15 +93,12 @@ const CreateInfographics = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-i-100 via-blue-200 to-indigo-200 mt-12">
+        <div className="min-h-screen bg-gradient-to-br from-i-100 via-blue-200 to-indigo-200 ">
             <div className="mx-auto bg-white rounded-xl shadow-lg">
                 <div className="bg-blue-700 text-white py-5">
                     <h1 className="text-4xl font-bold text-center">Create Infographics</h1>
                 </div>
 
-                <div className="my-10">
-                    <Link to={"/dashboard"} className="p-3 mt-5 bg-red-600 rounded-lg">Back To Dashboard</Link>
-                </div>
 
                 <form
                     onSubmit={handleSubmit}

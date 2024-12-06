@@ -1,71 +1,108 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import CreateReports from './Createreports';
+import CreatePressRelease from './CreatePressRelease';
+import CreateInfographics from './CreateInfographics';
+import OrdersList from './OrdersList';
+
 
 const HomeDashboard = () => {
-    const [sidebarOpen, setSidebarOpen] = useState(true);
-
-    const toggleSidebar = () => {
-        setSidebarOpen(!sidebarOpen);
-    };
+    const [activeTab, setActiveTab] = useState('dashboard'); // Default tab is 'dashboard'
 
     return (
-        <>
-            <button
-                data-drawer-target="default-sidebar"
-                data-drawer-toggle="default-sidebar"
-                aria-controls="default-sidebar"
-                type="button"
-                className="inline-flex items-center p-2 mt-2 ms-3 text-sm rounded-lg sm:hidden focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400  dark:focus:ring-gray-600"
-                onClick={toggleSidebar}
-            >
-                <span className="sr-only">Open sidebar</span>
-                <svg
-                    className="w-6 h-6"
-                    aria-hidden="true"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <path
-                        clipRule="evenodd"
-                        fillRule="evenodd"
-                        d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
-                    ></path>
-                </svg>
-            </button>
+        <div className="md:flex mt-10 py-10">
+            <ul className="flex flex-col  space-y-4 mt-5 text-sm font-medium text-gray-500 dark:text-gray-400 md:me-4 mb-4 md:mb-0">
+                {/* Tab links */}
+                <li>
+                    <a
+                        href="#"
+                        onClick={() => setActiveTab('dashboard')}
+                        className={`inline-flex items-center px-4 py-3 rounded-lg w-full ${activeTab === 'dashboard'
+                            ? 'text-gray-900 bg-gray-100 dark:bg-gray-700 dark:text-white'
+                            : 'hover:text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white'
+                            }`}
+                    >
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="#"
+                        onClick={() => setActiveTab('uploadReport')}
+                        className={`inline-flex items-center px-4 py-3 rounded-lg w-full ${activeTab === 'uploadReport'
+                            ? 'text-gray-900 bg-gray-100 dark:bg-gray-700 dark:text-white'
+                            : 'hover:text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white'
+                            }`}
+                    >
+                        Upload Report
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="#"
+                        onClick={() => setActiveTab('uploadPressRelease')}
+                        className={`inline-flex items-center px-4 py-3 rounded-lg w-full ${activeTab === 'uploadPressRelease'
+                            ? 'text-gray-900 bg-gray-100 dark:bg-gray-700 dark:text-white'
+                            : 'hover:text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white'
+                            }`}
+                    >
+                        Upload Press Release
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="#"
+                        onClick={() => setActiveTab('uploadInfographics')}
+                        className={`inline-flex items-center px-4 py-3 rounded-lg w-full ${activeTab === 'uploadInfographics'
+                            ? 'text-gray-900 bg-gray-100 dark:bg-gray-700 dark:text-white'
+                            : 'hover:text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white'
+                            }`}
+                    >
+                        Upload Infographics
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="#"
+                        onClick={() => setActiveTab('allOrders')}
+                        className={`inline-flex items-center px-4 py-3 rounded-lg w-full ${activeTab === 'allOrders'
+                            ? 'text-gray-900 bg-gray-100 dark:bg-gray-700 dark:text-white'
+                            : 'hover:text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white'
+                            }`}
+                    >
+                        All Orders
+                    </a>
+                </li>
+            </ul>
 
-            <aside
-                id="default-sidebar"
-                className={`mt-12 w-64 h-screen transition-transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} sm:translate-x-0`}
-                aria-label="Sidebar"
-            >
-                <div className="h-full  px-3 py-4 overflow-y-auto">
-                    <ul className="space-y-2 font-medium mt-5">
-                        <li className='py-2 ms-4 text-start hover:bg-slate-200 hover:rounded-md px-2'>
-                            <Link>Dashboard</Link>
-                        </li>
-                        <li className='py-2 ms-4 text-start hover:bg-slate-200 hover:rounded-md px-2'>
-
-                            <Link to={"/create_report"}>Upload Report</Link>
-                        </li>
-
-                        <li className='py-2 ms-4 text-start hover:bg-slate-200  hover:rounded-md px-2'>
-
-                            <Link to={"/create_press_release"}>Upload Press Release</Link>
-                        </li>
-                        <li className='py-2 ms-4 text-start hover:bg-slate-200  hover:rounded-md px-2'>
-
-                            <Link to={"/createinfographics"}>Upload Infographics</Link>
-                        </li>
-                        <li className='py-2 ms-4 text-start hover:bg-slate-200  hover:rounded-md px-2'>
-
-                            <Link to={"/order_list"}>All Orders</Link>
-                        </li>
-                        {/* More items can be added here */}
-                    </ul>
+            {/* Tab content */}
+            <div className="w\-full"> {/* Full width applied here */}
+                {activeTab === 'dashboard' && (
+                      <div className="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 w-full">
+                      {/* <AllFieldCount /> */}Hello
+                  </div>
+                )}
+                {activeTab === 'uploadReport' && (
+                    <div className="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 w-full">
+                        <CreateReports />
+                    </div>
+                )}
+                {activeTab === 'uploadPressRelease' && (
+                    <div className="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 w-full">
+                    <CreatePressRelease />
                 </div>
-            </aside>
-        </>
+                )}
+                {activeTab === 'uploadInfographics' && (
+                     <div className="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 w-full">
+                     <CreateInfographics />
+                 </div>
+                )}
+                {activeTab === 'allOrders' && (
+                      <div className="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 w-full">
+                      <OrdersList />
+                  </div>
+                )}
+            </div>
+        </div>
     );
 };
 

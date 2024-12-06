@@ -27,11 +27,9 @@ const OrdersList = () => {
     if (error) return <p className="text-center text-xl text-red-600">{error}</p>;
 
     return (
-        <div className=" mt-10">
-            <h2 className="text-3xl py-10 bg-blue-600 font-bold text-center text-white mb-6 mt-10">Orders List</h2>
-            <div className="my-10">
-                <Link to={"/dashboard"} className="p-3 mt-5 bg-red-600 rounded-lg">Back To Dashboard</Link>
-            </div>
+        <div className=" ">
+            <h2 className="text-3xl py-8 bg-blue-600 font-bold text-center text-white mb-6 ">Orders List</h2>
+          
             <div className="conteiner mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="  grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {orders.map((order) => (

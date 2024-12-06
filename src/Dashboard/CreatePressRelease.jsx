@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { TimceApi, baseUrl } from "../Constant/ConstantFiles";
-import { Link } from "react-router-dom";
+
 
 function CreatePressRelease() {
     const [reportDetails, setReportDetails] = useState({
@@ -75,14 +75,12 @@ function CreatePressRelease() {
     const editorRef = useRef(null);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-i-100 via-blue-200 to-indigo-200 mt-12">
+        <div className="min-h-screen bg-gradient-to-br from-i-100 via-blue-200 to-indigo-200 ">
             <div className="mx-auto bg-white rounded-xl shadow-lg">
                 <div className="bg-blue-700 text-white py-5">
-                    <h1 className="text-4xl font-bold">Create Press Release</h1>
+                    <h1 className="text-4xl font-bold px-2">Create Press Release</h1>
                 </div>
-                <div className="my-10">
-                    <Link to={"/dashboard"} className="p-3 mt-5 bg-red-600 rounded-lg">Back To Dashboard</Link>
-                </div>
+             
                 <form
                     onSubmit={handleSubmit}
                     className="space-y-6 rounded-sm border-2 border-gray-200 p-10"
