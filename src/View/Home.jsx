@@ -183,7 +183,7 @@ function Home() {
                     <p className="mb-5 text-5xl font-bold text-white animate-slideDown tracking-wide">
                         Want to Expand into
                     </p>
-                    <p className="mb-5 text-2xl font-bold text-black animate-slideUp tracking-wider">
+                    <p className="mb-5 text-2xl font-bold text-blue-900  leading-tightanimate-slideUp tracking-wider">
                         A NEW MARKET?
                     </p>
                     <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl dark:text-white animate-float">
@@ -266,8 +266,8 @@ function Home() {
                         </p>
                         <div className="flex justify-center mt-6">
                             <Link to={"/contact"}
-                                className="relative inline-flex items-center justify-center text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:scale-110 hover:shadow-xl transition-all duration-300 ease-in-out border-0 py-3 px-8 rounded-full text-lg group">
-                                <span className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 opacity-50 blur-md transition-all duration-300 group-hover:opacity-70"></span>
+                                className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+
                                 Get in Touch
                             </Link>
                         </div>
@@ -548,13 +548,8 @@ function Home() {
 
                     {/* Explore More Section */}
                     <div className="text-center mt-16">
-                        <button
-                            type="button"
-                            className="relative inline-flex items-center px-8 py-4 text-lg font-medium text-white bg-gradient-to-r from-pink-500 via-red-500 to-purple-600 rounded-lg shadow-lg hover:shadow-pink-500/50 hover:scale-110 transition-transform"
-                        >
-                            Explore More
-                            <span className="absolute inset-0 bg-gradient-to-r from-pink-400 via-red-400 to-purple-500 opacity-30 blur-md rounded-lg"></span>
-                        </button>
+                        <button type="button" className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Explore More</button>
+
                     </div>
                 </div>
             </section>

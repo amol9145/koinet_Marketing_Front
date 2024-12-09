@@ -3,6 +3,8 @@ import CreateReports from './Createreports';
 import CreatePressRelease from './CreatePressRelease';
 import CreateInfographics from './CreateInfographics';
 import OrdersList from './OrdersList';
+import MainDashboardBack from './MainDashboardBack';
+import { Link } from 'react-router-dom';
 
 
 const HomeDashboard = () => {
@@ -13,73 +15,73 @@ const HomeDashboard = () => {
             <ul className="flex flex-col  space-y-4 mt-5 text-sm font-medium text-gray-500 dark:text-gray-400 md:me-4 mb-4 md:mb-0">
                 {/* Tab links */}
                 <li>
-                    <a
-                        href="#"
+                    <Link
+                        to={"#"}
                         onClick={() => setActiveTab('dashboard')}
                         className={`inline-flex items-center px-4 py-3 rounded-lg w-full ${activeTab === 'dashboard'
                             ? 'text-gray-900 bg-gray-100 dark:bg-gray-700 dark:text-white'
-                            : 'hover:text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white'
+                            : 'hover:text-gray-900 bg-gray-50 hover:bg-gray-100   text-black'
                             }`}
                     >
                         Dashboard
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a
-                        href="#"
+                    <Link
+                        to={"#"}
                         onClick={() => setActiveTab('uploadReport')}
                         className={`inline-flex items-center px-4 py-3 rounded-lg w-full ${activeTab === 'uploadReport'
                             ? 'text-gray-900 bg-gray-100 dark:bg-gray-700 dark:text-white'
-                            : 'hover:text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white'
+                            : 'hover:text-gray-900 bg-gray-50 hover:bg-gray-100  dark:hover:bg-gray-700 text-black'
                             }`}
                     >
                         Upload Report
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a
-                        href="#"
+                    <Link
+                        to={"#"}
                         onClick={() => setActiveTab('uploadPressRelease')}
                         className={`inline-flex items-center px-4 py-3 rounded-lg w-full ${activeTab === 'uploadPressRelease'
                             ? 'text-gray-900 bg-gray-100 dark:bg-gray-700 dark:text-white'
-                            : 'hover:text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white'
+                            : 'hover:text-gray-900 bg-gray-50 hover:bg-gray-100 text-black '
                             }`}
                     >
                         Upload Press Release
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a
-                        href="#"
+                    <Link
+                        to={"#"}
                         onClick={() => setActiveTab('uploadInfographics')}
                         className={`inline-flex items-center px-4 py-3 rounded-lg w-full ${activeTab === 'uploadInfographics'
                             ? 'text-gray-900 bg-gray-100 dark:bg-gray-700 dark:text-white'
-                            : 'hover:text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white'
+                            : 'hover:text-gray-900 bg-gray-50 hover:bg-gray-100  text-black'
                             }`}
                     >
                         Upload Infographics
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a
-                        href="#"
+                    <Link
+                        to={"#"}
                         onClick={() => setActiveTab('allOrders')}
                         className={`inline-flex items-center px-4 py-3 rounded-lg w-full ${activeTab === 'allOrders'
                             ? 'text-gray-900 bg-gray-100 dark:bg-gray-700 dark:text-white'
-                            : 'hover:text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white'
+                            : 'hover:text-gray-900 bg-gray-50 hover:bg-gray-100 text-black'
                             }`}
                     >
                         All Orders
-                    </a>
+                    </Link>
                 </li>
             </ul>
 
             {/* Tab content */}
             <div className="w\-full"> {/* Full width applied here */}
                 {activeTab === 'dashboard' && (
-                      <div className="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 w-full">
-                      {/* <AllFieldCount /> */}Hello
-                  </div>
+                    <div className="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 w-full">
+                        <MainDashboardBack />
+                    </div>
                 )}
                 {activeTab === 'uploadReport' && (
                     <div className="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 w-full">
@@ -88,18 +90,18 @@ const HomeDashboard = () => {
                 )}
                 {activeTab === 'uploadPressRelease' && (
                     <div className="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 w-full">
-                    <CreatePressRelease />
-                </div>
+                        <CreatePressRelease />
+                    </div>
                 )}
                 {activeTab === 'uploadInfographics' && (
-                     <div className="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 w-full">
-                     <CreateInfographics />
-                 </div>
+                    <div className="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 w-full">
+                        <CreateInfographics />
+                    </div>
                 )}
                 {activeTab === 'allOrders' && (
-                      <div className="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 w-full">
-                      <OrdersList />
-                  </div>
+                    <div className="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 w-full">
+                        <OrdersList />
+                    </div>
                 )}
             </div>
         </div>
