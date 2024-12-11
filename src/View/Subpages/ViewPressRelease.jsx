@@ -125,7 +125,7 @@ const ViewPressRelease = () => {
                     <>
                         {/* Left Section */}
                         <div className="flex-1 bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300">
-                            <h2 className="text-4xl font-bold text-blue-700 mb-4 hover:text-blue-500 transition duration-200">
+                            <h2 className="text-4xl font-bold text-sky-900 mb-4 hover:text-blue-500 transition duration-200">
                                 {pressRelease.title}
                             </h2>
                             <div className="mt-4 text-sm text-gray-500">
@@ -162,8 +162,8 @@ const ViewPressRelease = () => {
                             </div>
 
                             {/* Enhanced Contact Form */}
-                            <div className="bg-gradient-to-r from-blue-500 to-blue-700 text-black rounded-lg p-6 transition duration-200 hover:shadow-xl shadow-lg">
-                                <h3 className="text-2xl font-semibold mb-4">Get in <span className="text-yellow-300">Touch</span> with Us</h3>
+                            <div className="bg-blue-100 text-black rounded-lg p-6 transition duration-200 hover:shadow-xl shadow-lg">
+                                <h3 className="text-2xl font-semibold mb-4">Get in <span className="text-blue-800">Touch</span> with Us</h3>
                                 <p className="mb-4">Were here to help! Fill out the form below, and our market research team will get back to you shortly.</p>
                                 <form className="space-y-4" ref={form} onSubmit={sendEmail}>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -224,13 +224,15 @@ const ViewPressRelease = () => {
                                             onChange={handleReCAPTCHAChange}
                                         />
                                     </div>
-                                    <button
-                                        type="submit"
-                                        className="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:shadow-lg transition duration-200 transform hover:scale-105"
-                                        disabled={loading}
-                                    >
-                                        {loading ? "Sending Email..." : "Get Sample Report"}
-                                    </button>
+
+                                    <div className="text-center">
+                                        <button type="submit" disabled={loading} className=" mt-3 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                                            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                                {loading ? "Sending Email..." : "Get Sample Report"}
+                                            </span>
+                                        </button>
+
+                                    </div>
 
                                 </form>
                             </div>
@@ -242,7 +244,7 @@ const ViewPressRelease = () => {
 
             {/* Attractive Recent Market Reports */}
             <div className="mt-10 bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300">
-                <h3 className="text-2xl font-semibold text-blue-700 mb-4">Recent Market Research Reports</h3>
+                <h3 className="text-2xl font-semibold text-sky-900 mb-4">Recent Market Research Reports</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {pressReleases.map((release, index) => (
                         <div key={index} className="bg-gray-50 rounded-lg p-4 shadow-sm hover:shadow-md transition duration-200">

@@ -63,7 +63,7 @@ function Pressreleased() {
                 </div>
             </section>
             <section className="text-gray-600 body-font overflow-hidden">
-                <div className="container px-5 py-24 mx-auto">
+                <div className="container px-5 py-10 mx-auto">
                     <div className="-my-8 divide-y-2 divide-gray-100">
                         {pressReleases.map((release, index) => (
                             <div key={index} className="py-8 flex flex-wrap md:flex-nowrap">
@@ -86,6 +86,29 @@ function Pressreleased() {
                         ))}
                     </div>
                 </div>
+            </section>
+            <section className="flex justify-center my-2">
+                <nav aria-label="Page navigation example">
+                    <ul className="flex items-center space-x-2">
+                        <li>
+                            <button
+
+                                className="px-4 py-2 cursor-pointer bg-gray-300 rounded-full hover:bg-gray-400 text-gray-700"  >
+                                Previous
+                            </button>
+                        </li>
+                        <li >
+                            <button className="px-4 py-2 rounded-fullbg-blue-500 text-black bg-gray-200 hover:bg-blue-300" >
+                                1
+                            </button>
+                        </li>
+                        <li>
+                            <button className="px-4 py-2 cursor-pointer bg-gray-300 rounded-full hover:bg-gray-400 text-gray-700" >
+                                Next
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
             </section>
         </>
     );

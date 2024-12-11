@@ -5,12 +5,22 @@ import LightImage from "../assets/light.png"
 // import SvgMp4 from "../assets/svg.mp4"
 import './Home.css';
 import { Link } from "react-router-dom";
+import {
+    Tabs,
+    TabsHeader,
+    TabsBody,
+    Tab,
+    TabPanel,
+} from "@material-tailwind/react";
+
 
 
 function Home() {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [visibleCards, setVisibleCards] = useState([0, 1, 2]);
+    // const [visibleCards, setVisibleCards] = useState([0, 1, 2]);
     const [activeIndex, setActiveIndex] = useState(null);
+
+
 
     const [isVisible, setIsVisible] = useState(false);
 
@@ -21,42 +31,7 @@ function Home() {
 
 
 
-    const cardData = [
-        {
-            title: "Construction Chemicals Market 1",
-            content:
-                "As per Intent Market Research, the Construction Chemicals Market was valued at USD 45.8 billion in 2023 and will surpass USD 85.6 billion by 2030; growing at a CAGR of 9.4% during 2024 - 2030.",
-            category: "Content Category 1",
-        },
-        {
-            title: "Construction Chemicals Market 2",
-            content:
-                "As per Intent Market Research, the Construction Chemicals Market was valued at USD 45.8 billion in 2023 and will surpass USD 85.6 billion by 2030; growing at a CAGR of 9.4% during 2024 - 2030.",
-            category: "Content Category 2",
-        },
-        {
-            title: "Construction Chemicals Market 3",
-            content:
-                "As per Intent Market Research, the Construction Chemicals Market was valued at USD 45.8 billion in 2023 and will surpass USD 85.6 billion by 2030; growing at a CAGR of 9.4% during 2024 - 2030.",
-            category: "Content Category 3",
-        },
-        {
-            title: "Construction Chemicals Market 4",
-            content:
-                "As per Intent Market Research, the Construction Chemicals Market was valued at USD 45.8 billion in 2023 and will surpass USD 85.6 billion by 2030; growing at a CAGR of 9.4% during 2024 - 2030.",
-            category: "Content Category 4",
-        },
-    ];
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setVisibleCards((prev) => {
-                // Shift to next cards
-                return prev.map((index) => (index + 1) % cardData.length);
-            });
-        }, 3000); // Change card every 3 seconds
-        return () => clearInterval(interval); // Cleanup on unmount
-    }, [cardData.length]);
 
     const toggleAccordion = (index) => {
         setActiveIndex(activeIndex === index ? null : index);
@@ -168,22 +143,111 @@ function Home() {
         },
     ];
 
+    const data = [
+        {
+            label: " Aerospace and Defence Industry",
+            value: " Aerospace and Defence Industry",
+            desc: `It really matters and then like it really doesn't matter.
+          What matters is the people who are sparked by it. And the people
+          who are like offended by it, it doesn't matter.`,
+        },
+        {
+            label: "Agriculture and Agri Inputs",
+            value: "Agriculture and Agri Inputs",
+            desc: `Because it's about motivating the doers. Because I'm here
+          to follow my dreams and inspire other people to follow their dreams, too.`,
+        },
+        {
+            label: "Animal Nutrition & Health",
+            value: "Animal Nutrition & Health",
+            desc: `We're not always in the position that we want to be at.
+          We're constantly growing. We're constantly making mistakes. We're
+          constantly trying to express ourselves and actualize our dreams.`,
+        },
+        {
+            label: "Semiconductor and Electronics",
+            value: "Semiconductor and Electronics",
+            desc: `Because it's about motivating the doers. Because I'm here
+          to follow my dreams and inspire other people to follow their dreams, too.`,
+        },
+        {
+            label: "Chemicals & Material",
+            value: "Chemicals & Material",
+            desc: `We're not always in the position that we want to be at.
+          We're constantly growing. We're constantly making mistakes. We're
+          constantly trying to express ourselves and actualize our dreams.`,
+        },
+    ];
     return (
         <>
-
             {/* Hero Section */}
             <section
-                className="relative flex justify-center items-center h-screen bg-cover bg-center overflow-hidden bg-fixed bg-[url('https://png.pngtree.com/thumb_back/fw800/background/20230720/pngtree-digital-marketing-in-action-businessmen-utilizing-smart-data-platform-in-virtual-image_3717440.jpg')]"
+                className="relative flex justify-center items-center h-screen bg-cover bg-center overflow-hidden bg-fixed"
             >
+                {/* Animated Background SVG */}
+                <div className="absolute inset-0">
+                    <svg
+                        className="w-full h-full"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 800 600"
+                        preserveAspectRatio="none"
+                    >
+                        <defs>
+                            <radialGradient id="radialGradient" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stopColor="#00D4FF" />
+                                <stop offset="50%" stopColor="#00204A" />
+                            </radialGradient>
+                        </defs>
+                        <rect x="0" y="0" width="100%" height="100%" fill="url(#radialGradient)" />
+
+                        {/* Pulse Rings */}
+                        <circle cx="400" cy="300" r="50" fill="none" stroke="white" strokeWidth="3">
+                            <animate
+                                attributeName="r"
+                                from="50"
+                                to="800"
+                                dur="2s"
+                                repeatCount="indefinite"
+                            />
+                            <animate
+                                attributeName="opacity"
+                                from="1"
+                                to="0"
+                                dur="4s"
+                                repeatCount="indefinite"
+                            />
+
+                        </circle>
+                        <circle cx="400" cy="300" r="100" fill="none" stroke="white" strokeWidth="2">
+                            <animate
+                                attributeName="r"
+                                from="100"
+                                to="800"
+                                dur="6s"
+                                repeatCount="indefinite"
+                            />
+                            <animate
+                                attributeName="opacity"
+                                from="1"
+                                to="0"
+                                dur="6s"
+                                repeatCount="indefinite"
+                            />
+                        </circle>
+                    </svg>
+                </div>
+
                 {/* Animated Content */}
                 <div
-                    className={`relative z-20 mx-auto text-center transition-all duration-1000 ease-in-out ${isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-10 scale-90"
+                    className={`relative z-20 mx-auto text-center transition-all duration-1000 ease-in-out ${isVisible
+                        ? "opacity-100 translate-y-0 scale-100"
+                        : "opacity-0 translate-y-10 scale-90"
                         }`}
                 >
                     <p className="mb-5 text-5xl font-bold text-white animate-slideDown tracking-wide">
                         Want to Expand into
                     </p>
-                    <p className="mb-5 text-2xl font-bold text-blue-900  leading-tightanimate-slideUp tracking-wider">
+                    <p className="mb-5 text-2xl font-bold text-yellow-400 animate-slideUp tracking-wider">
                         A NEW MARKET?
                     </p>
                     <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl dark:text-white animate-float">
@@ -191,7 +255,8 @@ function Home() {
                         <span className="text-red-600 glow">potential</span>
                     </h1>
                     <p className="mb-8 text-lg font-bold text-yellow-400 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-300 animate-zoomIn">
-                        One-stop solution to uncover data from 13+ industries with 50+ countries mapped
+                        One-stop solution to uncover data from 13+ industries with 50+ countries
+                        mapped
                     </p>
                     <form className="w-full max-w-md mx-auto animate-slideInUp">
                         <label
@@ -218,7 +283,7 @@ function Home() {
                             <input
                                 type="text"
                                 id="default"
-                                className="block w-full p-4 pl-10 text-sm border border-gray-300 rounded-lg text-black shadow-lg focus:ring-blue-500 focus:border-blue-500  dark:border-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                className="block w-full p-4 pl-10 text-sm border border-gray-300 rounded-lg text-black shadow-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Search Reports....."
                                 required
                             />
@@ -234,29 +299,23 @@ function Home() {
 
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black"></div>
-
-
-
-                {/* Rotating Background */}
-                {/* <div
-                    className="absolute inset-0 bg-cover bg-center bg-fixed opacity-30 animate-rotate"
-                    style={{
-                        backgroundImage: "url('https://png.pngtree.com/thumb_back/fw800/background/20230720/pngtree-virtual-office-with-smart-data-platform-businessmen-characters-engaged-in-digital-image_3717439.jpg')",
-                    }}
-                ></div> */}
             </section>
 
             {/* INTRO SECTION */}
-            <section className="text-gray-800 body-font bg-gradient-to-b from-white via-gray-100 to-gray-50 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-indigo-100 opacity-50"></div>
+            <section className="text-gray-800 body-fontrelative overflow-hidden ">
+                <div className="absolute inset-0  opacity-50"></div>
                 <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center z-10 relative">
                     {/* Left Content */}
-                    <div className="lg:flex-grow md:w-1/2 lg:pr-20 md:pr-10 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-                        <h1 className="title-font sm:text-4xl text-3xl mb-6 font-extrabold text-sky-900 tracking-wide leading-tight">
-                            <span className="block bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-500 to-blue-500">
+                    <div className="lg:flex-grow md:w-1/2 lg:pr-20 md:pr-10 flex flex-col md:items-start md:text-left mb-10md:mb-0 items-center text-center">
+                        <h1 className="title-font sm:text-4xl text-3xl mb-2 font-extrabold text-sky-900 tracking-wide leading-tight">
+                            <span className="block  via-purple-500">
                                 Igniting Growth-Focused Performance
                             </span>
-                            with Interconnected Segmentation
+                            <br />
+                            <span className="text-2xl">
+                                with Interconnected Segmentation
+
+                            </span>
                         </h1>
                         <p className="mb-4 text-lg leading-relaxed text-gray-700">
                             At <span className="font-bold text-indigo-500">Intent Market Research</span>, we deliver tailored research solutions that meet your unique needs. With advanced methodologies and industry expertise, we empower your business with actionable insights.
@@ -264,7 +323,7 @@ function Home() {
                         <p className="text-gray-600 mb-6">
                             Let’s collaborate to unlock your businesss full potential. Reach out to discuss how we can help you grow.
                         </p>
-                        <div className="flex justify-center mt-6">
+                        <div className="flex justify-center ">
                             <Link to={"/contact"}
                                 className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
 
@@ -285,9 +344,132 @@ function Home() {
                 <div className="absolute top-10 left-20 w-32 h-32 bg-gradient-to-tr from-indigo-500 to-purple-500 rounded-full blur-3xl opacity-50 animate-float"></div>
                 <div className="absolute bottom-20 right-20 w-40 h-40 bg-gradient-to-tl from-blue-500 to-sky-500 rounded-full blur-3xl opacity-50 animate-float-reverse"></div>
             </section>
+            <section className="relative text-gray-600 overflow-hidden my-10">
+
+                {/* Main Container */}
+                <div className="relative container px-5 mx-auto">
+                    {/* Section Header */}
+                    <div className="flex flex-col text-center w-full ">
+                        <h1 className="sm:text-5xl text-3xl font-extrabold title-font mb-6 text-sky-900 tracking-widest uppercase">
+                            Latest Release
+                        </h1>
+                        <p className="lg:w-2/3 mx-auto leading-relaxed text-lg text-gray-700">
+                            Beyond delivering comprehensive reports, we inspire our clients to craft savvy growth strategies using insights that are accurate, reliable, and invaluable.
+                        </p>
+                    </div>
+
+                    <div className="my-10">
+                        <Tabs
+                            value={data[0].value}
+                            orientation="vertical"
+                            className="bg-[#3A6D8C] p-6 md:flex md:flex-row flex-col"
+                        >
+                            <TabsHeader
+                                className="w-full md:w-80 border-r-0 md:border-r-4 border-[#FCCD2A] mb-4 md:mb-0"
+                            >
+                                {data.map(({ label, value }) => (
+                                    <Tab
+                                        key={value}
+                                        value={value}
+                                        className="bg-gray-100 rounded-lg hover:bg-blue-300 my-1 text-start hover:border-gray-900 hover:rounded-lg"
+                                    >
+                                        {label}
+                                    </Tab>
+                                ))}
+                            </TabsHeader>
+
+                            <TabsBody className="w-full md:w-auto">
+                                {data.map(({ value, desc }) => (
+                                    <TabPanel key={value} value={value} className="py-0 text-white">
+                                        {desc}
+                                    </TabPanel>
+                                ))}
+                            </TabsBody>
+                        </Tabs>
+                    </div>
+
+
+                </div>
+            </section>
+            {/* WHY INTENT MARKET RESEARCH?*/}
+            <section className="text-gray-600 body-font bg-slate-50 my-10">
+                <div className="container px-5  mx-auto">
+                    <div className="text-center mb-20">
+                        <h1 className="sm:text-5xl text-3xl font-extrabold title-font mb-6 text-sky-900 tracking-widest uppercase">
+                            Why Intent Market Research?
+                        </h1>
+                        <p className="text-lg leading-relaxed xl:w-2/3 lg:w-3/4 mx-auto text-gray-700">
+                            Are you ready to take your business to new heights? Our tailored research services offer unparalleled insights and actionable strategies designed to fuel your growth.
+                        </p>
+                        <div className="flex mt-6 justify-center">
+                            <div className="w-16 h-1 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500"></div>
+                        </div>
+                    </div>
+                    <div
+                        className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 rounded-lg"
+
+                    >
+                        {/* Card 1 */}
+                        <div className="p-2 md:w-1/3 bg-white scale-90 flex-col text-center items-center shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300  rounded-lg ">
+                            <div className="w-24 h-24 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 text-white mb-5">
+                                <img src={ServerImage} alt="Unique Data" className="w-16 h-16 object-contain" />
+                            </div>
+                            <div className="flex-grow ">
+                                <h2 className="text-gray-900 text-xl font-bold  mb-2 ">Unique Data</h2>
+                                <h3 className="text-indigo-700 text-lg font-semibold mb-3">Your Data-Driven Advantage</h3>
+                                <p className="leading-relaxed text-start text-gray-600 px-3">
+                                    Our extensive repository of accurate and reliable market research studies sets us apart. We meticulously analyze vast datasets to deliver validated insights that empower your decision-making. With Intent Market Research, you’ll gain a competitive edge and make informed choices at every stage of your business journey.
+                                </p>
+                                <button className=" mt-3 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                                    <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                        Learn More...
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                        {/* Card 2 */}
+                        <div className="p-2 md:w-1/3 scale-90 bg-white  flex-col text-center items-center shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300  rounded-lg">
+                            <div className="w-24 h-24 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 text-white mb-5">
+                                <img src={Podium} alt="One Platform" className="w-16 h-16 object-contain" />
+                            </div>
+                            <div className="flex-grow">
+                                <h2 className="text-gray-900 text-xl font-bold mb-2">One Platform</h2>
+                                <h3 className="text-indigo-700 text-lg font-semibold mb-3">Empowering Your Growth with Data-Driven Insights</h3>
+                                <p className="leading-relaxed text-start text-gray-600 px-3">
+                                    Our research goes beyond the report. We provide actionable insights that inspire your team to craft winning growth strategies. With consistently accurate and reliable data, you’ll have the confidence to make informed decisions and drive your business forward.
+                                </p>
+                                <button className=" mt-3 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                                    <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                        Learn More...
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                        {/* Card 3 */}
+                        <div className="p-2 bg-white md:w-1/3 scale-90 flex flex-col text-center items-center shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 rounded-lg relative">
+                            <div className="w-24 h-24 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 text-white mb-5">
+                                <img src={LightImage} alt="Innovative Solutions" className="w-16 h-16 object-contain" />
+                            </div>
+                            <div className="flex-grow">
+                                <h2 className="text-gray-900 text-xl font-bold mb-2">Innovative Solutions</h2>
+                                <h3 className="text-indigo-700 text-lg font-semibold mb-3">Are you ready to elevate your decision-making?</h3>
+                                <p className="leading-relaxed text-start text-gray-600 px-3">
+                                    At Intent Market Research, we offer a unique blend of accessibility, expertise, and cutting-edge methodologies. Our team of seasoned researchers is dedicated to providing you with the tools and insights you need to succeed.
+                                </p>
+                            </div>
+                            <button className="absolute bottom-4 left-1/2 transform -translate-x-1/2 inline-flex items-center justify-center p-0.5 mb-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                                <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                    Learn More...
+                                </span>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
 
             {/* SLIDE IMAGES*/}
-            <section className="relative w-full bg-gradient-to-br from-gray-100 to-gray-200 py-8">
+            <section className="relative w-full  py-8">
                 {/* Carousel Container */}
                 <div className="relative w-11/12 max-w-7xl mx-auto rounded-xl shadow-xl overflow-hidden">
                     {/* Carousel Items */}
@@ -383,187 +565,14 @@ function Home() {
                 </div>
             </section>
 
-            {/* WHY INTENT MARKET RESEARCH?*/}
-            <section className="text-gray-600 body-font">
-                <div className="container px-5 py-24 mx-auto">
-                    <div className="text-center mb-20">
-                        <h1 className="sm:text-5xl text-3xl font-extrabold title-font mb-6 text-indigo-900 tracking-widest uppercase">
-                            Why Intent Market Research?
-                        </h1>
-                        <p className="text-lg leading-relaxed xl:w-2/3 lg:w-3/4 mx-auto text-gray-700">
-                            Are you ready to take your business to new heights? Our tailored research services offer unparalleled insights and actionable strategies designed to fuel your growth.
-                        </p>
-                        <div className="flex mt-6 justify-center">
-                            <div className="w-16 h-1 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500"></div>
-                        </div>
-                    </div>
-                    <div
-                        className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 rounded-lg"
-                        style={{ backgroundColor: '#F3F0FF', padding: '25px' }}
-                    >
-                        {/* Card 1 */}
-                        <div className="p-2 md:w-1/3 scale-90 flex-col text-center items-center shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 bg-gradient-to-r from-indigo-100 via-purple-100 to-indigo-200 rounded-lg ">
-                            <div className="w-24 h-24 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 text-white mb-5">
-                                <img src={ServerImage} alt="Unique Data" className="w-16 h-16 object-contain" />
-                            </div>
-                            <div className="flex-grow">
-                                <h2 className="text-gray-900 text-xl font-bold  mb-2 ">Unique Data</h2>
-                                <h3 className="text-indigo-700 text-lg font-semibold mb-3">Your Data-Driven Advantage</h3>
-                                <p className="leading-relaxed text-start text-gray-600">
-                                    Our extensive repository of accurate and reliable market research studies sets us apart. We meticulously analyze vast datasets to deliver validated insights that empower your decision-making. With Intent Market Research, you’ll gain a competitive edge and make informed choices at every stage of your business journey.
-                                </p>
-                                <a
-                                    className="mt-4 text-black p-2 rounded-lg bg-red-600 inline-flex items-center transition-transform transform hover:scale-105"
-                                    href="#!"
-                                >
-                                    Learn More
-                                    <svg
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        className="w-4 h-4 ml-2"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path d="M5 12h14M12 5l7 7-7 7"></path>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                        {/* Card 2 */}
-                        <div className="p-6 md:w-1/3 scale-90 flex flex-col text-center items-center shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 bg-gradient-to-r from-indigo-100 via-purple-100 to-indigo-200 rounded-lg">
-                            <div className="w-24 h-24 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 text-white mb-5">
-                                <img src={Podium} alt="One Platform" className="w-16 h-16 object-contain" />
-                            </div>
-                            <div className="flex-grow">
-                                <h2 className="text-gray-900 text-xl font-bold mb-2">One Platform</h2>
-                                <h3 className="text-indigo-700 text-lg font-semibold mb-3">Empowering Your Growth with Data-Driven Insights</h3>
-                                <p className="leading-relaxed text-start text-gray-600">
-                                    Our research goes beyond the report. We provide actionable insights that inspire your team to craft winning growth strategies. With consistently accurate and reliable data, you’ll have the confidence to make informed decisions and drive your business forward.
-                                </p>
-                                <a
-                                    className="mt-4 text-black p-2 rounded-lg bg-red-600 inline-flex items-center transition-transform transform hover:scale-105"
-                                    href="#!"
-                                >
-                                    Learn More
-                                    <svg
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        className="w-4 h-4 ml-2"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path d="M5 12h14M12 5l7 7-7 7"></path>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                        {/* Card 3 */}
-                        <div className="p-6 md:w-1/3 scale-90 flex flex-col text-center items-center shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 bg-gradient-to-r from-indigo-100 via-purple-100 to-indigo-200 rounded-lg">
-                            <div className="w-24 h-24 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 text-white mb-5">
-                                <img src={LightImage} alt="Innovative Solutions" className="w-16 h-16 object-contain" />
-                            </div>
-                            <div className="flex-grow">
-                                <h2 className="text-gray-900 text-xl font-bold mb-2">Innovative Solutions</h2>
-                                <h3 className="text-indigo-700 text-lg font-semibold mb-3">Are you ready to elevate your decision-making?</h3>
-                                <p className="leading-relaxed text-start text-gray-600">
-                                    At Intent Market Research, we offer a unique blend of accessibility, expertise, and cutting-edge methodologies. Our team of seasoned researchers is dedicated to providing you with the tools and insights you need to succeed.
-                                </p>
-                                <a
-                                    className="mt-4 text-black p-2 rounded-lg bg-red-600 inline-flex items-center transition-transform transform hover:scale-105"
-                                    href="#!"
-                                >
-                                    Learn More
-                                    <svg
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        className="w-4 h-4 ml-2"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path d="M5 12h14M12 5l7 7-7 7"></path>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* LATEST RELEASE */}
-            <section className="relative text-gray-600 body-font overflow-hidden bg-gradient-to-br from-white to-gray-200 py-24">
-                {/* Background Elements */}
-                <div className="absolute inset-0 overflow-hidden">
-                    <div className="absolute top-0 left-10 w-72 h-72 bg-gradient-to-tr from-purple-300 via-pink-300 to-orange-300 rounded-full opacity-40 blur-3xl"></div>
-                    <div className="absolute bottom-0 right-10 w-96 h-96 bg-gradient-to-bl from-indigo-400 via-blue-400 to-teal-300 rounded-full opacity-40 blur-3xl"></div>
-                </div>
-
-                {/* Main Container */}
-                <div className="relative container px-5 mx-auto">
-                    {/* Section Header */}
-                    <div className="flex flex-col text-center w-full mb-16">
-                        <h1 className="sm:text-5xl text-3xl font-extrabold title-font mb-6 text-indigo-900 tracking-widest uppercase">
-                            Latest Release
-                        </h1>
-                        <p className="lg:w-2/3 mx-auto leading-relaxed text-lg text-gray-700">
-                            Beyond delivering comprehensive reports, we inspire our clients to craft savvy growth strategies using insights that are accurate, reliable, and invaluable.
-                        </p>
-                    </div>
-
-                    {/* Cards Section */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-                        {cardData.map((card, index) => (
-                            <div
-                                key={index}
-                                className={`relative p-6 rounded-2xl shadow-lg bg-white overflow-hidden border transition-all duration-500 transform hover:scale-105 hover:shadow-xl ${visibleCards.includes(index) ? "opacity-100" : "opacity-0"
-                                    }`}
-                                style={{
-                                    display: visibleCards.includes(index) ? "block" : "none",
-                                }}
-                            >
-                                {/* Background Blob */}
-                                <div className="absolute inset-0 -z-10 opacity-20">
-                                    <div className="absolute -top-12 -left-12 w-40 h-40 bg-gradient-to-r from-indigo-300 to-purple-400 rounded-full blur-2xl"></div>
-                                    <div className="absolute bottom-0 right-0 w-64 h-64 bg-gradient-to-r from-teal-300 to-green-400 rounded-full blur-3xl"></div>
-                                </div>
-                                <p className="flex items-center font-bold text-indigo-800 text-xl mb-4 tracking-wide">
-                                    {card.title}
-                                </p>
-                                <p className="text-gray-600 text-base mb-4 leading-relaxed">
-                                    {card.content}
-                                </p>
-                                <div className="mt-auto">
-                                    <span className="inline-block bg-gradient-to-r from-orange-400 to-orange-600 text-white py-1 px-4 rounded-full text-sm font-semibold shadow-md hover:shadow-lg">
-                                        {card.category}
-                                    </span>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    {/* Explore More Section */}
-                    <div className="text-center mt-16">
-                        <button type="button" className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Explore More</button>
-
-                    </div>
-                </div>
-            </section>
 
             {/* Why Choose Us? */}
-            <section className="relative bg-gradient-to-b from-gray-100 to-gray-200 py-16">
-                {/* Decorative Background Elements */}
+            <section className="relative  py-10">
 
-
-                {/* Main Content */}
                 <div className="container mx-auto px-6 md:px-12 lg:px-20">
                     {/* Section Header */}
                     <div className="text-center mb-12">
-                        <h1 className="sm:text-5xl text-3xl font-extrabold title-font mb-6 text-indigo-900 tracking-widest uppercase">
+                        <h1 className="sm:text-5xl text-3xl font-extrabold title-font mb-6 text-sky-900 tracking-widest uppercase">
                             Why Choose Us?
                         </h1>
                         <p className="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
@@ -572,12 +581,125 @@ function Home() {
                         </p>
                     </div>
 
+                    <div className="container mx-auto bg-blue-100 rounded-lg">
+                        <div className="flex flex-col items-center justify-center my-6">
+                            <div className="grid grid-cols-2 md:grid-cols-6 gap-4 p-4">
+                                {/* Card 1 */}
+                                <div className="border-r border-b p-3">
+                                    <img
+                                        className="mx-auto"
+                                        src="https://mnmimg.marketsandmarkets.com/Pagespeed/assets/images/home/revenu1.svg"
+                                        width="40"
+                                        height="40"
+                                        alt="Revenue"
+                                    />
+                                    <div className="text-center">
+                                        <h4 className="text-lg font-bold">
+                                            $<span id="count1">140</span> Bn
+                                        </h4>
+                                        <p className="text-sm text-gray-600">
+                                            Revenue Impact <br />
+                                            Delivered
+                                        </p>
+                                    </div>
+                                </div>
+                                {/* Card 2 */}
+                                <div className="border-r border-b p-3">
+                                    <img
+                                        className="mx-auto"
+                                        src="https://mnmimg.marketsandmarkets.com/Pagespeed/assets/images/home/revenu2.svg"
+                                        width="40"
+                                        height="40"
+                                        alt="High-growth"
+                                    />
+                                    <div className="text-center">
+                                        <h4 className="text-lg font-bold">
+                                            <span id="count2">30000</span>+
+                                        </h4>
+                                        <p className="text-sm text-gray-600">
+                                            High-growth <br />
+                                            Opportunities
+                                        </p>
+                                    </div>
+                                </div>
+                                {/* Card 3 */}
+                                <div className="border-r border-b p-3">
+                                    <img
+                                        className="mx-auto"
+                                        src="https://mnmimg.marketsandmarkets.com/Pagespeed/assets/images/home/revenu3.svg"
+                                        width="40"
+                                        height="40"
+                                        alt="Connected Markets"
+                                    />
+                                    <div className="text-center">
+                                        <h4 className="text-lg font-bold">
+                                            <span id="count3">200000</span>
+                                        </h4>
+                                        <p className="text-sm text-gray-600">
+                                            Connected <br />
+                                            Markets
+                                        </p>
+                                    </div>
+                                </div>
+                                {/* Card 4 */}
+                                <div className="border-r border-b p-3">
+                                    <img
+                                        className="mx-auto"
+                                        src="https://mnmimg.marketsandmarkets.com/Pagespeed/assets/images/home/revenu4.svg"
+                                        width="40"
+                                        height="40"
+                                        alt="Customers"
+                                    />
+                                    <div className="text-center">
+                                        <h4 className="text-lg font-bold">
+                                            <span id="count4">10000</span>+
+                                        </h4>
+                                        <p className="text-sm text-gray-600">Customers</p>
+                                    </div>
+                                </div>
+                                {/* Card 5 */}
+                                <div className="border-r border-b p-3">
+                                    <img
+                                        className="mx-auto"
+                                        src="https://mnmimg.marketsandmarkets.com/Pagespeed/assets/images/home/revenu5.svg"
+                                        width="40"
+                                        height="40"
+                                        alt="Promoter Score"
+                                    />
+                                    <div className="text-center">
+                                        <h4 className="text-lg font-bold">
+                                            <span id="count5">37</span>+
+                                        </h4>
+                                        <p className="text-sm text-gray-600">Net Promoter Score</p>
+                                    </div>
+                                </div>
+                                {/* Card 6 */}
+                                <div className="border-b p-3">
+                                    <img
+                                        className="mx-auto"
+                                        src="https://mnmimg.marketsandmarkets.com/Pagespeed/assets/images/home/revenu6.svg"
+                                        width="40"
+                                        height="40"
+                                        alt="Analysts"
+                                    />
+                                    <div className="text-center">
+                                        <h4 className="text-lg font-bold">
+                                            <span id="count6">650</span>+
+                                        </h4>
+                                        <p className="text-sm text-gray-600">Analysts</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                     {/* Features Section */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                         {reasons.map((reason, index) => (
                             <div
                                 key={index}
-                                className="bg-white rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transform transition-transform duration-300 p-6 flex flex-col items-center text-center"
+                                className="bg-blue-50 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transform transition-transform duration-300 p-6 flex flex-col items-center text-center"
                             >
                                 {/* Icon */}
                                 <div className="text-6xl text-indigo-500">{reason.icon}</div>
@@ -598,10 +720,10 @@ function Home() {
             </section>
 
             {/* Our Trending Reports */}
-            <section className="relative bg-gradient-to-b from-gray-100 to-gray-200 py-16">
+            <section className="relative  py-16">
                 <div className="container mx-auto px-6 md:px-12 lg:px-20">
                     {/* Section Title */}
-                    <h1 className="sm:text-5xl text-3xl text-center font-extrabold title-font mb-6 text-indigo-900 tracking-widest uppercase">
+                    <h1 className="sm:text-5xl text-3xl text-center font-extrabold title-font mb-6 text-sky-900 tracking-widest uppercase">
                         Our Trending Reports
                     </h1>
 
@@ -610,12 +732,11 @@ function Home() {
                         {accordionData.map(({ id, title, content, links }) => (
                             <div
                                 key={id}
-                                className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform hover:scale-105"
-                            >
+                                className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform hover:scale-105"                            >
                                 <h2>
                                     <button
                                         type="button"
-                                        className={`w-full flex items-center justify-between p-5 text-lg font-semibold text-sky-900 bg-gradient-to-r from-sky-100 via-white to-sky-100 hover:text-white hover:bg-gradient-to-r hover:from-indigo-500 hover:via-purple-500 hover:to-indigo-500 transition-all duration-300`}
+                                        className={`w-full flex items-center justify-between p-3 hover:text-white text-lg font-semibold text-sky-900 bg-gradient-to-r hover:bg-[#536493]`}
                                         aria-expanded={activeIndex === id}
                                         aria-controls={`accordion-collapse-body-${id}`}
                                         onClick={() => toggleAccordion(id)}
@@ -647,14 +768,15 @@ function Home() {
                                         <ul className="list-disc ml-5 space-y-2">
                                             {links.map((link, index) => (
                                                 <li key={index}>
-                                                    <a
-                                                        href={link.url}
-                                                        className="text-indigo-600 hover:text-indigo-800 hover:underline transition-all duration-300"
+                                                    <Link
+
+                                                        to={link.url}
+                                                        className=" hover:underline transition-all duration-300"
                                                         target="_blank"
                                                         rel="noopener noreferrer"
                                                     >
                                                         {link.label}
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                             ))}
                                         </ul>

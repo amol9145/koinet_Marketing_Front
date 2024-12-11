@@ -78,7 +78,7 @@ function Infographics() {
             </section>
             <hr className="bg-black p-2" />
             <section className="text-gray-600 body-font">
-                <div className="container px-5 py-24 mx-auto">
+                <div className="container px-5 py-10 mx-auto">
                     <div className="flex flex-wrap -m-4">
                         {infographics.map((item, index) => (
                             <div className="p-4 md:w-1/3" key={index}>
@@ -149,6 +149,29 @@ function Infographics() {
                         ))}
                     </div>
                 </div>
+            </section>
+            <section className="flex justify-center my-2">
+                <nav aria-label="Page navigation example">
+                    <ul className="flex items-center space-x-2">
+                        <li>
+                            <button
+
+                                className="px-4 py-2 cursor-pointer bg-gray-300 rounded-full hover:bg-gray-400 text-gray-700"  >
+                                Previous
+                            </button>
+                        </li>
+                        <li >
+                            <button className="px-4 py-2 rounded-fullbg-blue-500 text-black bg-gray-200 hover:bg-blue-300" >
+                                1
+                            </button>
+                        </li>
+                        <li>
+                            <button className="px-4 py-2 cursor-pointer bg-gray-300 rounded-full hover:bg-gray-400 text-gray-700" >
+                                Next
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
             </section>
         </>
     );

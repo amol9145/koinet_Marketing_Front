@@ -2,7 +2,7 @@
 function CCPA() {
     return (
         <div>
-            <div className="bg-gray-100 min-h-screen p-6">
+            <div className="bg-gray-100 min-h-screen p-6 mt-10">
                 <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg p-8">
                     <h1 className="text-3xl text-center font-bold text-white mb-4 bg-black p-2 rounded-lg">CCPA Privacy Policy</h1>
                     <p className="text-gray-700 mb-6">

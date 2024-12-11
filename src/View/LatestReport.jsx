@@ -99,70 +99,70 @@ function LatestReport() {
                 </form>
             </section>
             <hr className="bg-gray-950 py-2" />
-            <section>
-                <section className="text-gray-600 body-font overflow-hidden">
-                    <div className="container px-5 py-24 mx-auto">
-                        <div className="-my-8 divide-y-2 divide-gray-100">
-                            {currentReports.length > 0 ? (
-                                currentReports.map((report) => (
-                                    <div className="py-8 flex flex-wrap md:flex-nowrap" key={report.id}>
-                                        <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
-                                            <span className="font-semibold title-font text-gray-700">{report.category}</span>
-                                            <span className="mt-1 text-gray-800 text-sm">Published: {formatDate(report.createdAt)}</span>
-                                            <span className="mt-1 text-black text-sm font-bold">Report ID: {report.reportId}</span>
-                                        </div>
-                                        <div className="md:flex-grow">
-                                            <Link to={`/latest_reports/viewreportdetails/${report._id}`}>
-                                                <h2 className="text-1xl font-medium title-font mb-2 text-blue-500">{report.title}</h2>
-                                            </Link>
-                                            <p className="leading-relaxed">{report.description}</p>
-                                        </div>
+
+            <section className="text-gray-600 body-font overflow-hidden">
+                <div className="container px-5 py-24 mx-auto">
+                    <div className="-my-8 divide-y-2 divide-gray-100">
+                        {currentReports.length > 0 ? (
+                            currentReports.map((report) => (
+                                <div className=" flex flex-wrap md:flex-nowrap" key={report.id}>
+                                    <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+                                        <span className="font-semibold title-font text-gray-700">{report.category}</span>
+                                        <span className="mt-1 text-gray-800 text-sm">Published: {formatDate(report.createdAt)}</span>
+                                        <span className="mt-1 text-black text-sm font-bold">Report ID: {report.reportId}</span>
                                     </div>
-                                ))
-                            ) : (
-                                <p className="text-center text-gray-500">No data available for the selected category.</p>
-                            )}
-                        </div>
+                                    <div className="md:flex-grow">
+                                        <Link to={`/latest_reports/viewreportdetails/${report._id}`}>
+                                            <h2 className="text-1xl font-medium title-font mb-2 text-blue-500">{report.title}</h2>
+                                        </Link>
+                                        <p className="leading-relaxed">{report.description}</p>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <p className="text-center text-gray-500">No data available for the selected category.</p>
+                        )}
                     </div>
-                    <section className="flex justify-center mt-10 p-5">
-                        <nav aria-label="Page navigation example">
-                            <ul className="flex items-center space-x-2">
-                                <li>
+                </div>
+                <section className="flex justify-center my-2">
+                    <nav aria-label="Page navigation example">
+                        <ul className="flex items-center space-x-2">
+                            <li>
+                                <button
+                                    onClick={() => handlePageChange(currentPage - 1)}
+                                    disabled={currentPage === 1}
+                                    className="px-4 py-2 cursor-pointer bg-gray-300 rounded-full hover:bg-gray-400 text-gray-700"
+                                >
+                                    Previous
+                                </button>
+                            </li>
+                            {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
+                                <li key={page}>
                                     <button
-                                        onClick={() => handlePageChange(currentPage - 1)}
-                                        disabled={currentPage === 1}
-                                        className="px-4 py-2 cursor-pointer bg-gray-300 rounded-full hover:bg-gray-400 text-gray-700"
+                                        onClick={() => handlePageChange(page)}
+                                        className={`px-4 py-2 rounded-full ${page === currentPage
+                                            ? "bg-blue-500 text-white"
+                                            : "bg-gray-200 hover:bg-blue-300"
+                                            }`}
                                     >
-                                        Previous
+                                        {page}
                                     </button>
                                 </li>
-                                {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
-                                    <li key={page}>
-                                        <button
-                                            onClick={() => handlePageChange(page)}
-                                            className={`px-4 py-2 rounded-full ${page === currentPage
-                                                ? "bg-blue-500 text-white"
-                                                : "bg-gray-200 hover:bg-blue-300"
-                                                }`}
-                                        >
-                                            {page}
-                                        </button>
-                                    </li>
-                                ))}
-                                <li>
-                                    <button
-                                        onClick={() => handlePageChange(currentPage + 1)}
-                                        disabled={currentPage === totalPages}
-                                        className="px-4 py-2 cursor-pointer bg-gray-300 rounded-full hover:bg-gray-400 text-gray-700"
-                                    >
-                                        Next
-                                    </button>
-                                </li>
-                            </ul>
-                        </nav>
-                    </section>
+                            ))}
+                            <li>
+                                <button
+                                    onClick={() => handlePageChange(currentPage + 1)}
+                                    disabled={currentPage === totalPages}
+                                    className="px-4 py-2 cursor-pointer bg-gray-300 rounded-full hover:bg-gray-400 text-gray-700"
+                                >
+                                    Next
+                                </button>
+                            </li>
+                        </ul>
+                    </nav>
                 </section>
             </section>
+
         </div>
     );
 }

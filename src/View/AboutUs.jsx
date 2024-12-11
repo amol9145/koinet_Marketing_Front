@@ -1,219 +1,126 @@
 
-
+import Aboutimage from '../assets/about.webp'
 function AboutUs() {
     return (
-        <div className="bg-gradient-to-r from-blue-50 to-white ">
-            <div className=" ">
+        <div className="bg-gray-50 mt-20">
 
-                <div id="who-we-are" className="relative bg-gradient-to-b from-blue-50 to-white py-20">
-                    <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-16">
+            {/* About Us Section */}
+            <section className="text-start py-2 px-8 bg-sky-900">
+                <h1 className="text-4xl font-bold text-start py-2 mt-4 text-white ">About Us</h1>
+                <p className="text-start text-white text-1xl mt-2">
+                    At Koinet Market Research, we specialize in providing actionable insights that help businesses understand their market and make informed decisions.
+                </p>
 
+            </section>
 
-                        <div className="relative mb-12 animate-slide-in-down">
-
-                            <div className="text-center mb-4">
-                                <h1 className="text-5xl font-bold text-blue-900 animate-fade-in-down">
-                                    About Us
-                                </h1>
-                                <p className="text-lg text-black-bold mt-4 animate-fade-in-up">
-                                    Insights – As Unique As Your Business Growth Objectives!
-                                </p>
-                            </div>
-                            <div className="relative">
-                                <img
-                                    src="https://www.datatrakug.com/wp-content/uploads/2023/12/C.-Market-Research-.jpg"
-                                    alt="Who We Are"
-                                    className="rounded-xl shadow-lg w-full max-w-3xl object-cover mx-auto"
-                                />
-                                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-blue-800 to-transparent opacity-60 rounded-xl"></div>
-                                <div className="absolute top-4 left-4 text-white">
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div className="flex flex-col items-center text-center">
-                            <h2 className="text-4xl font-extrabold text-blue-900 mb-6 animate-fade-in">
-                                Who We Are
-                            </h2>
-                            <p className="text-lg text-gray-700 mb-6 animate-fade-in">
-                                Intent Market Research (IMR) is your trusted partner in delivering unique insights tailored to your business needs. With a commitment to innovation and sustainability, we help businesses transform data into strategic growth opportunities.
-                            </p>
-                            <p className="text-lg text-gray-700 mb-6 animate-fade-in">
-                                Our expertise spans across various industries, offering comprehensive market research reports and consulting services to drive informed decision-making and measurable results.
-                            </p>
-                            <button className="mt-6 px-6 py-3 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 animate-bounce">
-                                Connect With Us
-                            </button>
-                        </div>
-                    </div>
-
-
-                    <div className="absolute inset-0 pointer-events-none">
-                        <div className="absolute -top-10 -left-20 w-48 h-48 bg-blue-300 opacity-50 rounded-full blur-xl"></div>
-                        <div className="absolute bottom-10 right-10 w-32 h-32 bg-blue-600 opacity-30 rounded-full blur-2xl"></div>
-                    </div>
+            {/* Insights & Strengths Section */}
+            <section className=" flex flex-col md:flex-row justify-center items-center mx-10">
+                {/* Insights Left Side */}
+                <div className="md:w-1/2 text-center md:text-left">
+                    <h2 className="text-4xl font-extrabold text-sky-900 mb-4 tracking-widest uppercase">Our Insights</h2>
+                    <p className="text-lg text-gray-900 mb-4">
+                        We deliver high-quality market insights tailored to your specific business needs. With extensive research and analysis, we empower businesses to navigate the complexities of the market and drive growth.
+                    </p>
+                    <p className="text-lg text-gray-900 mb-4">
+                        Our expert analysts are skilled in providing actionable insights based on the latest market trends, consumer behavior, and competitor analysis. We ensure that our clients receive data-driven solutions that foster long-term success.
+                    </p>
+                    <p className="text-lg text-gray-900">
+                        Through strategic insights, businesses can optimize their operations, anticipate market changes, and make informed decisions. Our dedication to precision and expertise ensures that you stay ahead of the competition.
+                    </p>
                 </div>
 
+                {/* Image Section */}
+                <div className="md:w-1/2  mt-2 md:mt-0">
+                    <img
+                        src={Aboutimage}
+                        alt="Market Research"
+                        className="rounded-lg  w-full h-90 object-cover"
+                    />
+                </div>
+            </section>
 
-                <div id="offerings" className="bg-gradient-to-r from-blue-100 via-white to-blue-50 py-12">
-                    <h2 className="text-4xl font-extrabold text-blue-900 text-center mb-10">
-                        Our Offerings
-                    </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6 md:px-12">
+            {/* Our Offerings Section */}
+            <section className="py-8 px-8 bg-gray-100 mt-4">
+                <h2 className="text-4xl font-extrabold text-sky-900 text-center mb-6 tracking-widest uppercase">Our Offerings</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                    {/* Syndicated Reports */}
+                    <div className="bg-white rounded-lg shadow-lg text-center p-4">
+                        <h3 className="text-xl font-extrabold text-sky-900 mb-4 text-start">Syndicated Reports</h3>
+                        <p className="text-black font-bold mb-4 text-start">
+                            Explore emerging market trends with industry-specific research reports.
+                        </p>
+                        <br/>
+                        <p className='text-gray-900 mb-4 text-start'>Our industry-focused syndicated research reports offer quantifiable market insights to our clients exploring new markets, developing new products or looking for new growth opportunities. These reports are formulated with strong attention to detail and broader industry audience to ensure sustainable organization development.</p>
 
-                        <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition transform hover:-translate-y-2 duration-300 p-6">
-                            <img
-                                src="https://dedhamgroup.com/wp-content/uploads/2024/03/iStock-639075082-1024x683.jpg"
-                                alt="Syndicated Reports"
-                                className="rounded-lg w-full h-48 object-cover mb-4"
-                            />
-                            <h3 className="text-2xl font-semibold text-blue-800 text-center mb-2">
-                                Syndicated Reports
-                            </h3>
-                            <p className="text-gray-700 text-center">
-                                Explore emerging market trends and dynamics with our industry-focused research reports.
-                            </p>
-                        </div>
-
-                        <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition transform hover:-translate-y-2 duration-300 p-6">
-                            <img
-                                src="https://epe.brightspotcdn.com/dims4/default/a028cbb/2147483647/strip/true/crop/1720x1146+0+0/resize/680x453!/quality/90/?url=https%3A%2F%2Fepe-brightspot.s3.us-east-1.amazonaws.com%2F4f%2F32%2F46f7133446d0bd4002573bf70c1c%2Fsolutions-hero-target-1255870361-02182021.psd"
-                                alt="Custom Research"
-                                className="rounded-lg w-full h-48 object-cover mb-4"
-                            />
-                            <h3 className="text-2xl font-semibold text-blue-800 text-center mb-2">
-                                Custom Research
-                            </h3>
-                            <p className="text-gray-700 text-center">
-                                Tailored market intelligence reports to meet your unique business requirements.
-                            </p>
-                        </div>
-
-                        <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition transform hover:-translate-y-2 duration-300 p-6">
-                            <img
-                                src="https://www.hso.com/media/gbnhehqr/hso-professional-services-consulting.jpg?cc=0%2C0.0757%2C0%2C0.0797&width=640&height=360&quality=80&token=eb1f0512"          alt="Consulting Services"
-                                className="rounded-lg w-full h-48 object-cover mb-4"
-                            />
-                            <h3 className="text-2xl font-semibold text-blue-800 text-center mb-2">
-                                Consulting Services
-                            </h3>
-                            <p className="text-gray-700 text-center">
-                                Comprehensive consulting for market assessment, competitor intelligence, and more.
-                            </p>
-                        </div>
+                    </div>
+               
+                    {/* Competitor Analysis */}
+                    <div className="bg-white rounded-lg shadow-lg text-center p-4">
+                        <h3 className="text-xl font-extrabold text-sky-900 mb-4 text-start">Competitor Analysis</h3>
+                        <p className="text-black font-bold mb-4 text-start">
+                            In-depth analysis of competitors to help refine your market strategy.
+                        </p>
+                        <br/>
+                        <p className='text-gray-900 mb-4 text-start'>We offer complete tailored market intelligence report to meet our client’s unique business requirements. Our cross-functional consultants along with subject matter experts design tailor-made solution to meet your business growth objective. We offer a range of services from market assessment, competitor intelligence, go-to-market strategy along with many more.</p>
+                       
                     </div>
                 </div>
+            </section>
 
-                <div id="why-us" className="mb-12 py-12 bg-gradient-to-l from-indigo-50 via-white to-indigo-100 rounded-lg shadow-lg">
-                    <h2 className="text-4xl font-extrabold text-indigo-900 text-center mb-10 animate-fade-in">
-                        Why Choose Us?
-                    </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-6 md:px-12">
+            {/* Consulting Services Section */}
+            <section className="py-16 px-8 bg-white">
+                <div className="max-w-4xl mx-auto text-center">
+                    <h2 className="text-4xl font-extrabold text-sky-900 mb-6 tracking-widest uppercase">Consulting Services</h2>
+                    <p className="text-lg text-gray-900 mb-8">
+                        Our consulting services offer strategic guidance for market entry, customer segmentation, competitive analysis, and more. We work closely with businesses to drive growth and efficiency.
+                    </p>
+                    <p className="text-lg text-gray-900">
+                        Whether you exploring new markets or seeking to optimize your current strategies, our expert consultants are here to assist every step of the way.
+                    </p>
+                </div>
+            </section>
 
-                        <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:-translate-y-2 animate-fade-in">
-                            <div className="w-16 h-16 bg-indigo-700 text-white flex items-center justify-center rounded-full mx-auto mb-4">
-                                <i className="fas fa-user-tie text-3xl"></i>
-                            </div>
-                            <h3 className="text-xl font-semibold text-indigo-800 text-center mb-2">
-                                Industry Experts
-                            </h3>
-                            <p className="text-gray-700 text-center">
-                                Leverage our teams expertise to achieve growth and sustainability in dynamic markets.
+            {/* Why Koinet Market Research Section */}
+            <section className="py-16 px-8 bg-gray-100">
+                <div className="text-center">
+                    <h2 className="text-4xl font-extrabold text-sky-900 mb-6 tracking-widest uppercase">Why Choose Koinet Market Research?</h2>
+                    <p className="text-lg text-gray-900 mb-8 max-w-3xl mx-auto">
+                        Koinet Market Research provides customized, data-driven insights that enable businesses to make informed decisions. Our team of experienced researchers and consultants delivers actionable solutions backed by thorough data analysis. Partner with us for high-quality research and strategic growth opportunities.
+                    </p>
+                </div>
+            </section>
+
+            {/* What Makes Us Unique Section */}
+            <section className="py-16 px-8">
+                <div className="text-center">
+                    <h2 className="text-4xl font-extrabold text-sky-900 mb-6 tracking-widest uppercase">What Makes Us Unique?</h2>
+                    <div className="flex flex-col md:flex-row justify-center gap-8">
+                        {/* Unique Factor 1 */}
+                        <div className="bg-blue-50 p-6 rounded-lg shadow-lg text-center w-full md:w-1/3">
+                            <h3 className="text-xl font-bold text-sky-900 mb-4">Tailored Insights</h3>
+                            <p className="text-gray-900">
+                                We provide bespoke market research solutions designed specifically for your business needs.
                             </p>
                         </div>
-
-                        <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:-translate-y-2 animate-fade-in">
-                            <div className="w-16 h-16 bg-green-600 text-white flex items-center justify-center rounded-full mx-auto mb-4">
-                                <i className="fas fa-chart-line text-3xl"></i>
-                            </div>
-                            <h3 className="text-xl font-semibold text-green-700 text-center mb-2">
-                                Tailored Solutions
-                            </h3>
-                            <p className="text-gray-700 text-center">
-                                Customized strategies to overcome challenges and meet business goals effectively.
+                        {/* Unique Factor 2 */}
+                        <div className="bg-blue-50 p-6 rounded-lg shadow-lg text-center w-full md:w-1/3">
+                            <h3 className="text-xl font-bold text-sky-900mb-4">Expert Team</h3>
+                            <p className="text-gray-900">
+                                Our team consists of industry experts who understand the complexities of global markets.
                             </p>
                         </div>
-
-                        <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:-translate-y-2 animate-fade-in">
-                            <div className="w-16 h-16 bg-yellow-500 text-white flex items-center justify-center rounded-full mx-auto mb-4">
-                                <i className="fas fa-book text-3xl"></i>
-                            </div>
-                            <h3 className="text-xl font-semibold text-yellow-600 text-center mb-2">
-                                Comprehensive Reports
-                            </h3>
-                            <p className="text-gray-700 text-center">
-                                Actionable insights backed by robust methodologies to guide your decisions.
-                            </p>
-                        </div>
-
-                        <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:-translate-y-2 animate-fade-in">
-                            <div className="w-16 h-16 bg-red-500 text-white flex items-center justify-center rounded-full mx-auto mb-4">
-                                <i className="fas fa-handshake text-3xl"></i>
-                            </div>
-                            <h3 className="text-xl font-semibold text-red-600 text-center mb-2">
-                                Ethical Standards
-                            </h3>
-                            <p className="text-gray-700 text-center">
-                                Integrity, transparency, and adherence to industry standards in every project.
+                        {/* Unique Factor 3 */}
+                        <div className="bg-blue-50 p-6 rounded-lg shadow-lg text-center w-full md:w-1/3">
+                            <h3 className="text-xl font-bold text-sky-900 mb-4">Innovative Solutions</h3>
+                            <p className="text-gray-900">
+                                We use cutting-edge research tools and methodologies to deliver actionable insights.
                             </p>
                         </div>
                     </div>
                 </div>
-
-
-                <div id="unique" className="mb-12">
-                    <h2 className="text-4xl font-bold text-indigo-900 text-center mb-8">
-                        What Makes Us Unique?
-                    </h2>
-                    <div className="flex flex-wrap gap-8 justify-center">
-                        {[
-                            {
-                                title: "Trend Analysis",
-                                description:
-                                    "Analyze industry trends and market dynamics with in-depth research.",
-                                icon: "📊",
-                            },
-                            {
-                                title: "Industrial Expertise",
-                                description:
-                                    "Skilled experts deliver forward-thinking insights tailored for growth.",
-                                icon: "🏗️",
-                            },
-                            {
-                                title: "Insight-Driven Reports",
-                                description:
-                                    "Innovative, data-driven solutions to empower your business strategies.",
-                                icon: "📈",
-                            },
-                            {
-                                title: "Data Validation",
-                                description:
-                                    "Ensure reliability and accuracy through rigorous validation processes.",
-                                icon: "✔️",
-                            },
-                        ].map((item, index) => (
-                            <div
-                                key={index}
-                                className="bg-gradient-to-br from-blue-100 to-blue-50 p-6 rounded-lg shadow-lg transform transition-transform hover:scale-105 animate-fade-in-up flex-grow basis-[calc(50%-1rem)] md:basis-[calc(25%-1rem)]"
-                            >
-                                <div className="flex items-center justify-center w-16 h-16 bg-blue-600 text-white rounded-full mx-auto mb-4 text-3xl">
-                                    {item.icon}
-                                </div>
-                                <h3 className="text-2xl font-semibold text-blue-800 text-center mb-2">
-                                    {item.title}
-                                </h3>
-                                <p className="text-gray-700 text-center">{item.description}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-
-            </div>
+            </section>
         </div>
-    )
+    );
 }
 
-export default AboutUs
+export default AboutUs;

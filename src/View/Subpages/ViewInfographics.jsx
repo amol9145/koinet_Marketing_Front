@@ -236,39 +236,47 @@ function ViewInfographics() {
                     </div>
                 )}
             </div>
-            <section>
+            <section className="relative mt-5 flex flex-col items-center overflow-hidden">
                 {/* Check if infographic exists */}
                 {infographic && (
-                    <div className="my-20 text-center">
-                        <p className="text-blue-950 text-4xl font-bold">View Infographics Details</p>
-                        <div className="container border-2 text-blue-700 border-black mx-auto my-5 rounded-lg py-2 text-start px-3">
-                            <Link to="/some-link"> {/* Add a valid link path */}
-                                <p className="font-semibold">{infographic.title}</p>
-                            </Link>
-                            <br />
-                            <div className="text-black flex gap-4">
-                                <p>Published: {new Date(infographic.createdAt).toLocaleDateString()}</p> {/* Format date if available */}
-                                |
-                                <p>Report ID: {infographic.reportId}</p> {/* Example field */}
-                                |
-                                <p>{infographic.category}</p> {/* Example category */}
+                    <div className=" text-center">
+                        <div className="text-start my-6 bg-blue-800 py-2  w-full ">
+                            <p className="text-5xl font-bold  text-white ms-4   drop-shadow-lg">
+                                View Infographics Details
+                            </p>
+                        </div>
+
+                        <div className="relative max-w-7xl transition-all mt-2">
+                            <div className="text-[#1e40af] text-start font-medium p-4 mb-6 border border-b-2 border-[#1e40af]">
+                                {infographic.title}
+                                <div className="flex flex-wrap gap-6 text-sm font-semibold text-gray-600 mt-5 ">
+                                    <span className="px-4 py-2 bg-[#e0e7ff] text-[#4338ca] rounded-full shadow-md">
+                                        Published: {new Date(infographic.createdAt).toLocaleDateString()}
+                                    </span>
+                                    <span className="px-4 py-2 bg-[#fcd34d] text-[#92400e] rounded-full shadow-md">
+                                        Report ID: {infographic.reportId}
+                                    </span>
+                                    <span className="px-4 py-2 bg-[#a78bfa] text-[#312e81] rounded-full shadow-md">
+                                        {infographic.category}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 )}
             </section>
-
+            <hr className="py-1 bg-zinc-300 mt-2" />
             <section>
                 {infographic && (
                     <div className="container mx-auto max-w-screen-xl px-4 py-8 sm:px-4 lg:px-8">
-                        <div className="mb-4 border-b border-gray-200 dark:border-gray-700 ">
+                        <div className="mb-8  border-b-2 border-gray-300 dark:border-gray-700 ">
                             <ul
-                                className="flex flex-wrap -mb-px text-lg font-medium text-center"
+                                className="flex flex-wrap justify-center -mb-px text-sm  text-center gap-2 sm:gap-4 md:gap-6"
                                 role="tablist"
                             >
                                 <li className="me-2 " role="presentation">
                                     <button
-                                        className={`inline-block p-4 border-b-2 rounded-t-lg ${activeTab === "summary" ? "border-blue-600 bg-slate-300 text-blue-600" : "hover:text-gray-600 hover:border-gray-300"
+                                        className={`inline-block text-lg py-1 sm:px-4 sm:py-2 md:px-1 md:py-3  ${activeTab === "summary" ? "bg-[#001F3F] text-white" : "hover:text-gray-600 hover:border-gray-300"
                                             }`}
                                         onClick={() => setActiveTab("summary")}
                                         type="button"
@@ -281,7 +289,7 @@ function ViewInfographics() {
                                 </li>
                                 <li className="me-2" role="presentation">
                                     <button
-                                        className={`inline-block p-4 border-b-2 rounded-t-lg ${activeTab === "toc" ? "border-blue-600 bg-slate-300 text-blue-600" : "hover:text-gray-600 hover:border-gray-300"
+                                        className={`inline-block text-lg py-1 sm:px-4 sm:py-2 md:px-1 md:py-3 ${activeTab === "toc" ? "bg-[#001F3F] text-white" : "hover:text-gray-600 hover:border-gray-300"
                                             }`}
                                         onClick={() => setActiveTab("toc")}
                                         type="button"
@@ -294,7 +302,7 @@ function ViewInfographics() {
                                 </li>
                                 <li className="me-2" role="presentation">
                                     <button
-                                        className={`inline-block p-4 border-b-2 rounded-t-lg ${activeTab === "methodology" ? "border-blue-600 bg-slate-300 text-blue-600" : "hover:text-gray-600 hover:border-gray-300"
+                                        className={`inline-block text-lg py-1 sm:px-4 sm:py-2 md:px-1 md:py-3 ${activeTab === "methodology" ? "bg-[#001F3F] text-white" : "hover:text-gray-600 hover:border-gray-300"
                                             }`}
                                         onClick={() => setActiveTab("methodology")}
                                         type="button"
@@ -308,7 +316,7 @@ function ViewInfographics() {
 
                                 <li role="presentation">
                                     <button
-                                        className={`inline-block p-4 border-b-2 rounded-t-lg ${activeTab === "infographics" ? "border-blue-600 bg-slate-300 text-blue-600" : "hover:text-gray-600 hover:border-gray-300"
+                                        className={`inline-block text-lg py-1 sm:px-4 sm:py-2 md:px-1 md:py-3 ${activeTab === "infographics" ? "bg-[#001F3F] text-white" : "hover:text-gray-600 hover:border-gray-300"
                                             }`}
                                         onClick={() => setActiveTab("infographics")}
                                         type="button"
@@ -321,7 +329,7 @@ function ViewInfographics() {
                                 </li>
                             </ul>
                         </div>
-                        <div>
+                        <div className="border-2  rounded-lg border-gray-200 p-4">
                             {activeTab === "summary" && (
                                 <div>
                                     <div dangerouslySetInnerHTML={{ __html: infographic.summary }} />
@@ -418,11 +426,10 @@ function ViewInfographics() {
                                             </div>
                                         </li>
                                     </ul>
-                                    <button
-                                        onClick={handlePayment}
-                                        className="mt-5 w-full bg-gradient-to-r from-teal-400 to-green-500 text-white p-3 rounded-full text-sm font-semibold tracking-wider uppercase shadow-md hover:shadow-lg hover:scale-105 transform transition duration-300"
-                                    >
-                                        Buy Now
+                                    <button onClick={handlePayment} className=" mt-3 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                                        <span className="  relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                            Buy Now
+                                        </span>
                                     </button>
                                 </div>
                             </div>
@@ -435,27 +442,27 @@ function ViewInfographics() {
                                 <div>
                                     {/* Button to open the modal */}
                                     <div className="mb-4">
-                                        <button
-                                            onClick={handleOpenModal}
-                                            className="block bg-gradient-to-r from-teal-400 to-cyan-500 text-white p-3 rounded-lg text-xs font-semibold tracking-widest uppercase title-font shadow-md text-center"
-                                            type="button"
-                                        >
-                                            Download Sample Report
-                                        </button>
-                                    </div>
 
-                                    {/* Modal */}
-
-
-                                    <div className="mb-4">
-                                        <Link to={"/contact"} className="block bg-gradient-to-r from-teal-400 to-cyan-500 text-white p-3 rounded-lg text-xs font-semibold tracking-widest uppercase title-font shadow-md text-center">
-                                            Request Customization
+                                        <Link onClick={handleOpenModal} className=" mt-3 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                                            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                                Download Sample Report
+                                            </span>
                                         </Link>
                                     </div>
 
+                                    {/* Modal */}
                                     <div className="mb-4">
-                                        <Link to={"/contact"} className="block bg-gradient-to-r from-teal-400 to-cyan-500 text-white p-3 rounded-lg text-xs font-semibold tracking-widest uppercase title-font shadow-md text-center">
-                                            Speak to Consultant
+                                        <Link to={"/contact"} className="  relative inline-flex items-center justify-center p-0.5 mb-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                                            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                                Request Customization
+                                            </span>
+                                        </Link>
+                                    </div>
+                                    <div className="mb-4">
+                                        <Link to={"/contact"} className="  relative inline-flex items-center justify-center p-0.5 mb-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                                            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                                Speak to Consultant
+                                            </span>
                                         </Link>
                                     </div>
                                 </div>

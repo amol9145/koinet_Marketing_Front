@@ -277,46 +277,46 @@ function ViewReportDetails() {
             </div>
             {/*1st section*/}
             <section
-                className="relative py-16 px-8 bg-gradient-to-r from-[#f9f5ff] via-[#e0e7ff] to-[#dbeafe] flex flex-col items-center overflow-hidden"
+                className="relative mt-10 flex flex-col items-center overflow-hidden"
             >
                 {/* Title */}
-                <div className="text-center mb-16 mt-10">
-                    <p className="text-5xl font-extrabold  text-indigo-900 tracking-widest uppercase  drop-shadow-lg">
+                <div className="text-start my-6 bg-blue-800 py-2  w-full ">
+                    <p className="text-5xl font-bold  text-white ms-4   drop-shadow-lg">
                         View Report Details
                     </p>
                 </div>
 
                 {/* Content Card */}
-                <div className="relative w-full max-w-4xl bg-white shadow-lg rounded-lg p-6 md:p-8 text-left transition-all hover:scale-[1.02]">
-                    <a href="#">
-                        <p className="text-[#1e40af] text-base font-medium leading-7 mb-6">
-                            {reportDetails.title}
-                        </p>
-                    </a>
-                    <div className="flex flex-wrap gap-6 text-sm font-semibold text-gray-600">
-                        <span className="px-4 py-2 bg-[#e0e7ff] text-[#4338ca] rounded-full shadow-md">
-                            Published: {formatDate(reportDetails.createdAt)}
-                        </span>
-                        <span className="px-4 py-2 bg-[#fcd34d] text-[#92400e] rounded-full shadow-md">
-                            Report ID: {reportDetails.reportId}
-                        </span>
-                        <span className="px-4 py-2 bg-[#a78bfa] text-[#312e81] rounded-full shadow-md">
-                            {reportDetails.category}
-                        </span>
+                <div className="relative max-w-7xl transition-all mt-2">
+                    <div className="text-[#1e40af] text-start font-medium p-4 mb-6 border border-b-2 border-[#1e40af]">
+                        {reportDetails.title}
+                        <div className="flex flex-wrap gap-6 text-sm font-semibold text-gray-600 ">
+                            <span className="px-4 py-2 bg-[#e0e7ff] text-[#4338ca] rounded-full shadow-md">
+                                Published: {formatDate(reportDetails.createdAt)}
+                            </span>
+                            <span className="px-4 py-2 bg-[#fcd34d] text-[#92400e] rounded-full shadow-md">
+                                Report ID: {reportDetails.reportId}
+                            </span>
+                            <span className="px-4 py-2 bg-[#a78bfa] text-[#312e81] rounded-full shadow-md">
+                                {reportDetails.category}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </section>
 
+
             {/* 2nd Section */}
+            <hr className="py-1 bg-zinc-300 mt-2" />
             <section>
-                <div className="container mx-auto max-w-screen-xl px-4 py-8 sm:px-6 md:px-8 lg:px-12 hidden sm:block">
+                <div className="container mx-auto max-w-screen-xl px-4 py-8 sm:px-6 md:px-8 lg:px-12 ">
                     {/* Tab Navigation */}
-                    <div className="mb-8 border-b-2 border-gray-300 dark:border-gray-700">
-                        <ul className="flex flex-wrap justify-center -mb-px text-sm font-semibold text-center gap-2 sm:gap-4 md:gap-6">
+                    <div className="mb-8  border-b-2 border-gray-300 dark:border-gray-700">
+                        <ul className="flex flex-wrap justify-center -mb-px text-sm  text-center gap-2 sm:gap-4 md:gap-6">
                             {[
-                                { id: "summary", label: "SUMMARY" },
-                                { id: "toc", label: "TABLE OF CONTENTS" },
-                                { id: "methodology", label: "METHODOLOGY" },
+                                { id: "summary", label: "Summary" },
+                                { id: "toc", label: "Table Of Contents" },
+                                { id: "methodology", label: "Methodology" },
                             ].map((tab) => (
                                 <li
                                     key={tab.id}
@@ -324,9 +324,9 @@ function ViewReportDetails() {
                                     role="presentation"
                                 >
                                     <button
-                                        className={`inline-block px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-4 transition-all duration-300 ease-in-out rounded-full ${activeTab === tab.id
-                                            ? "bg-gradient-to-r from-indigo-600 to-indigo-400 text-black shadow-xl scale-105"
-                                            : "bg-white text-black hover:text-indigo-500 hover:bg-gray-100   dark:hover:text-indigo-400 "
+                                        className={`inline-block  py-1 sm:px-4 sm:py-2 md:px-1 md:py-1  ${activeTab === tab.id
+                                            ? "bg-[#001F3F] text-white"
+                                            : " "
                                             }`}
                                         onClick={() => setActiveTab(tab.id)}
                                         type="button"
@@ -347,7 +347,7 @@ function ViewReportDetails() {
                     </div>
 
                     {/* Tab Content */}
-                    <div>
+                    <div className=" border-2  rounded-lg border-gray-200">
                         {activeTab === "summary" && (
                             <div className="p-4 sm:p-6 md:p-8 rounded-lg ">
                                 <div dangerouslySetInnerHTML={{ __html: reportDetails.summary }} />
@@ -442,11 +442,11 @@ function ViewReportDetails() {
                                             </div>
                                         </li>
                                     </ul>
-                                    <button
-                                        onClick={handlePayment}
-                                        className="mt-5 w-full bg-gradient-to-r from-teal-400 to-green-500 text-white p-3 rounded-full text-sm font-semibold tracking-wider uppercase shadow-md hover:shadow-lg hover:scale-105 transform transition duration-300"
-                                    >
-                                        Buy Now
+
+                                    <button onClick={handlePayment} className=" mt-3 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                                        <span className="  relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                            Buy Now
+                                        </span>
                                     </button>
                                 </div>
                             </div>
@@ -459,27 +459,27 @@ function ViewReportDetails() {
                                 <div>
                                     {/* Button to open the modal */}
                                     <div className="mb-4">
-                                        <button
-                                            onClick={handleOpenModal}
-                                            className="block bg-gradient-to-r from-teal-400 to-cyan-500 text-white p-3 rounded-lg text-xs font-semibold tracking-widest uppercase title-font shadow-md text-center"
-                                            type="button"
-                                        >
-                                            Download Sample Report
-                                        </button>
-                                    </div>
 
-                                    {/* Modal */}
-
-
-                                    <div className="mb-4">
-                                        <Link to={"/contact"} className="block bg-gradient-to-r from-teal-400 to-cyan-500 text-white p-3 rounded-lg text-xs font-semibold tracking-widest uppercase title-font shadow-md text-center">
-                                            Request Customization
+                                        <Link onClick={handleOpenModal} className=" mt-3 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                                            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                                Download Sample Report
+                                            </span>
                                         </Link>
                                     </div>
 
+                                    {/* Modal */}
                                     <div className="mb-4">
-                                        <Link to={"/contact"} className="block bg-gradient-to-r from-teal-400 to-cyan-500 text-white p-3 rounded-lg text-xs font-semibold tracking-widest uppercase title-font shadow-md text-center">
-                                            Speak to Consultant
+                                        <Link to={"/contact"} className="  relative inline-flex items-center justify-center p-0.5 mb-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                                            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                                Request Customization
+                                            </span>
+                                        </Link>
+                                    </div>
+                                    <div className="mb-4">
+                                        <Link to={"/contact"} className="  relative inline-flex items-center justify-center p-0.5 mb-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                                            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                                Speak to Consultant
+                                            </span>
                                         </Link>
                                     </div>
                                 </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -10,10 +10,10 @@ const Login = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r p-5 relative overflow-hidden mt-9">
       {/* Animated Background */}
-      <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-blue-400 via-indigo-400 to-sky-400 opacity-60"></div>
+      <div className="absolute inset-0 "></div>
 
       {/* Content */}
-      <div className="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-md relative z-10">
+      <div className="bg-white shadow-2xl  p-4 w-full max-w-md relative z-10">
         <div className="flex justify-center mb-6">
           <div className="bg-gradient-to-br from-indigo-300 to-blue-200 p-4 rounded-full shadow-lg">
             <svg
@@ -99,56 +99,14 @@ const Login = () => {
               )}
             </span>
           </div>
-          <div className="text-right mb-6">
-            <a
-              href="#"
-              className="text-sm text-blue-500 hover:underline focus:text-blue-700"
-            >
-              Forgot password?
-            </a>
-          </div>
+
           <button
             type="submit"
             className="w-full bg-gradient-to-r from-blue-400 to-indigo-400 text-white py-3 rounded-lg shadow-lg hover:opacity-90 focus:ring-4 focus:ring-blue-300 transition"
           >
-            Get Started
+            Log-In
           </button>
         </form>
-        <div className="text-center text-sm text-gray-500 mt-6">
-          ── Or sign in with ──
-        </div>
-        <div className="flex justify-center space-x-4 mt-4">
-          <button
-            type="button"
-            className="bg-gray-200 p-3 rounded-full hover:bg-gray-300 transition shadow-md"
-          >
-            <img
-              src="https://www.svgrepo.com/show/355037/google.svg"
-              alt="Google"
-              className="h-6"
-            />
-          </button>
-          <button
-            type="button"
-            className="bg-gray-200 p-3 rounded-full hover:bg-gray-300 transition shadow-md"
-          >
-            <img
-              src="https://www.svgrepo.com/show/157817/facebook.svg"
-              alt="Facebook"
-              className="h-6"
-            />
-          </button>
-          <button
-            type="button"
-            className="bg-gray-200 p-3 rounded-full hover:bg-gray-300 transition shadow-md"
-          >
-            <img
-              src="https://www.svgrepo.com/show/355037/apple.svg"
-              alt="Apple"
-              className="h-6"
-            />
-          </button>
-        </div>
       </div>
     </div>
   );
