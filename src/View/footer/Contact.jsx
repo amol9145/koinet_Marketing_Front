@@ -52,7 +52,7 @@ function Contact() {
 
   return (
     <div>
-      <section className="py-16 bg-gradient-to-r from-indigo-600 to-blue-500 text-white min-h-screen">
+      <section className="py-10 mt-10 bg-gradient-to-r from-indigo-600 to-blue-500 text-white min-h-screen">
         <div className="container mx-auto px-6">
           <div className="flex flex-col-reverse lg:flex-row items-center">
             <div className="lg:w-1/2 text-center lg:text-left mb-12 lg:mb-0">
