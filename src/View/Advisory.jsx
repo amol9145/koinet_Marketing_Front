@@ -38,7 +38,7 @@ function Advisory() {
                         <div className="w-full sm:p-6 px-6 mb-8 bg-gradient-to-r from-blue-50 via-white to-blue-50 shadow-lg rounded-lg transition-transform transform ">
                             <div className="border-l-4 border-blue-500 pl-6">
                                 <p className="text-black text-lg leading-relaxed tracking-wide">
-                                    At <span className="font-bold text-blue-600">Intent Market Research (IMR)</span>, we understand that our clients success relies on a complete and accurate assessment of market dynamics. Within market assessment services, we develop and provide valuable insights about the industry by analyzing market trends, customer demographics and behavior, market opportunities and drivers, and risk assessment to enable businesses to refine their strategies effectively.
+                                    At <span className="font-bold text-blue-600">Koinet Market Research (KMR)</span>, we understand that our clients success relies on a complete and accurate assessment of market dynamics. Within market assessment services, we develop and provide valuable insights about the industry by analyzing market trends, customer demographics and behavior, market opportunities and drivers, and risk assessment to enable businesses to refine their strategies effectively.
                                 </p>
                                 <br />
                                 <p className="text-black text-lg leading-relaxed tracking-wide">

@@ -318,7 +318,7 @@ function Home() {
                             </span>
                         </h1>
                         <p className="mb-4 text-lg leading-relaxed text-gray-700">
-                            At <span className="font-bold text-indigo-500">Intent Market Research</span>, we deliver tailored research solutions that meet your unique needs. With advanced methodologies and industry expertise, we empower your business with actionable insights.
+                            At <span className="font-bold text-indigo-500">Koinet Market Research</span>, we deliver tailored research solutions that meet your unique needs. With advanced methodologies and industry expertise, we empower your business with actionable insights.
                         </p>
                         <p className="text-gray-600 mb-6">
                             Let’s collaborate to unlock your businesss full potential. Reach out to discuss how we can help you grow.
@@ -391,12 +391,12 @@ function Home() {
 
                 </div>
             </section>
-            {/* WHY INTENT MARKET RESEARCH?*/}
+            {/* WHY Koinet MARKET RESEARCH?*/}
             <section className="text-gray-600 body-font bg-slate-50 my-10">
                 <div className="container px-5  mx-auto">
                     <div className="text-center mb-20">
                         <h1 className="sm:text-5xl text-3xl font-extrabold title-font mb-6 text-sky-900 tracking-widest uppercase">
-                            Why Intent Market Research?
+                            Why Koinet Market Research?
                         </h1>
                         <p className="text-lg leading-relaxed xl:w-2/3 lg:w-3/4 mx-auto text-gray-700">
                             Are you ready to take your business to new heights? Our tailored research services offer unparalleled insights and actionable strategies designed to fuel your growth.
@@ -418,7 +418,7 @@ function Home() {
                                 <h2 className="text-gray-900 text-xl font-bold  mb-2 ">Unique Data</h2>
                                 <h3 className="text-indigo-700 text-lg font-semibold mb-3">Your Data-Driven Advantage</h3>
                                 <p className="leading-relaxed text-start text-gray-600 px-3">
-                                    Our extensive repository of accurate and reliable market research studies sets us apart. We meticulously analyze vast datasets to deliver validated insights that empower your decision-making. With Intent Market Research, you’ll gain a competitive edge and make informed choices at every stage of your business journey.
+                                    Our extensive repository of accurate and reliable market research studies sets us apart. We meticulously analyze vast datasets to deliver validated insights that empower your decision-making. With Koinet Market Research, you’ll gain a competitive edge and make informed choices at every stage of your business journey.
                                 </p>
                                 <button className=" mt-3 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
                                     <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
@@ -454,7 +454,7 @@ function Home() {
                                 <h2 className="text-gray-900 text-xl font-bold mb-2">Innovative Solutions</h2>
                                 <h3 className="text-indigo-700 text-lg font-semibold mb-3">Are you ready to elevate your decision-making?</h3>
                                 <p className="leading-relaxed text-start text-gray-600 px-3">
-                                    At Intent Market Research, we offer a unique blend of accessibility, expertise, and cutting-edge methodologies. Our team of seasoned researchers is dedicated to providing you with the tools and insights you need to succeed.
+                                    At Koinet Market Research, we offer a unique blend of accessibility, expertise, and cutting-edge methodologies. Our team of seasoned researchers is dedicated to providing you with the tools and insights you need to succeed.
                                 </p>
                             </div>
                             <button className="absolute bottom-4 left-1/2 transform -translate-x-1/2 inline-flex items-center justify-center p-0.5 mb-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">

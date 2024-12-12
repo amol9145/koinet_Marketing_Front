@@ -57,7 +57,7 @@ function Pressreleased() {
         <>
             <section>
                 <div className="mt-20">
-                    <h1 className="text-3xl bg-blue-800 font-bold text-start text-white py-3">
+                    <h1 className="text-3xl bg-sky-900 text-white font-bold text-start  py-3">
                         <span className="ms-4">Press Releases</span>
                     </h1>
                 </div>

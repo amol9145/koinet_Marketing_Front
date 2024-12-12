@@ -280,7 +280,7 @@ function ViewReportDetails() {
                 className="relative mt-10 flex flex-col items-center overflow-hidden"
             >
                 {/* Title */}
-                <div className="text-start my-6 bg-blue-800 py-2  w-full ">
+                <div className="text-start my-6 bg-sky-900 text-white py-2  w-full ">
                     <p className="text-5xl font-bold  text-white ms-4   drop-shadow-lg">
                         View Report Details
                     </p>

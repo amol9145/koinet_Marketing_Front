@@ -1,5 +1,8 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function WhoWeAre() {
+    const [activeTab, setActiveTab] = useState("Trend_analysis");
     return (
         <>
             <div className=" bg-gradient-to-r py-12 ">
@@ -38,9 +41,9 @@ function WhoWeAre() {
                         </div>
                     </div>
                 </div>
-                <section className="text-gray-600 body-font my-10">
+                <section className="text-gray-600 body-font mt-10">
                     <div>
-                        <h2 className="text-center text-4xl font-bold "><span className="bg-sky-900 p-4 text-white rounded-lg underline">Our Offerings</span></h2>
+                        <h2 className="text-center text-4xl font-bold "><span className="bg-sky-900 p-4 text-white rounded-lg underline">Why Koinet Market Research?</span></h2>
                     </div>
                     <div className="container px-5 py-20 mx-auto flex flex-wrap">
                         <div className="flex flex-wrap justify-center items-center">
@@ -116,63 +119,95 @@ function WhoWeAre() {
                     </div>
                 </section>
 
-                {/* Expertise Section */}
-                <div className="mt-16 bg-gradient-to-br from-blue-50 to-teal-50 py-12 rounded-lg shadow-lg">
-                    <div className="text-center mb-10">
-                        <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-6">
-                            What Sets Us Apart
-                        </h2>
-                        <p className="text-lg text-black-600 max-w-3xl mx-auto">
-                            With a proven track record of delivering high-quality market research solutions, we specialize in transforming data into actionable insights that drive business results.
-                        </p>
+                <section className="">
+                    <div className="mb-10">
+                        <h2 className="text-center text-4xl font-bold "><span className="bg-sky-900 p-2 text-white rounded-lg underline ">What distinguishes us?</span></h2>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {/* Expertise 1 */}
-                        <div className="bg-cyan-100 shadow-md rounded-lg p-6 hover:shadow-xl transition-all">
-                            <h3 className="text-xl font-semibold text-blue-950 mb-3">
-                                Industry Expertise
-                            </h3>
-                            <p className="text-black-600">
-                                Deep insights across diverse industries, including technology, healthcare, and finance.
-                            </p>
+                    <div className="container mx-auto px-4">
+                        <div className="mb-4 border-b border-gray-200 dark:border-gray-700 text-center">
+                            <ul
+                                className="flex flex-wrap justify-center -mb-px text-lg font-medium text-center"
+                                id="default-tab"
+                                role="tablist"
+                            >
+                                {[
+                                    { id: "Trend_analysis", label: "Trend analysis" },
+                                    { id: "Insight_driven_reports", label: "Insight-driven reports" },
+                                    { id: "Industrial_Expertise", label: "Industrial Expertise" },
+                                    { id: "Validation", label: "Validation" },
+                                ].map((tab) => (
+                                    <li className="me-2" role="presentation" key={tab.id}>
+                                        <button
+                                            className={`inline-block p-4 border-b-2 rounded-t-lg ${activeTab === tab.id
+                                                ? "text-white border-blue-600 bg-sky-900 p-2"
+                                                : "hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                                                }`}
+                                            type="button"
+                                            role="tab"
+                                            aria-controls={tab.id}
+                                            aria-selected={activeTab === tab.id}
+                                            onClick={() => setActiveTab(tab.id)}
+                                        >
+                                            {tab.label}
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
-
-                        {/* Expertise 2 */}
-                        <div className="bg-cyan-100 shadow-md rounded-lg p-6 hover:shadow-xl transition-all">
-                            <h3 className="text-xl font-semibold text-blue-950 mb-3">
-                                Tailored Solutions
-                            </h3>
-                            <p className="text-black-600">
-                                Custom research services designed to meet unique business needs and objectives.
-                            </p>
-                        </div>
-
-                        {/* Expertise 3 */}
-                        <div className="bg-cyan-100 shadow-md rounded-lg p-6 hover:shadow-xl transition-all">
-                            <h3 className="text-xl font-semibold text-blue-950 mb-3">
-                                Data Accuracy
-                            </h3>
-                            <p className="text-black-600">
-                                Rigorous methodologies ensure precise and reliable market data for strategic decisions.
-                            </p>
+                        <div id="default-tab-content" className="text-center">
+                            {[
+                                {
+                                    id: "Trend_analysis",
+                                    content:
+                                        "Our dedicated team of analysts and domain experts analyze latest industry trends with a better understanding of shifting consumer behaviors and market dynamics.",
+                                },
+                                {
+                                    id: "Insight_driven_reports",
+                                    content:
+                                        "With our team and network of industry experts we deliver subject matter expertise and innovative solutions through our syndicated and custom reports.",
+                                },
+                                {
+                                    id: "Industrial_Expertise",
+                                    content:
+                                        "We have a team of skilled experts, who are dedicated to deliver tailor-made solutions and forward-thinking insights to clients. With our insights, clients can make lasting impact and promote their business growth.",
+                                },
+                                {
+                                    id: "Validation",
+                                    content:
+                                        "The validation process stands as the pivotal step in our methodology. Through a structured process, validate and we re-validate the data points, ensuring their reliability and compatibility for the final computations.",
+                                },
+                            ].map((tabContent) => (
+                                <div
+                                    key={tabContent.id}
+                                    className={`p-4 rounded-lg bg-gray-50 ${activeTab === tabContent.id ? "block" : "hidden"
+                                        }`}
+                                    id={tabContent.id}
+                                    role="tabpanel"
+                                    aria-labelledby={`${tabContent.id}-tab`}
+                                >
+                                    <p className="text-lg text-gray-500 dark:text-gray-400 px-20">
+                                        {tabContent.content}
+                                    </p>
+                                </div>
+                            ))}
                         </div>
                     </div>
-                </div>
+                </section>
+
 
                 {/* Closing Section */}
-                <div className="mt-16 text-center">
+                <div className="  mt-16 text-center bg-slate-100 py-10">
                     <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-6">
-                        Ready to Collaborate?
+                        Let’s Join Forces!
                     </h2>
                     <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-                        Partner with us to harness the power of market insights and achieve your business goals.
+                        Join forces with us to leverage market insights and drive your business success.
                     </p>
-                    <a
-                        href="/contact"
-                        className="px-6 py-3 bg-gradient-to-r from-blue-600 to-teal-500 text-white rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl transition-all"
-                    >
-                        Contact Us
-                    </a>
+                    <Link to={"/contact"} className=" mt-3 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                        <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                            Contact
+                        </span>
+                    </Link>
                 </div>
             </div>
         </>
