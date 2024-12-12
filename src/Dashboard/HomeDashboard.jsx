@@ -31,7 +31,7 @@ const HomeDashboard = () => {
                         to={"#"}
                         onClick={() => setActiveTab('uploadReport')}
                         className={`inline-flex items-center px-4 py-3 rounded-lg w-full ${activeTab === 'uploadReport'
-                            ? 'text-gray-900 bg-gray-100 dark:text-white'
+                            ? 'text-gray-900 bg-gray-100'
                             : 'hover:text-gray-900 bg-gray-50 hover:bg-gray-100  dark:hover:bg-gray-700 text-black'
                             }`}
                     >
@@ -43,7 +43,7 @@ const HomeDashboard = () => {
                         to={"#"}
                         onClick={() => setActiveTab('uploadPressRelease')}
                         className={`inline-flex items-center px-4 py-3 rounded-lg w-full ${activeTab === 'uploadPressRelease'
-                            ? 'text-gray-900 bg-gray-100  dark:text-white'
+                            ? 'text-gray-900 bg-gray-100'
                             : 'hover:text-gray-900 bg-gray-50 hover:bg-gray-100 text-black '
                             }`}
                     >
@@ -55,7 +55,7 @@ const HomeDashboard = () => {
                         to={"#"}
                         onClick={() => setActiveTab('uploadInfographics')}
                         className={`inline-flex items-center px-4 py-3 rounded-lg w-full ${activeTab === 'uploadInfographics'
-                            ? 'text-gray-900 bg-gray-100  dark:text-white'
+                            ? 'text-gray-900 bg-gray-100 '
                             : 'hover:text-gray-900 bg-gray-50 hover:bg-gray-100  text-black'
                             }`}
                     >
@@ -67,7 +67,7 @@ const HomeDashboard = () => {
                         to={"#"}
                         onClick={() => setActiveTab('allOrders')}
                         className={`inline-flex items-center px-4 py-3 rounded-lg w-full ${activeTab === 'allOrders'
-                            ? 'text-gray-900 bg-gray-100  dark:text-white'
+                            ? 'text-gray-900 bg-gray-100'
                             : 'hover:text-gray-900 bg-gray-50 hover:bg-gray-100 text-black'
                             }`}
                     >
