@@ -93,7 +93,7 @@ const CreateInfographics = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-i-100 via-blue-200 to-indigo-200 ">
+        <div className="min-h-screen  ">
             <div className="mx-auto bg-white rounded-xl shadow-lg">
                 <div className="bg-blue-700 text-white py-5">
                     <h1 className="text-4xl font-bold text-center">Create Infographics</h1>
