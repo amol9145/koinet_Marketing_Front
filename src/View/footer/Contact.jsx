@@ -52,19 +52,22 @@ function Contact() {
 
   return (
     <div>
-      <section className="py-10 mt-10 bg-gradient-to-r from-indigo-600 to-blue-500 text-white min-h-screen">
-        <div className="container mx-auto px-6">
+      <section
+        className="py-10 mt-10 bg-gradient-to-r bg-sky-100 min-h-screen contact_bg"
+       
+      >
+        <div className="container mx-auto px-2">
           <div className="flex flex-col-reverse lg:flex-row items-center">
-            <div className="lg:w-1/2 text-center lg:text-left mb-12 lg:mb-0">
+            <div className="lg:w-1/2 text-center text-white lg:text-left mb-12 lg:mb-0">
               <h1 className="text-4xl sm:text-4xl font-extrabold mb-6">
-                Ready to Drive Your Market Insights Forward?
+                Ready to <span className="text-blue-500">Drive</span> Your Market Insights <span className="text-blue-500">Forward?</span>
               </h1>
               <p className="text-lg sm:text-2xl font-light mb-2">
                 We provide actionable market research insights to help your business grow and succeed.
               </p>
             </div>
             <div className="lg:w-1/2 mt-4">
-              <div className="bg-white shadow-lg p-4 rounded-2xl space-y-4">
+              <div className="bg-blue-50 shadow-lg p-4 rounded-2xl">
                 <form onSubmit={handleSubmit}>
                   {/* Full Name and Company Name Fields */}
                   <div className="mb-4 grid grid-cols-1 lg:grid-cols-2 gap-2">
@@ -241,6 +244,7 @@ function Contact() {
           </div>
         </div>
       </section>
+
     </div>
   );
 }

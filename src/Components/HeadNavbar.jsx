@@ -1,22 +1,28 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../assets/Logo.png"
+import Logo from "../assets/Logo.png";
 
 const Navbar = () => {
-
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [activeDropdown, setActiveDropdown] = useState(null); // null indicates no dropdown is open
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
     const navbarRef = useRef(null);
+
+    // Toggle the main menu
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
-    const toggleDropdown = (dropdown) => {
-        setActiveDropdown((prev) => (prev === dropdown ? null : dropdown));
+    // Toggle dropdown visibility
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
     };
+
+    // Close menu or dropdown when clicking outside the navbar
     const handleClickOutside = (event) => {
         if (navbarRef.current && !navbarRef.current.contains(event.target)) {
-            setActiveDropdown(null); // Close dropdown
+            setIsMenuOpen(false); // Close the menu
+            setIsDropdownOpen(false); // Close the dropdown
         }
     };
 
@@ -27,20 +33,22 @@ const Navbar = () => {
         };
     }, []);
 
+    // Close the menu and dropdown after clicking a link
+    const handleLinkClick = () => {
+        setIsMenuOpen(false); // Close the menu
+        setIsDropdownOpen(false); // Close the dropdown
+    };
+
     return (
-        <nav ref={navbarRef} className="bg-white text-black shadow-lg border-gray-200 dark:border-gray-600  fixed top-0 z-50 w-full">
+        <nav ref={navbarRef} className="bg-white text-black shadow-lg border-gray-200 dark:border-gray-600 fixed top-0 z-50 w-full">
             <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
                 <Link to={"/"} className="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img
-                        src={Logo}
-                        className="h-10 w-35"
-                        alt="Logo"
-                    />
+                    <img src={Logo} className="h-10 w-35" alt="Logo" />
                 </Link>
                 <button
                     onClick={toggleMenu}
                     type="button"
-                    className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400  dark:focus:ring-gray-600"
+                    className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:focus:ring-gray-600"
                     aria-controls="mega-menu-full"
                     aria-expanded={isMenuOpen}
                 >
@@ -61,17 +69,17 @@ const Navbar = () => {
                         />
                     </svg>
                 </button>
+
                 <div
                     id="mega-menu-full"
-                    className={`items-center justify-between font-medium ${isMenuOpen ? "flex" : "hidden"
-                        } w-full md:flex md:w-auto md:order-1`}
+                    className={`items-center justify-between font-medium ${isMenuOpen ? "flex" : "hidden"} w-full md:flex md:w-auto md:order-1`}
                 >
-                    <ul className="flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 text-black md:border-0 md:bg-white  dark:border-gray-700">
+                    <ul className="flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 text-black md:border-0 md:bg-white dark:border-gray-700">
                         <li>
                             <Link
                                 to={"/"}
-                                onClick={() => setActiveDropdown(null)}
-                                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500  dark:hover:text-blue-500  dark:border-gray-700"
+                                onClick={handleLinkClick}
+                                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:text-blue-500 dark:border-gray-700"
                             >
                                 Home
                             </Link>
@@ -79,41 +87,17 @@ const Navbar = () => {
                         <li>
                             <Link
                                 to={"/latest_reports"}
-                                onClick={() => setActiveDropdown(null)}
-                                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500  dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                                onClick={handleLinkClick}
+                                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
                             >
                                 Industry Expertise
                             </Link>
                         </li>
-                        {/* <li>
-                            <Link to={"/Allexpertise"}
-                                onClick={() => toggleDropdown("dropdown1")}
-                                id="mega-menu-full-dropdown-button"
-                                className="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded md:w-auto hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0  md:dark:hover:text-blue-500  dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
-                            >
-                                Industry Expertise
-                                <svg
-                                    className="w-2.5 h-2.5 ms-2.5"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 10 6"
-                                >
-                                    <path
-                                        stroke="currentColor"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="m1 1 4 4 4-4"
-                                    />
-                                </svg>
-                            </Link>
-                        </li> */}
-                        <li>
+                        <li className="relative">
                             <button
-                                onClick={() => toggleDropdown("dropdown2")}
-                                id="mega-menu-full-dropdown-button"
-                                className="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded md:w-auto hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0  md:dark:hover:text-blue-500  dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                                id="dropdownNavbarLink"
+                                onClick={toggleDropdown}
+                                className="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
                             >
                                 Featured Insights
                                 <svg
@@ -132,22 +116,58 @@ const Navbar = () => {
                                     />
                                 </svg>
                             </button>
+
+                            {isDropdownOpen && (
+                                <div
+                                    id="dropdownNavbar"
+                                    className="absolute z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
+                                >
+                                    <ul className="py-2 text-sm text-gray-700 dark:text-gray-400">
+                                        <li>
+                                            <Link
+                                                to={"/pressreleased"}
+                                                onClick={handleLinkClick}
+                                                className="block px-4 py-2 text-black"
+                                            >
+                                                Press Releases
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link
+                                                to={"/infographics"}
+                                                onClick={handleLinkClick}
+                                                className="block px-4 py-2 text-black"
+                                            >
+                                                Infographics
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link
+                                                to={"/whoweare"}
+                                                onClick={handleLinkClick}
+                                                className="block px-4 py-1 text-black"
+                                            >
+                                                Who We Are
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                </div>
+                            )}
                         </li>
                         <li>
                             <Link
                                 to={"/advisory"}
-                                onClick={() => setActiveDropdown(null)}
-                                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500  dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                                onClick={handleLinkClick}
+                                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
                             >
-
                                 Advisory Services
                             </Link>
                         </li>
                         <li>
                             <Link
                                 to={"/contact"}
-                                onClick={() => setActiveDropdown(null)}
-                                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500  dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                                onClick={handleLinkClick}
+                                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
                             >
                                 Contact
                             </Link>
@@ -155,8 +175,8 @@ const Navbar = () => {
                         <li>
                             <Link
                                 to={"/Dashboard"}
-                                onClick={() => setActiveDropdown(null)}
-                                className="block py-2 px-3 bg-blue text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500  dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                                onClick={handleLinkClick}
+                                className="block py-2 px-3 bg-blue text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
                             >
                                 Dashboard
                             </Link>
@@ -164,157 +184,6 @@ const Navbar = () => {
                     </ul>
                 </div>
             </div>
-            {activeDropdown === "dropdown1" && (
-                <div
-                    id="mega-menu-full-dropdown"
-                    className="mt-1 border-gray-200 shadow-sm bg-gray-50 md:bg-white border-y  dark:border-gray-600" >
-                    <div className=" bg-customBlue grid max-w-screen-xl px-4 py-5 mx-auto text-gray-900  sm:grid-cols-2 md:px-6">
-                        <ul>
-                            <li>
-                                <Link
-                                    to={"Allexpertise"}
-                                    className="block p-3 rounded-lg hover:bg-gray-100 "
-                                    onClick={() => setActiveDropdown(null)}
-                                >
-                                    <div className="font-semibold ">
-                                        <p>Aerospace & Defence Industry</p>
-                                    </div>
-
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to={"Allexpertise"}
-                                    className="block p-3 rounded-lg hover:bg-gray-100 "
-                                >
-                                    <div className="font-semibold">
-                                        <p>Agriculture and Agri Inputs</p>
-                                    </div>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to={"Allexpertise"}
-                                    className="block p-3 rounded-lg hover:bg-gray-100 "
-                                >
-                                    <div className="font-semibold">
-                                        <p>Animal Nutriation and Helth</p>
-                                    </div>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to={"Allexpertise"}
-                                    className="block p-3 rounded-lg hover:bg-gray-100 "
-                                >
-                                    <div className="font-semibold">
-                                        <p>Packadging</p>
-                                    </div>
-                                </Link>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li>
-                                <Link
-                                    to={"/Allexpertise"}
-                                    className="block p-3 rounded-lg hover:bg-gray-100 "
-                                >
-                                    <div className="font-semibold">
-                                        <p>Automotive and Transportaion</p>
-                                    </div>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to={"/Allexpertise"}
-                                    className="block p-3 rounded-lg hover:bg-gray-100 "
-                                >
-                                    <div className="font-semibold">
-                                        <p>Building and Construction</p>
-                                    </div>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to={"/Allexpertise"}
-                                    className="block p-3 rounded-lg hover:bg-gray-100 "
-                                >
-                                    <div className="font-semibold">
-                                        <p>Chemicals and Materials</p>
-                                    </div>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to={"/Allexpertise"}
-                                    className="block p-3 rounded-lg hover:bg-gray-100 "
-                                >
-                                    <div className="font-semibold">
-                                        <p>Energy and Power</p>
-                                    </div>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to={"/Allexpertise"}
-                                    className="block p-3 rounded-lg hover:bg-gray-100 "
-                                >
-                                    <div className="font-semibold">
-                                        <p>Food and Beverage</p>
-                                    </div>
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            )}
-            {activeDropdown === "dropdown2" && (
-                <div
-                    id=""
-                    className="mt-1 text-end w-full border-gray-200 shadow-sm bg-gray-50 md:bg-white border-y  dark:border-gray-600"
-                >
-                    <div className="grid bg-customBlue text-end text-gray-900  sm:grid-cols-2 md:px-6">
-                        <ul>
-                            <li>
-                                <Link
-                                    to={"/pressreleased"}
-                                    onClick={() => setActiveDropdown(null)}
-                                    className="block p-3 rounded-lg hover:bg-gray-100 "
-                                >
-                                    <div className="font-semibold">
-                                        <p>Press Releases</p>
-                                    </div>
-
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to={"/infographics"}
-                                    onClick={() => setActiveDropdown(null)}
-                                    className="block p-3 rounded-lg hover:bg-gray-100 "
-                                >
-                                    <div className="font-semibold">
-                                        <p>Infographics</p>
-                                    </div>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to={"/whoweare"}
-                                    onClick={() => setActiveDropdown(null)}
-                                    className="block p-3 rounded-lg hover:bg-gray-100 "
-                                >
-                                    <div className="font-semibold">
-                                        <p>Who we are</p>
-                                    </div>
-                                </Link>
-                            </li>
-
-                        </ul>
-
-                    </div>
-                </div>
-            )}
         </nav>
     );
 };

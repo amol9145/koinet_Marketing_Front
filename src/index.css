@@ -8,4 +8,9 @@ html, body {
     font-family: "Funnel Sans", sans-serif;
 }
 
+.contact_bg{
+    background-image:url('https://img.freepik.com/premium-photo/old-phone-receiver-orange-color-background-3d-illustration_771335-11631.jpg?w=826') ;
+    background-size: cover;
+    background-position: center;
 
+}
