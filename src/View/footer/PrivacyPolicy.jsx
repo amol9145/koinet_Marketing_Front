@@ -2,7 +2,7 @@
 function PrivacyPolicy() {
     return (
         <div>
-            <div className="bg-gray-100 min-h-screen p-6">
+            <div className="bg-gray-100 min-h-screen p-6 mt-10">
                 <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg p-8">
                     <h1 className="text-4xl font-bold text-center text-white bg-black p-4 rounded-lg mb-6">
                         Privacy Policy
