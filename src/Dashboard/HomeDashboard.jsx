@@ -19,7 +19,7 @@ const HomeDashboard = () => {
                         to={"#"}
                         onClick={() => setActiveTab('dashboard')}
                         className={`inline-flex items-center px-4 py-3 rounded-lg w-full ${activeTab === 'dashboard'
-                            ? 'text-gray-900 bg-gray-100 dark:text-white'
+                            ? 'text-gray-900 bg-gray-100'
                             : 'hover:text-gray-900 bg-gray-50 hover:bg-gray-100 text-black'
                             }`}
                     >
