@@ -1,33 +1,18 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import { baseUrl } from "../../Constant/ConstantFiles";
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { fetchInfographics } from '../../../redux/slices/Infographicsslice';
+
 
 function Infographics() {
-    const [infographics, setInfographics] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const dispatch = useDispatch();
+    const { data: infographics, loading, error } = useSelector(
+        (state) => state.infographics
+    );
 
     useEffect(() => {
-        // Fetch infographics from the API
-        const fetchInfographics = async () => {
-            try {
-                const response = await axios.get(`${baseUrl}/get_infographics`);
-                if (Array.isArray(response.data.data)) {
-                    setInfographics(response.data.data);
-                } else {
-                    setError("Data is not an array");
-                }
-            } catch (error) {
-                console.error(error);
-                setError("Error fetching data");
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchInfographics();
-    }, []);
+        dispatch(fetchInfographics());
+    }, [dispatch]);
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>{error}</div>;

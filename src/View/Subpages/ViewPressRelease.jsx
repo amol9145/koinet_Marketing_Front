@@ -1,100 +1,36 @@
-
 import { useEffect, useRef, useState } from "react";
-import axios from "axios";
-import { FaFilePdf, FaFileExcel, FaFilePowerpoint, FaChartBar } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPressReleaseById, fetchAllPressReleases, sendEmail } from "../../../redux/slices/ViewPressReleased";
 import { Link, useParams } from "react-router-dom";
-import { baseUrl } from "../../Constant/ConstantFiles";
 import ReCAPTCHA from "react-google-recaptcha";
+import { FaFilePdf, FaFileExcel, FaFilePowerpoint, FaChartBar } from "react-icons/fa";
 import { toast } from "react-toastify";
-// import emailjs from 'emailjs-com';
-
 
 const ViewPressRelease = () => {
-    const [pressRelease, setPressRelease] = useState(null); // State to store API data
-    const [loading, setLoading] = useState(true); // State for loading status
-    const [error, setError] = useState(null); // State for error handling
+    const { id } = useParams();
+    const dispatch = useDispatch();
     const [captchaVerified, setCaptchaVerified] = useState(false);
-    const [pressReleases, setPressReleases] = useState([]);
-
-
-
-    const { id } = useParams()
     const form = useRef();
     console.log(captchaVerified)
 
+    const { pressRelease, pressReleases, loading, error } = useSelector((state) => state.viewpressRelease || {});
+
+    useEffect(() => {
+        dispatch(fetchPressReleaseById(id));
+        dispatch(fetchAllPressReleases());
+    }, [dispatch, id]);
 
     const handleReCAPTCHAChange = (value) => {
         setCaptchaVerified(!!value);
     };
-    // Fetch API data
-    useEffect(() => {
-        const fetchPressRelease = async () => {
-            try {
-                const response = await axios.get(
-                    `${baseUrl}/get_data_press_releases/${id}`
-                );
-                console.log(response)
-                setPressRelease(response.data.data); // Store API data in state
-            } catch (err) {
-                setError("Failed to fetch press release data. Please try again later.", err);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchPressRelease();
-    }, []);
 
-
-    useEffect(() => {
-        // Fetch data from API
-        axios
-            .get(`${baseUrl}/get_data_press_releases`)
-            .then((response) => {
-                const data = response.data; // Axios automatically parses JSON responses
-                if (data && Array.isArray(data.data)) {
-                    setPressReleases(data.data); // Use the `data` key from the response
-                } else {
-                    setPressReleases([]); // Fallback if `data` is not an array
-                }
-                setLoading(false);
-            })
-            .catch((err) => {
-                setError(err.message);
-                setLoading(false);
-            });
-    }, []);
-
-    const sendEmail = async (e) => {
+    const handleSendEmail = async (e) => {
         e.preventDefault();
-
-        setLoading(true);
-
-
         const formData = new FormData(form.current);
-
-        // Append the link to the form data
         formData.append("user_link", "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf");
-
-        try {
-            const response = await axios.post(`${baseUrl}/send-email`, Object.fromEntries(formData));
-            toast.success(response.data.message);
-            form.current.reset();
-
-        } catch (error) {
-            toast.error(error);
-            console.error(error);
-        } finally {
-            setLoading(false);
-        }
+        dispatch(sendEmail(Object.fromEntries(formData)));
+        toast.success(`Email sent successfully`);
     };
-
-    if (loading) {
-        return <p>Loading...</p>;
-    }
-
-    if (error) {
-        return <p>Error: {error}</p>;
-    }
     function formatDate(dateString) {
         const options = { day: '2-digit', month: 'short', year: 'numeric' };
         const date = new Date(dateString);
@@ -116,6 +52,9 @@ const ViewPressRelease = () => {
     if (error) {
         return <div className="text-center text-red-600 py-10">{error}</div>;
     }
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error}</p>;
     return (
         <div className="container mx-auto pt-10 mt-10">
             {/* Main Layout */}
@@ -165,7 +104,7 @@ const ViewPressRelease = () => {
                             <div className="bg-blue-100 text-black rounded-lg p-6 transition duration-200 hover:shadow-xl shadow-lg">
                                 <h3 className="text-2xl font-semibold mb-4">Get in <span className="text-blue-800">Touch</span> with Us</h3>
                                 <p className="mb-4">Were here to help! Fill out the form below, and our market research team will get back to you shortly.</p>
-                                <form className="space-y-4" ref={form} onSubmit={sendEmail}>
+                                <form className="space-y-4" ref={form} onSubmit={handleSendEmail}>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div>
                                             <label className="block font-medium mb-1">Name</label>

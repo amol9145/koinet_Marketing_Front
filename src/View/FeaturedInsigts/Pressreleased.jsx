@@ -1,12 +1,17 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import striptags from "striptags";
-import { baseUrl } from "../../Constant/ConstantFiles";
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import striptags from 'striptags';
+import { fetchPressReleases } from '../../../redux/slices/PressRelesead';
+
 
 function Pressreleased() {
-    const [pressReleases, setPressReleases] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const dispatch = useDispatch();
+    const { data: pressReleases, loading, error } = useSelector((state) => state.pressReleases);
+
+    useEffect(() => {
+        dispatch(fetchPressReleases());
+    }, [dispatch]);
 
     function truncateText(text, wordLimit) {
         const words = text.split(' ');
@@ -16,29 +21,11 @@ function Pressreleased() {
         return text;
     }
 
-
-    useEffect(() => {
-        // Fetch data from API
-        fetch(`${baseUrl}/get_data_press_releases`)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Failed to fetch press releases");
-                }
-                return response.json();
-            })
-            .then((data) => {
-                if (data && Array.isArray(data.data)) {
-                    setPressReleases(data.data); // Use the `data` key from the response
-                } else {
-                    setPressReleases([]); // Fallback if `data` is not an array
-                }
-                setLoading(false);
-            })
-            .catch((err) => {
-                setError(err.message);
-                setLoading(false);
-            });
-    }, []);
+    function formatDate(dateString) {
+        const options = { day: '2-digit', month: 'short', year: 'numeric' };
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-GB', options); // "en-GB" ensures DD MMM YYYY format
+    }
 
     if (loading) {
         return <p>Loading...</p>;
@@ -47,17 +34,12 @@ function Pressreleased() {
     if (error) {
         return <p>Error: {error}</p>;
     }
-    function formatDate(dateString) {
-        const options = { day: '2-digit', month: 'short', year: 'numeric' };
-        const date = new Date(dateString);
-        return date.toLocaleDateString('en-GB', options); // "en-GB" ensures DD MMM YYYY format
-    }
 
     return (
         <>
             <section>
                 <div className="mt-20">
-                    <h1 className="text-3xl bg-sky-900 text-white font-bold text-start  py-3">
+                    <h1 className="text-3xl bg-sky-900 text-white font-bold text-start py-3">
                         <span className="ms-4">Press Releases</span>
                     </h1>
                 </div>
@@ -91,19 +73,17 @@ function Pressreleased() {
                 <nav aria-label="Page navigation example">
                     <ul className="flex items-center space-x-2">
                         <li>
-                            <button
-
-                                className="px-4 py-2 cursor-pointer bg-gray-300 rounded-full hover:bg-gray-400 text-gray-700"  >
+                            <button className="px-4 py-2 cursor-pointer bg-gray-300 rounded-full hover:bg-gray-400 text-gray-700">
                                 Previous
                             </button>
                         </li>
-                        <li >
-                            <button className="px-4 py-2 rounded-fullbg-blue-500 text-black bg-gray-200 hover:bg-blue-300" >
+                        <li>
+                            <button className="px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-300 text-black">
                                 1
                             </button>
                         </li>
                         <li>
-                            <button className="px-4 py-2 cursor-pointer bg-gray-300 rounded-full hover:bg-gray-400 text-gray-700" >
+                            <button className="px-4 py-2 cursor-pointer bg-gray-300 rounded-full hover:bg-gray-400 text-gray-700">
                                 Next
                             </button>
                         </li>

@@ -387,8 +387,6 @@ function Home() {
                             </TabsBody>
                         </Tabs>
                     </div>
-
-
                 </div>
             </section>
             {/* WHY Koinet MARKET RESEARCH?*/}

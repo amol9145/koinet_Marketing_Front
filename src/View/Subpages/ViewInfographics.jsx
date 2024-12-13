@@ -1,80 +1,60 @@
-import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { baseUrl } from "../../Constant/ConstantFiles";
+import { useDispatch, useSelector } from "react-redux";
 import { useRazorpay } from "react-razorpay";
-
-import emailjs from 'emailjs-com';
+// import emailjs from "emailjs-com";
+import { fetchInfographicById } from "../../../redux/slices/ViewInfographics";
+import { toast } from "react-toastify";
+import { sendEmail } from "../../../redux/slices/ViewPressReleased";
 
 
 function ViewInfographics() {
-    const { id } = useParams();  // Extract `id` from the URL params
-
-    const [activeTab, setActiveTab] = useState("summary");
-    const [infographic, setInfographic] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const { id } = useParams(); // Extract `id` from the URL params
+    const dispatch = useDispatch();
     const { Razorpay } = useRazorpay();
 
+    // Redux state
+    const { data: infographic, loading, error } = useSelector(
+        (state) => state.viewinfographic
+    );
+
+    const [activeTab, setActiveTab] = useState("summary");
     const [selectedLicense, setSelectedLicense] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const form = useRef();
-    // Function to open the modal
-    const handleOpenModal = () => {
-        setIsModalOpen(true);
-    };
-    // Function to close the modal
-    const handleCloseModal = () => {
-        setIsModalOpen(false);
-    };
-    const sendEmail = (e) => {
-        e.preventDefault();
 
-        emailjs
-            .sendForm(
-                'service_anhnjq1', // Replace with your EmailJS service ID
-                'template_g6wzw9k', // Replace with your EmailJS template ID
-                form.current,
-                '9DlhYScldqmnqrNr1' // Replace with your public key
-            )
-            .then(
-                (result) => {
-                    console.log('SUCCESS!', result.text);
-                    alert('Email sent successfully!');
-                },
-                (error) => {
-                    console.error('FAILED...', error.text);
-                    alert('Failed to send email. Please try again.');
-                }
-            );
-    };
-
-
+    // Fetch infographic data on component mount
     useEffect(() => {
         if (!id) {
-            setError("No ID provided in the URL.");
+            console.error("No ID provided in the URL.");
             return;
         }
+        dispatch(fetchInfographicById(id));
+    }, [id, dispatch]);
 
-        const fetchInfographicById = async () => {
-            try {
-                setLoading(true);
-                const response = await axios.get(`${baseUrl}/get_infographic/${id}`);
-                console.log(response);
-                setInfographic(response.data.data);  // Set the infographic data from API response
-            } catch (err) {
-                setError("Error fetching infographic data.");
-                console.error("Error fetching infographic:", err);
-            } finally {
-                setLoading(false);
-            }
-        };
+    // Modal handlers
+    const handleOpenModal = () => setIsModalOpen(true);
+    const handleCloseModal = () => setIsModalOpen(false);
 
-        fetchInfographicById();  // Trigger API call if `id` exists
-    }, [id]);  // Dependency array ensures this effect runs whenever `id` changes
+    // Email sending function
+    const handleSendEmail = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form.current);
+        formData.append("user_link", "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf");
+        
+        try {
+            await dispatch(sendEmail(Object.fromEntries(formData))); // Assuming sendEmail dispatch works asynchronously
+            toast.success("Email sent successfully");
+            form.current.reset();  // Clear all form fields after success
+        } catch (error) {
+            console.log(error)
+            toast.error("Failed to send email. Please try again.");
+            form.current.reset();  // Clear all form fields after error
+        }
+    };
+    
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>{error}</div>;
+    // Payment handler
     const handlePayment = () => {
         if (!selectedLicense || !infographic) {
             alert("Please select a license before proceeding.");
@@ -114,9 +94,10 @@ function ViewInfographics() {
         razorpayInstance.open();
     };
 
-    if (!infographic) {
-        return <p>Loading...</p>;
-    }
+    // Render conditions
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>{error}</div>;
+    if (!infographic) return <p>Loading...</p>;
 
 
     return (
@@ -171,7 +152,7 @@ function ViewInfographics() {
                                         Were here to help! Fill out the form below, and our market research team will get back to you shortly.
                                     </p>
 
-                                    <form className="space-y-4" ref={form} onSubmit={sendEmail}>
+                                    <form className="space-y-4" ref={form} onSubmit={handleSendEmail}>
                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             <div>
                                                 <label className="block font-medium mb-1">Name</label>

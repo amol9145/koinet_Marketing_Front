@@ -1,40 +1,31 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { baseUrl } from "../Constant/ConstantFiles";
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { fetchReports } from '../../redux/slices/ReportSlice';
+
 
 function LatestReport() {
-    const [reports, setReports] = useState([]);
+    const dispatch = useDispatch();
+    const { data: reports, loading, error } = useSelector((state) => state.reports);
     const [filteredReports, setFilteredReports] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [selectedCategory, setSelectedCategory] = useState("");
+    const [selectedCategory, setSelectedCategory] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const reportsPerPage = 5;
 
     useEffect(() => {
-        // Fetch reports data from the API
-        axios
-            .get(`${baseUrl}/get_reports`)
-            .then((response) => {
-                setReports(response.data.data); // Assuming the response data is an array of reports
-                setFilteredReports(response.data.data); // Set initial filtered reports
-                setLoading(false);
-            })
-            .catch((err) => {
-                setError(err.message);
-                setLoading(false);
-            });
-    }, []);
+        dispatch(fetchReports());
+    }, [dispatch]);
+
+    useEffect(() => {
+        setFilteredReports(reports);
+    }, [reports]);
 
     const handleCategoryChange = (e) => {
         const category = e.target.value;
         setSelectedCategory(category);
-        setCurrentPage(1); // Reset to the first page when category changes
+        setCurrentPage(1);
         if (category) {
-            const filtered = reports.filter(
-                (report) => report.category === category
-            );
+            const filtered = reports.filter((report) => report.category === category);
             setFilteredReports(filtered);
         } else {
             setFilteredReports(reports);
@@ -42,9 +33,9 @@ function LatestReport() {
     };
 
     const formatDate = (dateString) => {
-        const options = { day: "2-digit", month: "short", year: "numeric" };
+        const options = { day: '2-digit', month: 'short', year: 'numeric' };
         const date = new Date(dateString);
-        return date.toLocaleDateString("en-GB", options); // "en-GB" ensures DD MMM YYYY format
+        return date.toLocaleDateString('en-GB', options);
     };
 
     const indexOfLastReport = currentPage * reportsPerPage;
@@ -64,7 +55,6 @@ function LatestReport() {
     if (error) {
         return <p>Error: {error}</p>;
     }
-
     return (
         <div>
             <section>
