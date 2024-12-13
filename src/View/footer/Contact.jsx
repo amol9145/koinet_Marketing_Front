@@ -17,6 +17,59 @@ function Contact() {
     terms: false,
   });
 
+  const countries = [
+    { value: "india", label: "India" },
+    { value: "usa", label: "United States" },
+    { value: "uk", label: "United Kingdom" },
+    { value: "canada", label: "Canada" },
+    { value: "australia", label: "Australia" },
+    { value: "germany", label: "Germany" },
+    { value: "france", label: "France" },
+    { value: "japan", label: "Japan" },
+    { value: "china", label: "China" },
+    { value: "brazil", label: "Brazil" },
+    { value: "south-africa", label: "South Africa" },
+    { value: "mexico", label: "Mexico" },
+    { value: "italy", label: "Italy" },
+    { value: "spain", label: "Spain" },
+    { value: "russia", label: "Russia" },
+    { value: "south-korea", label: "South Korea" },
+    { value: "netherlands", label: "Netherlands" },
+    { value: "sweden", label: "Sweden" },
+    { value: "switzerland", label: "Switzerland" },
+    { value: "singapore", label: "Singapore" },
+    { value: "argentina", label: "Argentina" },
+    { value: "new-zealand", label: "New Zealand" },
+    { value: "turkey", label: "Turkey" },
+    { value: "norway", label: "Norway" },
+    { value: "denmark", label: "Denmark" },
+    { value: "finland", label: "Finland" },
+    { value: "belgium", label: "Belgium" },
+    { value: "portugal", label: "Portugal" },
+    { value: "ireland", label: "Ireland" },
+    { value: "poland", label: "Poland" },
+    { value: "malaysia", label: "Malaysia" },
+    { value: "indonesia", label: "Indonesia" },
+    { value: "thailand", label: "Thailand" },
+    { value: "vietnam", label: "Vietnam" },
+    { value: "philippines", label: "Philippines" },
+    { value: "saudi-arabia", label: "Saudi Arabia" },
+    { value: "uae", label: "United Arab Emirates" },
+    { value: "israel", label: "Israel" },
+    { value: "egypt", label: "Egypt" },
+    { value: "nigeria", label: "Nigeria" },
+    { value: "kenya", label: "Kenya" },
+    { value: "ethiopia", label: "Ethiopia" },
+    { value: "pakistan", label: "Pakistan" },
+    { value: "bangladesh", label: "Bangladesh" },
+    { value: "colombia", label: "Colombia" },
+    { value: "chile", label: "Chile" },
+    { value: "peru", label: "Peru" },
+    { value: "venezuela", label: "Venezuela" },
+    { value: "greece", label: "Greece" },
+    { value: "czech-republic", label: "Czech Republic" },
+  ];
+
   const handleChange = (e) => {
     const { id, value, type, checked } = e.target;
     setFormData({
@@ -54,7 +107,7 @@ function Contact() {
     <div>
       <section
         className="py-10 mt-10 bg-gradient-to-r bg-sky-100 min-h-screen contact_bg"
-       
+
       >
         <div className="container mx-auto px-2">
           <div className="flex flex-col-reverse lg:flex-row items-center">
@@ -146,10 +199,11 @@ function Contact() {
                         className="w-full p-2 text-gray-700 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         required
                       >
-                        <option value="india">India</option>
-                        <option value="usa">USA</option>
-                        <option value="uk">UK</option>
-                        {/* Add more countries */}
+                        {countries.map((country) => (
+                          <option key={country.value} value={country.value}>
+                            {country.label}
+                          </option>
+                        ))}
                       </select>
                     </div>
                     <div>

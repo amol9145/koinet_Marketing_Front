@@ -1,10 +1,17 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { Editor } from "@tinymce/tinymce-react";
-import axios from "axios";
-import { useRef, useState } from "react";
-import { TimceApi, baseUrl } from "../Constant/ConstantFiles";
 
+import { useRef, useState } from "react";
+import { TimceApi } from "../Constant/ConstantFiles";
+
+
+import { createInfographic } from '../../redux/slices/createinfographics/NewInfographicsslice';
 
 const CreateInfographics = () => {
+    const dispatch = useDispatch();
+    const { loading, error, success } = useSelector((state) => state.infographics);
+    console.log(loading, error, success)
+
     const [reportDetails, setReportDetails] = useState({
         title: "",
         category: "",
@@ -41,39 +48,25 @@ const CreateInfographics = () => {
         setReportDetails((prev) => ({ ...prev, file: e.target.files[0] }));
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
-        try {
-            const formData = new FormData();
-            formData.append("title", reportDetails.title);
-            formData.append("category", reportDetails.category);
-            formData.append("singleUserPrice", reportDetails.singleUserPrice);
-            formData.append("multiUserPrice", reportDetails.multiUserPrice);
-            formData.append("enterprisePrice", reportDetails.enterprisePrice);
-            formData.append("file", reportDetails.file);
-            formData.append("imageUrl", reportDetails.imageUrl);
-            formData.append("reportId", reportDetails.reportId);
-            formData.append("summary", reportDetails.summary);
-            formData.append("tableOfContents", reportDetails.tableOfContents);
-            formData.append("methodology", reportDetails.methodology);
-            formData.append("infographics", reportDetails.infographics);
+        const formData = new FormData();
+        formData.append("title", reportDetails.title);
+        formData.append("category", reportDetails.category);
+        formData.append("singleUserPrice", reportDetails.singleUserPrice);
+        formData.append("multiUserPrice", reportDetails.multiUserPrice);
+        formData.append("enterprisePrice", reportDetails.enterprisePrice);
+        formData.append("file", reportDetails.file);
+        formData.append("imageUrl", reportDetails.imageUrl);
+        formData.append("reportId", reportDetails.reportId);
+        formData.append("summary", reportDetails.summary);
+        formData.append("tableOfContents", reportDetails.tableOfContents);
+        formData.append("methodology", reportDetails.methodology);
+        formData.append("infographics", reportDetails.infographics);
 
-            const response = await axios.post(`${baseUrl}/infographics`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-
-            if (response.status === 200) {
-                console.log("Report successfully submitted:", response.data);
-                // Optionally reset form or show success message
-            } else {
-                console.error("Error submitting the report:", response.data);
-            }
-        } catch (error) {
-            console.error("API error:", error);
-        }
+        // Dispatch action to make the API call
+        dispatch(createInfographic(formData));
     };
 
     const editorRefs = useRef({

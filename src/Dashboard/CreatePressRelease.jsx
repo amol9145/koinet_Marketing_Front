@@ -1,78 +1,75 @@
-import axios from "axios";
-import { Editor } from "@tinymce/tinymce-react";
-import { useRef, useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
+import { useDispatch, useSelector } from 'react-redux';
+import { useRef, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import { TimceApi, baseUrl } from "../Constant/ConstantFiles";
-
+import { Editor } from "@tinymce/tinymce-react";
+import { TimceApi } from '../Constant/ConstantFiles';
+import { createPressRelease ,resetState} from '../../redux/slices/createpressreleased/createpressreleased';
 
 function CreatePressRelease() {
-    const [reportDetails, setReportDetails] = useState({
-        title: "",
-        category: "",
-        description: "", // Already a string
-        reportId: "",
-        file: null,
-    });
-    const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState("");
-
-    const categories = [
-        "Automotive and Transportation",
-        "Building and Construction",
-        "Chemicals and Materials",
-        "Energy and Power",
-        "Food and Beverage",
-        "Aerospace & Defence Industry",
-        "Agriculture and Agri Inputs",
-        "Animal Nutrition and Health",
-        "Packaging",
-    ];
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setReportDetails((prev) => ({ ...prev, [name]: value }));
-    };
-
-    const handleFileChange = (e) => {
-        setReportDetails((prev) => ({ ...prev, file: e.target.files[0] }));
-    };
-
-    const handleEditorChange = (content) => {
-        setReportDetails((prev) => ({ ...prev, description: content }));
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const formData = new FormData();
-        formData.append("title", reportDetails.title);
-        formData.append("category", reportDetails.category);
-        formData.append("description", reportDetails.description); // String content
-        formData.append("reportId", reportDetails.reportId);
-        if (reportDetails.file) {
-            formData.append("file", reportDetails.file);
-        }
-
-        try {
-            setLoading(true);
-            const response = await axios.post(`${baseUrl}/upload_press_release`, formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
-            });
-            setMessage(response.data.message);
-            toast.success("Press release submitted successfully!");
-            setReportDetails({ title: "", category: "", description: "", reportId: "", file: null });
-        } catch (error) {
-            setMessage(error.response?.data?.error || "An error occurred.");
-            toast.error("Failed to submit press release.");
-        } finally {
-            setLoading(false);
-        }
-    };
-
     const editorRef = useRef(null);
+  const dispatch = useDispatch();
+  const { loading, message, error } = useSelector((state) => state.createpressRelease);
+
+  const [reportDetails, setReportDetails] = useState({
+    title: "",
+    category: "",
+    description: "",
+    reportId: "",
+    file: null,
+  });
+
+  const categories = [
+    "Automotive and Transportation",
+    "Building and Construction",
+    "Chemicals and Materials",
+    "Energy and Power",
+    "Food and Beverage",
+    "Aerospace & Defence Industry",
+    "Agriculture and Agri Inputs",
+    "Animal Nutrition and Health",
+    "Packaging",
+  ];
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setReportDetails((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFileChange = (e) => {
+    setReportDetails((prev) => ({ ...prev, file: e.target.files[0] }));
+  };
+
+  const handleEditorChange = (content) => {
+    setReportDetails((prev) => ({ ...prev, description: content }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("title", reportDetails.title);
+    formData.append("category", reportDetails.category);
+    formData.append("description", reportDetails.description);
+    formData.append("reportId", reportDetails.reportId);
+    if (reportDetails.file) {
+      formData.append("file", reportDetails.file);
+    }
+
+    // Dispatch the action to create the press release
+    dispatch(createPressRelease(formData));
+  };
+
+  // Show toast notifications based on message or error
+  if (message) {
+    toast.success(message);
+    dispatch(resetState());
+  }
+
+  if (error) {
+    toast.error(error);
+    dispatch(resetState());
+  }
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-i-100 via-blue-200 to-indigo-200 ">

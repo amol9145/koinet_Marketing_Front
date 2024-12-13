@@ -1,12 +1,17 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { useState, useRef } from 'react';
+import { toast } from 'react-toastify';
 import { Editor } from "@tinymce/tinymce-react";
-import { useRef, useState } from "react";
-import axios from 'axios';
-import { toast } from "react-toastify";
-import { TimceApi } from "../Constant/ConstantFiles";
+import { TimceApi } from '../Constant/ConstantFiles';
+import { createReport } from '../../redux/slices/createreport/createnewreport';
 
 
 
 const CreateReports = () => {
+  const dispatch = useDispatch();
+  const { loading, successMessage, errorMessage } = useSelector((state) => state.createnewreport);
+  console.log(loading)
+
   const [reportDetails, setReportDetails] = useState({
     title: "",
     category: "",
@@ -45,33 +50,11 @@ const CreateReports = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Create FormData to send the form data including file
-    const formData = new FormData();
-    formData.append("title", reportDetails.title);
-    formData.append("category", reportDetails.category);
-    formData.append("singleUserPrice", reportDetails.singleUserPrice);
-    formData.append("multiUserPrice", reportDetails.multiUserPrice);
-    formData.append("enterprisePrice", reportDetails.enterprisePrice);
-    formData.append("summary", reportDetails.summary);
-    formData.append("tableOfContents", reportDetails.tableOfContents);
-    formData.append("methodology", reportDetails.methodology);
-    formData.append("downloadSampleReport", reportDetails.downloadSampleReport);
-    formData.append("reportId", reportDetails.reportId);
-    formData.append("file", reportDetails.file);
-
     try {
-      // Send the FormData to the backend API
-      const response = await axios.post("http://localhost:3000/reports", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data", // Make sure to set the correct content type for file upload
-        },
-      });
+      // Dispatch the submitReport action
+      await dispatch(createReport(reportDetails));
 
-      // Handle the API response
-      console.log("Report Submitted:", response.data);
-      toast.success("Report successfully submitted!"); // Show success toast
-
-      // Optionally, clear the form after submission
+      // Clear form data on success
       setReportDetails({
         title: "",
         category: "",
@@ -85,11 +68,16 @@ const CreateReports = () => {
         reportId: "",
         file: null,
       });
+
+      // Show success toast
+      toast.success(successMessage);
+
     } catch (error) {
-      console.error("Error submitting report:", error);
-      toast.error("There was an error submitting the report."); // Show error toast
+      console.log(error)
+      toast.error(errorMessage || 'Error submitting the report.');
     }
   };
+
   const editorRefs = useRef({
     summary: null,
     tableOfContents: null,
@@ -113,7 +101,7 @@ const CreateReports = () => {
             Create New Report
           </h1>
         </div>
-       
+
         <form onSubmit={handleSubmit} className="space-y-6 rounded-sm border-2 border-gray-200 p-10">
           {/* Report Title */}
           <div>
@@ -225,7 +213,7 @@ const CreateReports = () => {
           </div>
 
           {/* SUMMARY */}
-          {["summary", "tableOfContents", "methodology", "downloadSampleReport"].map(
+          {["summary", "tableOfContents", "methodology"].map(
             (field, index) => (
               <div key={index}>
                 <label className="block text-gray-700 font-semibold mb-2">
