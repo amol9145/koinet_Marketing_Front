@@ -52,8 +52,8 @@ function Advisory() {
                     </div>
 
                 </div>
-                
-                
+
+
                 <div className="my-5">
                     <p className="text-lg font-bold text-white dark:text-white ms-2 bg-sky-900 p-2 rounded-lg">Competitive Intelligence</p>
                 </div>
@@ -116,9 +116,9 @@ function Advisory() {
                         </h2>
                         {activeIndex === 2 && (
                             <div id="accordion-collapse-body-1" className="p-5 bg-gray-50 border-t border-gray-200">
-                                  <p className="text-gray-600 font-semibold dark:text-gray-400 mt-3">Supply Analysis:</p>
+                                <p className="text-gray-600 font-semibold dark:text-gray-400 mt-3">Supply Analysis:</p>
                                 <ul className="list-disc ml-5 space-y-2">
-                           
+
                                     <li>Intent Market Research analyzes economic conditions, consumer trends and preferences, availability, and advertising to assess product or service demand</li>
                                     <li>We develop strategies to understand behavior at the end-use levels and guide businesses on how pricing and service levels impact customer buying Novisions</li>
                                 </ul>
@@ -129,19 +129,19 @@ function Advisory() {
                                 </ul>
                             </div>
                         )}
-                        </div>
+                    </div>
 
-                        {/* Accordion Item 3 */}
-                        <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
+                    {/* Accordion Item 3 */}
+                    <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
                         <h2>
                             <button
                                 type="button"
                                 className={`w-full flex items-center justify-between p-3 hover:text-white text-lg font-semibold text-sky-900 bg-gradient-to-r hover:bg-[#536493]`}
-                                aria-expanded={activeIndex === 1}
+                                aria-expanded={activeIndex === 3}
                                 aria-controls="accordion-collapse-body-1"
-                                onClick={() => toggleAccordion(1)}
+                                onClick={() => toggleAccordion(3)}
                             >
-                               
+
                                 <span>Product Opportunity Assessment</span>
                                 <svg
                                     className={`w-6 h-6 transform transition-transform duration-300 ${activeIndex === 3 ? "rotate-180" : ""}`}
@@ -155,43 +155,43 @@ function Advisory() {
                                 </svg>
                             </button>
                         </h2>
-                        {activeIndex === 1 && (
+                        {activeIndex === 3 && (
                             <div id="accordion-collapse-body-1" className="p-5 bg-gray-50 border-t border-gray-200">
                                 <ul className="list-disc ml-5 space-y-2">
-                                <li>Intent Market Research analyzes economic conditions, consumer trends and preferences, availability, and advertising to assess product or service demand</li>
+                                    <li>Intent Market Research analyzes economic conditions, consumer trends and preferences, availability, and advertising to assess product or service demand</li>
                                     <li>We develop strategies to understand behavior at the end-use levels and guide businesses on how pricing and service levels impact customer buying Novisions</li>
                                 </ul>
                             </div>
                         )}
                     </div>
-                    </div>
+                </div>
 
-                    <div className="my-5">
-                        <p className="text-lg font-bold text-black dark:text-white">Competitive Intelligence</p>
-                        <div className="flex justify-center items-center rounded-lg">
-                            <img src="https://cdni.iconscout.com/illustration/premium/thumb/competitive-intelligence-illustration-download-in-svg-png-gif-file-formats--business-analysis-idea-data-strategy-ideas-strategic-planning-pack-illustrations-5624177.png?f=webp" alt="" className="my-3 w-80 h-80" />
+                <div className="my-5">
+                    <p className="text-lg font-bold text-black dark:text-white">Competitive Intelligence</p>
+                    <div className="flex justify-center items-center rounded-lg">
+                        <img src="https://cdni.iconscout.com/illustration/premium/thumb/competitive-intelligence-illustration-download-in-svg-png-gif-file-formats--business-analysis-idea-data-strategy-ideas-strategic-planning-pack-illustrations-5624177.png?f=webp" alt="" className="my-3 w-80 h-80" />
 
-                        </div>
-                        <p>Intent Market Research provides a clear understanding of competitive dynamics through careful data collection, analysis, and interpretation. Through our competitive intelligence offerings, businesses can identify their unique sales considerations, differentiating factors, and areas of improvement.</p>
-                        <br />
-                        <p>Our insights empower organizations to precisely target their audience and set their brands apart from competitors. Through our proprietary competitive intelligence services, IMR helps businesses to understand their competition and fine-tune growth strategies.</p>
                     </div>
-                
-                   
-                        <p className=" my-5 text-lg font-bold text-white dark:text-white ms-2 bg-sky-900 p-2 rounded-lg">Few of our competitive intelligence services include the following:</p>
-                        <div id="accordion-collapse" className="space-y-6">
-                            {/* Accordion Item 1 */}
-                            <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
+                    <p>Intent Market Research provides a clear understanding of competitive dynamics through careful data collection, analysis, and interpretation. Through our competitive intelligence offerings, businesses can identify their unique sales considerations, differentiating factors, and areas of improvement.</p>
+                    <br />
+                    <p>Our insights empower organizations to precisely target their audience and set their brands apart from competitors. Through our proprietary competitive intelligence services, IMR helps businesses to understand their competition and fine-tune growth strategies.</p>
+                </div>
+
+
+                <p className=" my-5 text-lg font-bold text-white dark:text-white ms-2 bg-sky-900 p-2 rounded-lg">Few of our competitive intelligence services include the following:</p>
+                <div id="accordion-collapse" className="space-y-6">
+                    {/* Accordion Item 1 */}
+                    <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
                         <h2>
                             <button
                                 type="button"
                                 className={`w-full flex items-center justify-between p-3 hover:text-white text-lg font-semibold text-sky-900 bg-gradient-to-r hover:bg-[#536493]`}
-                                aria-expanded={activeIndex === 1}
+                                aria-expanded={activeIndex === 4}
                                 aria-controls="accordion-collapse-body-1"
-                                onClick={() => toggleAccordion(1)}
+                                onClick={() => toggleAccordion(4)}
                             >
-                                    <span>Comppetative Threats</span>
-                                    <svg
+                                <span>Comppetative Threats</span>
+                                <svg
                                     className={`w-6 h-6 transform transition-transform duration-300 ${activeIndex === 1 ? "rotate-180" : ""}`}
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
@@ -202,30 +202,30 @@ function Advisory() {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                                 </svg>
                             </button>
-                            </h2>
-                            {activeIndex === 1 && (
+                        </h2>
+                        {activeIndex === 4 && (
                             <div id="accordion-collapse-body-1" className="p-5 bg-gray-50 border-t border-gray-200">
                                 <ul className="list-disc ml-5 space-y-2">
-                                        <li>IMR delves into specifics of market sizing, customer perspectives, industry trends & dynamics, etc. to formulate organic and inorganic growth strategies</li>
-                                        <li>Our recommendations enable clients stay at the forefront in pursuing market expansion strategies leading to higher market shares and profitability</li>
-                                        </ul>
+                                    <li>IMR delves into specifics of market sizing, customer perspectives, industry trends & dynamics, etc. to formulate organic and inorganic growth strategies</li>
+                                    <li>Our recommendations enable clients stay at the forefront in pursuing market expansion strategies leading to higher market shares and profitability</li>
+                                </ul>
                             </div>
                         )}
                     </div>
-                    
 
-                            {/* Accordion Item 2 */}
-                            <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
+
+                    {/* Accordion Item 2 */}
+                    <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
                         <h2>
                             <button
                                 type="button"
                                 className={`w-full flex items-center justify-between p-3 hover:text-white text-lg font-semibold text-sky-900 bg-gradient-to-r hover:bg-[#536493]`}
-                                aria-expanded={activeIndex === 2}
+                                aria-expanded={activeIndex === 5}
                                 aria-controls="accordion-collapse-body-1"
-                                onClick={() => toggleAccordion(2)}
+                                onClick={() => toggleAccordion(5)}
                             >
-                                    <span>Benchmarketing Metrics</span>
-                                    <svg
+                                <span>Benchmarketing Metrics</span>
+                                <svg
                                     className={`w-6 h-6 transform transition-transform duration-300 ${activeIndex === 2 ? "rotate-180" : ""}`}
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
@@ -236,83 +236,37 @@ function Advisory() {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                                 </svg>
                             </button>
-                            </h2>
-                            {activeIndex === 2 && (
+                        </h2>
+                        {activeIndex === 5 && (
                             <div id="accordion-collapse-body-1" className="p-5 bg-gray-50 border-t border-gray-200">
-                                
-                                    <p className="text-gray-600 font-semibold dark:text-gray-400">Demand Analysis:</p>
-                                    <ul className="list-disc ml-5 space-y-2">
-                                        <li>Intent Market Research analyzes economic conditions, consumer trends and preferences, availability, and advertising to assess product or service demand</li>
-                                        <li>We develop strategies to understand behavior at the end-use levels and guide businesses on how pricing and service levels impact customer buying Novisions</li>
-                                    </ul>
-                                    <p className="text-gray-600 font-semibold dark:text-gray-400 mt-3">Supply Analysis:</p>
-                                    <ul className="list-disc ml-5 space-y-2">
-                                        <li>IMR tracks the complexities of supply networks by analyzing suppliers, raw material supplies, operational parameters, logistics networks, and so on</li>
-                                        <li>We deliver high-value research services that are crucial for pricing strategies, sales forecasting, operational costs, etc. for informed Novision-making</li>
-                                    </ul>
-                                </div>
-                            )}
-                            </div>
 
-                            {/* Accordion Item 3 */}
-                            <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
-                            <h2>
-                            <button
-                                type="button"
-                                className={`w-full flex items-center justify-between p-3 hover:text-white text-lg font-semibold text-sky-900 bg-gradient-to-r hover:bg-[#536493]`}
-                                aria-expanded={activeIndex === 3}
-                                aria-controls="accordion-collapse-body-1"
-                                onClick={() => toggleAccordion(3)}
-                            >
-                                    <span>Competitor Tracking and Monitoring</span>
-                                   <svg
-                                    className={`w-6 h-6 transform transition-transform duration-300 ${activeIndex === 3 ? "rotate-180" : ""}`}
-                                    xmlns="http://www.w3.org/2000/svg"
-                                       fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                >
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </button>
-                            </h2>
-                            {activeIndex === 3 && (
-                            <div id="accordion-collapse-body-1" className="p-5 bg-gray-50 border-t border-gray-200"> 
+                                <p className="text-gray-600 font-semibold dark:text-gray-400">Demand Analysis:</p>
                                 <ul className="list-disc ml-5 space-y-2">
-                                        <li>Intent Market Research analyzes economic conditions, consumer trends and preferences, availability, and advertising to assess product or service demand</li>
-                                        <li>We develop strategies to understand behavior at the end-use levels and guide businesses on how pricing and service levels impact customer buying Novisions</li>
-                                    </ul>
-
-                                </div>
-                            )}
-                        </div>
+                                    <li>Intent Market Research analyzes economic conditions, consumer trends and preferences, availability, and advertising to assess product or service demand</li>
+                                    <li>We develop strategies to understand behavior at the end-use levels and guide businesses on how pricing and service levels impact customer buying Novisions</li>
+                                </ul>
+                                <p className="text-gray-600 font-semibold dark:text-gray-400 mt-3">Supply Analysis:</p>
+                                <ul className="list-disc ml-5 space-y-2">
+                                    <li>IMR tracks the complexities of supply networks by analyzing suppliers, raw material supplies, operational parameters, logistics networks, and so on</li>
+                                    <li>We deliver high-value research services that are crucial for pricing strategies, sales forecasting, operational costs, etc. for informed Novision-making</li>
+                                </ul>
+                            </div>
+                        )}
                     </div>
-                    <div className="my-5">
-                        <p className="text-lg font-bold text-black dark:text-white ms-2">Competitive Intelligence</p>
-                        <div className="flex justify-center items-center">
-                            <img src="https://cdni.iconscout.com/illustration/premium/thumb/business-growth-idea-illustration-download-in-svg-png-gif-file-formats--analytics-logo-strategic-planning-pack-illustrations-5501819.png?f=webp" alt="" className="my-5 w-100 h-100" />
 
-                        </div>
-                        <p>Intent Market Research partners with clients who are looking to succeed in global markets and achieve their business objectives. We develop detailed analyses of market entry strategies, ways to overcome potential challenges, and anticipate competitors’ reactions.</p>
-                        <br />
-                    </div>
-                <div>
-                        <p className=" my-5 text-lg font-bold text-white dark:text-white ms-2 bg-sky-900 rounded-lg p-2 ">  Few of the strategic business objectives for which IMR supports business entities:</p>
-                        <div id="accordion-collapse" className="space-y-6">
-                            {/* Accordion Item 1 */}
-                            <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
+                    {/* Accordion Item 3 */}
+                    <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
                         <h2>
                             <button
                                 type="button"
                                 className={`w-full flex items-center justify-between p-3 hover:text-white text-lg font-semibold text-sky-900 bg-gradient-to-r hover:bg-[#536493]`}
-                                aria-expanded={activeIndex === 1}
+                                aria-expanded={activeIndex === 6}
                                 aria-controls="accordion-collapse-body-1"
-                                onClick={() => toggleAccordion(1)}
+                                onClick={() => toggleAccordion(6)}
                             >
-                                    <span>Mode of Entry</span>
-                                    <svg
-                                    className={`w-6 h-6 transform transition-transform duration-300 ${activeIndex === 1 ? "rotate-180" : ""}`}
+                                <span>Competitor Tracking and Monitoring</span>
+                                <svg
+                                    className={`w-6 h-6 transform transition-transform duration-300 ${activeIndex === 3 ? "rotate-180" : ""}`}
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"
@@ -322,44 +276,90 @@ function Advisory() {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                                 </svg>
                             </button>
-                            </h2>
-                            {activeIndex === 1 && (
+                        </h2>
+                        {activeIndex === 6 && (
                             <div id="accordion-collapse-body-1" className="p-5 bg-gray-50 border-t border-gray-200">
                                 <ul className="list-disc ml-5 space-y-2">
+                                    <li>Intent Market Research analyzes economic conditions, consumer trends and preferences, availability, and advertising to assess product or service demand</li>
+                                    <li>We develop strategies to understand behavior at the end-use levels and guide businesses on how pricing and service levels impact customer buying Novisions</li>
+                                </ul>
+
+                            </div>
+                        )}
+                    </div>
+                </div>
+                <div className="my-5">
+                    <p className="text-lg font-bold text-black dark:text-white ms-2">Competitive Intelligence</p>
+                    <div className="flex justify-center items-center">
+                        <img src="https://cdni.iconscout.com/illustration/premium/thumb/business-growth-idea-illustration-download-in-svg-png-gif-file-formats--analytics-logo-strategic-planning-pack-illustrations-5501819.png?f=webp" alt="" className="my-5 w-100 h-100" />
+
+                    </div>
+                    <p>Intent Market Research partners with clients who are looking to succeed in global markets and achieve their business objectives. We develop detailed analyses of market entry strategies, ways to overcome potential challenges, and anticipate competitors’ reactions.</p>
+                    <br />
+                </div>
+                <div>
+                    <p className=" my-5 text-lg font-bold text-white dark:text-white ms-2 bg-sky-900 rounded-lg p-2 ">  Few of the strategic business objectives for which IMR supports business entities:</p>
+                    <div id="accordion-collapse" className="space-y-6">
+                        {/* Accordion Item 1 */}
+                        <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
+                            <h2>
+                                <button
+                                    type="button"
+                                    className={`w-full flex items-center justify-between p-3 hover:text-white text-lg font-semibold text-sky-900 bg-gradient-to-r hover:bg-[#536493]`}
+                                    aria-expanded={activeIndex === 7}
+                                    aria-controls="accordion-collapse-body-1"
+                                    onClick={() => toggleAccordion(7)}
+                                >
+                                    <span>Mode of Entry</span>
+                                    <svg
+                                        className={`w-6 h-6 transform transition-transform duration-300 ${activeIndex === 1 ? "rotate-180" : ""}`}
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                    >
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </h2>
+                            {activeIndex === 7 && (
+                                <div id="accordion-collapse-body-1" className="p-5 bg-gray-50 border-t border-gray-200">
+                                    <ul className="list-disc ml-5 space-y-2">
                                         <li>IMR delves into specifics of market sizing, customer perspectives, industry trends & dynamics, etc. to formulate organic and inorganic growth strategies</li>
                                         <li>Our recommendations enable clients stay at the forefront in pursuing market expansion strategies leading to higher market shares and profitability</li>
                                     </ul>
                                 </div>
                             )}
-                            </div>
+                        </div>
 
-                            {/* Accordion Item 2 */}
-                            <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
-                        <h2>
-                            <button
-                                type="button"
-                                className={`w-full flex items-center justify-between p-3 hover:text-white text-lg font-semibold text-sky-900 bg-gradient-to-r hover:bg-[#536493]`}
-                                aria-expanded={activeIndex === 2}
-                                aria-controls="accordion-collapse-body-1"
-                                onClick={() => toggleAccordion(2)}
-                            >
+                        {/* Accordion Item 2 */}
+                        <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
+                            <h2>
+                                <button
+                                    type="button"
+                                    className={`w-full flex items-center justify-between p-3 hover:text-white text-lg font-semibold text-sky-900 bg-gradient-to-r hover:bg-[#536493]`}
+                                    aria-expanded={activeIndex === 8}
+                                    aria-controls="accordion-collapse-body-1"
+                                    onClick={() => toggleAccordion(8)}
+                                >
                                     <span>Market Entry Barriers</span>
                                     <svg
-                                    className={`w-6 h-6 transform transition-transform duration-300 ${activeIndex === 2 ? "rotate-180" : ""}`}
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                >
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </button>
+                                        className={`w-6 h-6 transform transition-transform duration-300 ${activeIndex === 2 ? "rotate-180" : ""}`}
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                    >
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
                             </h2>
-                            {activeIndex === 2 && (
-                            <div id="accordion-collapse-body-1" className="p-5 bg-gray-50 border-t border-gray-200">
-                                <p className="text-gray-600 font-semibold dark:text-gray-400">Competitor Reaction Assessment</p>
-                                <ul className="list-disc ml-5 space-y-2">
+                            {activeIndex === 8 && (
+                                <div id="accordion-collapse-body-1" className="p-5 bg-gray-50 border-t border-gray-200">
+                                    <p className="text-gray-600 font-semibold dark:text-gray-400">Competitor Reaction Assessment</p>
+                                    <ul className="list-disc ml-5 space-y-2">
                                         <li>Intent Market Research analyzes economic conditions, consumer trends and preferences, availability, and advertising to assess product or service demand</li>
                                         <li>We develop strategies to understand behavior at the end-use levels and guide businesses on how pricing and service levels impact customer buying Novisions</li>
                                     </ul>
@@ -370,34 +370,34 @@ function Advisory() {
                                     </ul>
                                 </div>
                             )}
-                            </div>
+                        </div>
 
-                            {/* Accordion Item 3 */}
-                            <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
-                        <h2>
-                            <button
-                                type="button"
-                                className={`w-full flex items-center justify-between p-3 hover:text-white text-lg font-semibold text-sky-900 bg-gradient-to-r hover:bg-[#536493]`}
-                                aria-expanded={activeIndex === 3}
-                                aria-controls="accordion-collapse-body-1"
-                                onClick={() => toggleAccordion(3)}
-                            >
+                        {/* Accordion Item 3 */}
+                        <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
+                            <h2>
+                                <button
+                                    type="button"
+                                    className={`w-full flex items-center justify-between p-3 hover:text-white text-lg font-semibold text-sky-900 bg-gradient-to-r hover:bg-[#536493]`}
+                                    aria-expanded={activeIndex === 9}
+                                    aria-controls="accordion-collapse-body-1"
+                                    onClick={() => toggleAccordion(9)}
+                                >
                                     <span>Competitor Tracking and Monitoring</span>
                                     <svg
-                                    className={`w-6 h-6 transform transition-transform duration-300 ${activeIndex === 3 ? "rotate-180" : ""}`}
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                >
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </button>
+                                        className={`w-6 h-6 transform transition-transform duration-300 ${activeIndex === 3 ? "rotate-180" : ""}`}
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                    >
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
                             </h2>
-                            {activeIndex === 3 && (
-                            <div id="accordion-collapse-body-1" className="p-5 bg-gray-50 border-t border-gray-200">
-                                   <ul className="list-disc ml-5 space-y-2">
+                            {activeIndex === 9 && (
+                                <div id="accordion-collapse-body-1" className="p-5 bg-gray-50 border-t border-gray-200">
+                                    <ul className="list-disc ml-5 space-y-2">
                                         <li>Intent Market Research analyzes economic conditions, consumer trends and preferences, availability, and advertising to assess product or service demand</li>
                                         <li>We develop strategies to understand behavior at the end-use levels and guide businesses on how pricing and service levels impact customer buying Novisions</li>
                                     </ul>
@@ -405,23 +405,23 @@ function Advisory() {
                                 </div>
                             )}
                         </div>
-                        </div>
-                        </div>
-                    
-
-                    <div className="my-5">
-                        <p className="text-lg font-bold text-white dark:text-white ms-2 bg-sky-900 rounded-lg p-2">Strategic Alliances and Acquisition Services</p>
                     </div>
-                    <div id="accordion-collapse" className="space-y-6">
-                        {/* Accordion Item 1 */}
-                        <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
+                </div>
+
+
+                <div className="my-5">
+                    <p className="text-lg font-bold text-white dark:text-white ms-2 bg-sky-900 rounded-lg p-2">Strategic Alliances and Acquisition Services</p>
+                </div>
+                <div id="accordion-collapse" className="space-y-6">
+                    {/* Accordion Item 1 */}
+                    <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
                         <h2>
                             <button
                                 type="button"
                                 className={`w-full flex items-center justify-between p-3 hover:text-white text-lg font-semibold text-sky-900 bg-gradient-to-r hover:bg-[#536493]`}
-                                aria-expanded={activeIndex === 1}
+                                aria-expanded={activeIndex === 10}
                                 aria-controls="accordion-collapse-body-1"
-                                onClick={() => toggleAccordion(1)}
+                                onClick={() => toggleAccordion(10)}
                             >
                                 <span>Strategic Alliance</span>
                                 <svg
@@ -435,8 +435,8 @@ function Advisory() {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                                 </svg>
                             </button>
-                            </h2>
-                            {activeIndex === 1 && (
+                        </h2>
+                        {activeIndex === 10 && (
                             <div id="accordion-collapse-body-1" className="p-5 bg-gray-50 border-t border-gray-200">
                                 <ul className="list-disc ml-5 space-y-2">
                                     <li>IMR delves into specifics of market sizing, customer perspectives, industry trends & dynamics, etc. to formulate organic and inorganic growth strategies</li>
@@ -444,17 +444,17 @@ function Advisory() {
                                 </ul>
                             </div>
                         )}
-                        </div>
+                    </div>
 
-                        {/* Accordion Item 2 */}
-                        <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
+                    {/* Accordion Item 2 */}
+                    <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
                         <h2>
                             <button
                                 type="button"
                                 className={`w-full flex items-center justify-between p-3 hover:text-white text-lg font-semibold text-sky-900 bg-gradient-to-r hover:bg-[#536493]`}
-                                aria-expanded={activeIndex === 2}
+                                aria-expanded={activeIndex === 11}
                                 aria-controls="accordion-collapse-body-1"
-                                onClick={() => toggleAccordion(2)}
+                                onClick={() => toggleAccordion(11)}
                             >
                                 <span>Mergers & Acquisitions</span>
                                 <svg
@@ -468,10 +468,10 @@ function Advisory() {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                                 </svg>
                             </button>
-                            </h2>
-                            {activeIndex === 2 && (
+                        </h2>
+                        {activeIndex === 11 && (
                             <div id="accordion-collapse-body-1" className="p-5 bg-gray-50 border-t border-gray-200">
-                           
+
                                 <p className="text-gray-600 font-semibold dark:text-gray-400">Demand Analysis:</p>
                                 <ul className="list-disc ml-5 space-y-2">
                                     <li>Intent Market Research analyzes economic conditions, consumer trends and preferences, availability, and advertising to assess product or service demand</li>
@@ -484,17 +484,17 @@ function Advisory() {
                                 </ul>
                             </div>
                         )}
-                        </div>
+                    </div>
 
-                        {/* Accordion Item 3 */}
-                        <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
+                    {/* Accordion Item 3 */}
+                    <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
                         <h2>
                             <button
                                 type="button"
                                 className={`w-full flex items-center justify-between p-3 hover:text-white text-lg font-semibold text-sky-900 bg-gradient-to-r hover:bg-[#536493]`}
-                                aria-expanded={activeIndex === 3}
+                                aria-expanded={activeIndex === 12}
                                 aria-controls="accordion-collapse-body-1"
-                                onClick={() => toggleAccordion(3)}
+                                onClick={() => toggleAccordion(12)}
                             >
                                 <span>Mergers & Acquisitions</span>
                                 <svg
@@ -508,12 +508,12 @@ function Advisory() {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                                 </svg>
                             </button>
-                            </h2>
-                            {activeIndex === 3 && (
+                        </h2>
+                        {activeIndex === 12 && (
                             <div id="accordion-collapse-body-1" className="p-5 bg-gray-50 border-t border-gray-200">
-                           
-                                
-                                    <ul className="list-disc ml-5 space-y-2">
+
+
+                                <ul className="list-disc ml-5 space-y-2">
                                     <li>Intent Market Research analyzes economic conditions, consumer trends and preferences, availability, and advertising to assess product or service demand</li>
                                     <li>We develop strategies to understand behavior at the end-use levels and guide businesses on how pricing and service levels impact customer buying Novisions</li>
                                 </ul>
@@ -521,25 +521,25 @@ function Advisory() {
                             </div>
                         )}
                     </div>
-                    </div>
-                    <div className="my-5">
-                        <p className="text-lg font-bold text-white dark:text-white ms-2 bg-sky-900 p-2 rounded-lg">Supply Chain Optimization</p>
-                    </div>
-                    <div>
-                        <p>Intent Market Research helps organizations focus on developing sustainability and resilience in their supply chain to deal with trade instability and mitigate disruptions. Through our insights on network optimization, inventory management, integrated business planning, transportation and logistics, we help our clients maximize the ROI.</p>
-                        <p>In addition, with end-to-end supply chain optimization studies, we help companies reach the utmost supply chain performance by improving critical success factors such as cost (operational expenditures), speed (reduced lead time), and delivery (forecast accuracy).</p>
-                    </div>
+                </div>
+                <div className="my-5">
+                    <p className="text-lg font-bold text-white dark:text-white ms-2 bg-sky-900 p-2 rounded-lg">Supply Chain Optimization</p>
+                </div>
+                <div>
+                    <p>Intent Market Research helps organizations focus on developing sustainability and resilience in their supply chain to deal with trade instability and mitigate disruptions. Through our insights on network optimization, inventory management, integrated business planning, transportation and logistics, we help our clients maximize the ROI.</p>
+                    <p>In addition, with end-to-end supply chain optimization studies, we help companies reach the utmost supply chain performance by improving critical success factors such as cost (operational expenditures), speed (reduced lead time), and delivery (forecast accuracy).</p>
+                </div>
 
-                    <div id="accordion-collapse" className="space-y-6">
-                        {/* Accordion Item 1 */}
-                        <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
+                <div id="accordion-collapse" className="space-y-6">
+                    {/* Accordion Item 1 */}
+                    <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
                         <h2>
                             <button
                                 type="button"
                                 className={`w-full flex items-center justify-between p-3 hover:text-white text-lg font-semibold text-sky-900 bg-gradient-to-r hover:bg-[#536493]`}
-                                aria-expanded={activeIndex === 1}
+                                aria-expanded={activeIndex === 13}
                                 aria-controls="accordion-collapse-body-1"
-                                onClick={() => toggleAccordion(1)}
+                                onClick={() => toggleAccordion(13)}
                             >
                                 <span>Supply Chain Overview</span>
                                 <svg
@@ -553,8 +553,8 @@ function Advisory() {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                                 </svg>
                             </button>
-                            </h2>
-                            {activeIndex === 1 && (
+                        </h2>
+                        {activeIndex === 13 && (
                             <div id="accordion-collapse-body-1" className="p-5 bg-gray-50 border-t border-gray-200">
                                 <ul className="list-disc ml-5 space-y-2">
                                     <li>IMR delves into specifics of market sizing, customer perspectives, industry trends & dynamics, etc. to formulate organic and inorganic growth strategies</li>
@@ -562,17 +562,17 @@ function Advisory() {
                                 </ul>
                             </div>
                         )}
-                        </div>
+                    </div>
 
-                        {/* Accordion Item 2 */}
-                        <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
+                    {/* Accordion Item 2 */}
+                    <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
                         <h2>
                             <button
                                 type="button"
                                 className={`w-full flex items-center justify-between p-3 hover:text-white text-lg font-semibold text-sky-900 bg-gradient-to-r hover:bg-[#536493]`}
-                                aria-expanded={activeIndex === 2}
+                                aria-expanded={activeIndex === 14}
                                 aria-controls="accordion-collapse-body-1"
-                                onClick={() => toggleAccordion(2)}
+                                onClick={() => toggleAccordion(14)}
                             >
                                 <span>Logistics Overview</span>
                                 <svg
@@ -586,10 +586,10 @@ function Advisory() {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                                 </svg>
                             </button>
-                            </h2>
-                            {activeIndex === 2 && (
+                        </h2>
+                        {activeIndex === 14 && (
                             <div id="accordion-collapse-body-1" className="p-5 bg-gray-50 border-t border-gray-200">
-                               
+
                                 <p className="text-gray-600 font-semibold dark:text-gray-400">Demand Analysis:</p>
                                 <ul className="list-disc ml-5 space-y-2">
                                     <li>Intent Market Research analyzes economic conditions, consumer trends and preferences, availability, and advertising to assess product or service demand</li>
@@ -602,17 +602,17 @@ function Advisory() {
                                 </ul>
                             </div>
                         )}
-                        </div>
+                    </div>
 
-                        {/* Accordion Item 3 */}
-                        <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform">
+                    {/* Accordion Item 3 */}
+                    <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform">
                         <h2>
                             <button
                                 type="button"
                                 className={`w-full flex items-center justify-between p-3 hover:text-white text-lg font-semibold text-sky-900 bg-gradient-to-r hover:bg-[#536493]`}
-                                aria-expanded={activeIndex === 3}
+                                aria-expanded={activeIndex === 15}
                                 aria-controls="accordion-collapse-body-1"
-                                onClick={() => toggleAccordion(3)}
+                                onClick={() => toggleAccordion(15)}
                             >
                                 <span>Low-Cost Country Sourcing</span>
                                 <svg
@@ -626,11 +626,11 @@ function Advisory() {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                                 </svg>
                             </button>
-                            </h2>
-                            {activeIndex === 2 && (
+                        </h2>
+                        {activeIndex === 15 && (
                             <div id="accordion-collapse-body-1" className="p-5 bg-gray-50 border-t border-gray-200">
-                              
-                              <ul className="list-disc ml-5 space-y-2">
+
+                                <ul className="list-disc ml-5 space-y-2">
                                     <li>Intent Market Research analyzes economic conditions, consumer trends and preferences, availability, and advertising to assess product or service demand</li>
                                     <li>We develop strategies to understand behavior at the end-use levels and guide businesses on how pricing and service levels impact customer buying Novisions</li>
                                 </ul>
@@ -638,7 +638,7 @@ function Advisory() {
                             </div>
                         )}
                     </div>
-                    </div>
+                </div>
             </section>
 
             <section className="text-black body-font">
@@ -725,7 +725,7 @@ function Advisory() {
 
                                         {/* Hover Effect (Overlay) */}
                                         <div className="absolute inset-0 bg-blue-300 bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-lg">
-                                           
+
                                         </div>
                                     </div>
                                 </div>
@@ -812,10 +812,10 @@ function Advisory() {
                                 </p>
                                 <p className="text-sm text-gray-600">Published Date: Nov 2024</p>
                             </div>
-                            
+
                         </div>
                     </div>
-                    
+
                 </div>
             </section>
 
