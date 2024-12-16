@@ -76,7 +76,7 @@ function LatestReport() {
         <div>
             <section>
                 <div className="bg-sky-900 text-white mt-10 py-5">
-                    <p className="text-4xl font-bold text-start mt-4">Industry Expertise</p>
+                    <p className="text-4xl font-bold text-start mt-9">Industry Expertise</p>
                     <br />
                     <p>
                         Beyond delivering comprehensive reports, we inspire our clients to craft savvy growth strategies using the insights we provide—information that is consistently accurate, reliable, and invaluable.
