@@ -126,7 +126,7 @@ function WhoWeAre() {
                 <section className="">
                     <div>
                         <p className="text-center text-4xl font-bold mb-10">
-                            <span className="bg-sky-900 p-4 text-white rounded-lg underline text-sm sm:text-base md:text-lg lg:text-4xl">
+                            <span className="bg-sky-900 p-2 text-white rounded-lg underline text-sm sm:text-base md:text-lg lg:text-4xl">
                                 What distinguishes us?
                             </span>
                         </p>
@@ -148,7 +148,7 @@ function WhoWeAre() {
                                         <button
                                             className={`inline-block p-4 border-b-2 rounded-t-lg ${activeTab === tab.id
                                                 ? "text-white border-blue-600 bg-sky-900 p-2"
-                                                : "hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                                                : " hover:border-gray-300 "
                                                 }`}
                                             type="button"
                                             role="tab"
