@@ -43,7 +43,11 @@ function WhoWeAre() {
                 </div>
                 <section className="text-gray-600 body-font mt-10">
                     <div>
-                        <h2 className="text-center text-4xl font-bold "><span className="bg-sky-900 p-4 text-white rounded-lg underline">Why Koinet Market Research?</span></h2>
+                        <p className="text-center text-4xl font-bold">
+                            <span className="bg-sky-900 p-4 text-white rounded-lg underline text-sm sm:text-base md:text-lg lg:text-4xl">
+                                Why Koinet Market Research?
+                            </span>
+                        </p>
                     </div>
                     <div className="container px-5 py-20 mx-auto flex flex-wrap">
                         <div className="flex flex-wrap justify-center items-center">
@@ -120,8 +124,12 @@ function WhoWeAre() {
                 </section>
 
                 <section className="">
-                    <div className="mb-10">
-                        <h2 className="text-center text-4xl font-bold "><span className="bg-sky-900 p-2 text-white rounded-lg underline ">What distinguishes us?</span></h2>
+                    <div>
+                        <p className="text-center text-4xl font-bold mb-10">
+                            <span className="bg-sky-900 p-4 text-white rounded-lg underline text-sm sm:text-base md:text-lg lg:text-4xl">
+                                What distinguishes us?
+                            </span>
+                        </p>
                     </div>
                     <div className="container mx-auto px-4">
                         <div className="mb-4 border-b border-gray-200 dark:border-gray-700 text-center">
