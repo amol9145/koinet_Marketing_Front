@@ -146,7 +146,7 @@ function WhoWeAre() {
                                 ].map((tab) => (
                                     <li className="me-2" role="presentation" key={tab.id}>
                                         <button
-                                            className={`inline-block p-4 border-b-2 rounded-t-lg ${activeTab === tab.id
+                                            className={`inline-block p-2 border-b-2 rounded-t-lg ${activeTab === tab.id
                                                 ? "text-white border-blue-600 bg-sky-900 p-2"
                                                 : " hover:border-gray-300 "
                                                 }`}
