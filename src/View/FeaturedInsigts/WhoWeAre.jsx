@@ -193,7 +193,7 @@ function WhoWeAre() {
                                     role="tabpanel"
                                     aria-labelledby={`${tabContent.id}-tab`}
                                 >
-                                    <p className="text-lg text-gray-500 dark:text-gray-400 px-20">
+                                    <p className="text-lg text-gray-700 dark:text-gray-400 px-20">
                                         {tabContent.content}
                                     </p>
                                 </div>
