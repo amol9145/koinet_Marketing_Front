@@ -704,7 +704,7 @@ function Advisory() {
                         <p className="text-lg text-gray-800 mb-8 max-w-2xl mx-auto">
                             Dive into our latest case studies that highlight innovative approaches and proven results.
                         </p>
-                        <div className="w-24 h-1 bg-white mx-auto mb-8"></div>
+                       
                     </div>
 
                     {/* Case Study Cards */}
