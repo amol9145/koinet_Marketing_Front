@@ -53,9 +53,10 @@ function Advisory() {
 
                 </div>
 
-
-                <div className="my-5">
-                    <p className="text-lg font-bold text-white dark:text-white ms-2 bg-sky-900 p-2 rounded-lg">Competitive Intelligence</p>
+                <div className="my-5 text-center">
+                    <p className="text-lg font-bold text-white dark:text-white bg-sky-900 p-2 rounded-lg inline-block">
+                        Competitive Intelligence
+                    </p>
                 </div>
                 <div id="accordion-collapse" className="space-y-6">
                     {/* Accordion Item */}
@@ -178,7 +179,11 @@ function Advisory() {
                 </div>
 
 
-                <p className=" my-5 text-lg font-bold text-white dark:text-white ms-2 bg-sky-900 p-2 rounded-lg">Few of our competitive intelligence services include the following:</p>
+                <div className="my-10 text-center">
+                    <p className="text-lg font-bold text-white dark:text-white bg-sky-900 p-2 rounded-lg inline-block">
+                        Few of our competitive intelligence services include the following:
+                    </p>
+                </div>
                 <div id="accordion-collapse" className="space-y-6">
                     {/* Accordion Item 1 */}
                     <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
@@ -289,7 +294,11 @@ function Advisory() {
                     </div>
                 </div>
                 <div className="my-5">
-                    <p className="text-lg font-bold text-black dark:text-white ms-2">Competitive Intelligence</p>
+                    <div className="my-5 text-center">
+                        <p className="text-lg font-bold text-white dark:text-white bg-sky-900 p-2 rounded-lg inline-block">
+                            Competitive Intelligence
+                        </p>
+                    </div>
                     <div className="flex justify-center items-center">
                         <img src="https://cdni.iconscout.com/illustration/premium/thumb/business-growth-idea-illustration-download-in-svg-png-gif-file-formats--analytics-logo-strategic-planning-pack-illustrations-5501819.png?f=webp" alt="" className="my-5 w-100 h-100" />
 
@@ -298,7 +307,11 @@ function Advisory() {
                     <br />
                 </div>
                 <div>
-                    <p className=" my-5 text-lg font-bold text-white dark:text-white ms-2 bg-sky-900 rounded-lg p-2 ">  Few of the strategic business objectives for which IMR supports business entities:</p>
+                    <div className="my-5 text-center">
+                        <p className="text-lg font-bold text-white dark:text-white bg-sky-900 p-2 rounded-lg inline-block">
+                            Few of the strategic business objectives for which IMR supports business entities:
+                        </p>
+                    </div>
                     <div id="accordion-collapse" className="space-y-6">
                         {/* Accordion Item 1 */}
                         <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform transform ">
@@ -409,8 +422,10 @@ function Advisory() {
                 </div>
 
 
-                <div className="my-5">
-                    <p className="text-lg font-bold text-white dark:text-white ms-2 bg-sky-900 rounded-lg p-2">Strategic Alliances and Acquisition Services</p>
+                <div className="my-10 text-center">
+                    <p className="text-lg font-bold text-white dark:text-white bg-sky-900 p-2 rounded-lg inline-block">
+                        Strategic Alliances and Acquisition Services
+                    </p>
                 </div>
                 <div id="accordion-collapse" className="space-y-6">
                     {/* Accordion Item 1 */}
@@ -522,8 +537,10 @@ function Advisory() {
                         )}
                     </div>
                 </div>
-                <div className="my-5">
-                    <p className="text-lg font-bold text-white dark:text-white ms-2 bg-sky-900 p-2 rounded-lg">Supply Chain Optimization</p>
+                <div className="my-10 text-center">
+                    <p className="text-lg font-bold text-white dark:text-white bg-sky-900 p-2 rounded-lg inline-block">
+                        Supply Chain Optimization
+                    </p>
                 </div>
                 <div>
                     <p>Intent Market Research helps organizations focus on developing sustainability and resilience in their supply chain to deal with trade instability and mitigate disruptions. Through our insights on network optimization, inventory management, integrated business planning, transportation and logistics, we help our clients maximize the ROI.</p>
@@ -704,7 +721,7 @@ function Advisory() {
                         <p className="text-lg text-gray-800 mb-8 max-w-2xl mx-auto">
                             Dive into our latest case studies that highlight innovative approaches and proven results.
                         </p>
-                       
+
                     </div>
 
                     {/* Case Study Cards */}
