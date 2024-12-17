@@ -14,3 +14,8 @@ html, body {
     background-position: center;
 
 }
+@media (max-width: 640px) {
+    .sm_device_height {
+      padding-top: 162px;
+    }
+  }

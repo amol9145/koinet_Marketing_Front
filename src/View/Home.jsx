@@ -181,9 +181,7 @@ function Home() {
     return (
         <>
             {/* Hero Section */}
-            <section
-                className="relative flex justify-center items-center h-screen bg-cover bg-center overflow-hidden bg-fixed"
-            >
+            <section  className=" sm_device_height relative flex justify-center items-center sm:h-[60vh] md:h-[100vh] lg:h-screen bg-cover bg-center overflow-hidden bg-fixed">
                 {/* Animated Background SVG */}
                 <div className="absolute inset-0">
                     <svg
@@ -199,102 +197,36 @@ function Home() {
                             </radialGradient>
                         </defs>
                         <rect x="0" y="0" width="100%" height="100%" fill="url(#radialGradient)" />
-
                         {/* Pulse Rings */}
                         <circle cx="400" cy="300" r="50" fill="none" stroke="white" strokeWidth="3">
-                            <animate
-                                attributeName="r"
-                                from="50"
-                                to="800"
-                                dur="2s"
-                                repeatCount="indefinite"
-                            />
-                            <animate
-                                attributeName="opacity"
-                                from="1"
-                                to="0"
-                                dur="4s"
-                                repeatCount="indefinite"
-                            />
-
+                            <animate attributeName="r" from="50" to="800" dur="2s" repeatCount="indefinite" />
+                            <animate attributeName="opacity" from="1" to="0" dur="4s" repeatCount="indefinite" />
                         </circle>
                         <circle cx="400" cy="300" r="100" fill="none" stroke="white" strokeWidth="2">
-                            <animate
-                                attributeName="r"
-                                from="100"
-                                to="800"
-                                dur="6s"
-                                repeatCount="indefinite"
-                            />
-                            <animate
-                                attributeName="opacity"
-                                from="1"
-                                to="0"
-                                dur="6s"
-                                repeatCount="indefinite"
-                            />
+                            <animate attributeName="r" from="100" to="800" dur="6s" repeatCount="indefinite" />
+                            <animate attributeName="opacity" from="1" to="0" dur="6s" repeatCount="indefinite" />
                         </circle>
                     </svg>
                 </div>
 
                 {/* Animated Content */}
                 <div
-                    className={`relative z-20 mx-auto text-center transition-all duration-1000 ease-in-out ${isVisible
-                        ? "opacity-100 translate-y-0 scale-100"
-                        : "opacity-0 translate-y-10 scale-90"
+                    className={`relative z-20 mx-auto text-center transition-all duration-1000 ease-in-out ${isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-10 scale-90"
                         }`}
                 >
-                    <p className="mb-5 text-5xl font-bold text-white animate-slideDown tracking-wide">
+                    <p className="mb-5 lg:text-5xl md:text-5xl text-3xl font-bold text-white animate-slideDown tracking-wide">
                         Want to Expand into
                     </p>
                     <p className="mb-5 text-2xl font-bold text-yellow-400 animate-slideUp tracking-wider">
                         A NEW MARKET?
                     </p>
-                    <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl dark:text-white animate-float">
+                    <h1 className="mb-4 text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-none text-white animate-float">
                         We <span className="text-red-600 glow">invest</span> in the world’s{" "}
                         <span className="text-red-600 glow">potential</span>
                     </h1>
-                    <p className="mb-8 text-lg font-bold text-yellow-400 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-300 animate-zoomIn">
-                        One-stop solution to uncover data from 13+ industries with 50+ countries
-                        mapped
+                    <p className="mb-8 text-base md:text-lg lg:text-xl font-bold text-yellow-400 sm:px-8 lg:px-48 animate-zoomIn">
+                        One-stop solution to uncover data from 13+ industries with 50+ countries mapped
                     </p>
-                    {/* <form className="w-full max-w-md mx-auto animate-slideInUp">
-                        <label
-                            htmlFor="default-email"
-                            className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
-                        >
-                            Search Reports...
-                        </label>
-                        <div className="relative">
-                            <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-                                <svg
-                                    className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <circle cx="11" cy="11" r="8" />
-                                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                                </svg>
-                            </div>
-                            <input
-                                type="text"
-                                id="default"
-                                className="block w-full p-4 pl-10 text-sm border border-gray-300 rounded-lg text-black shadow-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Search Reports....."
-                                required
-                            />
-                            <button
-                                type="submit"
-                                className="text-white absolute right-2.5 bottom-2.5 bg-blue-800 hover:from-purple-500 hover:to-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 transition-all duration-300 shadow-lg hover:shadow-2xl animate-pulse"
-                            >
-                                Search
-                            </button>
-                        </div>
-                    </form> */}
                 </div>
 
                 {/* Gradient Overlay */}
