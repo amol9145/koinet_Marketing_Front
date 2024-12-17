@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { baseUrl } from "../../Constant/ConstantFiles";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -282,7 +283,7 @@ function Contact() {
                       required
                     />
                     <label htmlFor="terms" className="ml-2 text-gray-700 text-sm">
-                      I agree to the <a href="#" className="text-blue-500">terms and conditions</a>.
+                      I agree to the <Link to={"/termsandconditions"} className="text-blue-500">terms and conditions</Link>.
                     </label>
                   </div>
 
