@@ -12,7 +12,7 @@ const Footer = () => {
                             className="h-12 w-35"
                             alt="Logo" />
                     </a>
-                    <p className="mt-2 text-sm text-gray-300">Air plant banjo lyft occupy retro adaptogen indego</p>
+                    <p className="mt-2 text-sm text-gray-300">Make informed decisions for growth and strategy.</p>
                 </div>
                 <div className="flex-grow flex flex-wrap md:pr-20 -mb-10 md:text-left text-center order-first">
                     <div className="lg:w-1/4 md:w-1/2 w-full px-4 ">
