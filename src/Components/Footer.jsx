@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
-import Logo from "../assets/Logo.png"
+import Logo from "../assets/logo2.jpg"
 
 const Footer = () => {
     return (
-        <footer className="text-white  bg-gray-900 ">
+        <footer className="text-white  bg-[#243642] ">
             <div className="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
                 <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left md:mt-0 mt-10">
                     <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
                         <img
                             src={Logo}
-                            className="h-10 w-35"
+                            className="h-12 w-35"
                             alt="Logo" />
                     </a>
                     <p className="mt-2 text-sm text-gray-300">Air plant banjo lyft occupy retro adaptogen indego</p>
@@ -19,16 +19,16 @@ const Footer = () => {
                         <h2 className="title-font font-medium text-white tracking-widest text-lg mb-3 text-start">Services</h2>
                         <nav className="list-none mb-10 text-start ">
                             <li>
-                                <a className="text-gray-300 hover:text-gray-600" >Latest Reports</a>
+                                <a className="text-gray-300 cursor-pointer hover:text-white" >Latest Reports</a>
                             </li>
                             <li>
-                                <a className="text-gray-300 hover:text-gray-600">Advisory Services</a>
+                                <a className="text-gray-300 cursor-pointer hover:text-white">Advisory Services</a>
                             </li>
                             <li>
-                                <a className="text-gray-300 hover:text-gray-600">Emerging Technologies</a>
+                                <a className="text-gray-300 cursor-pointer hover:text-white">Emerging Technologies</a>
                             </li>
                             <li>
-                                <a className="text-gray-300 hover:text-gray-600">Customer Research</a>
+                                <a className="text-gray-300 cursor-pointer hover:text-white">Customer Research</a>
                             </li>
                         </nav>
                     </div>
@@ -36,19 +36,19 @@ const Footer = () => {
                         <h2 className="title-font font-medium text-white tracking-widest text-lg mb-3 text-start">Useful Links</h2>
                         <nav className="list-none mb-10 text-start ">
                             <li>
-                                <Link to={"/ccpa"} className="text-gray-300 hover:text-gray-600" >CCPA Privacy Policy</Link>
+                                <Link to={"/ccpa"} className="text-gray-300 hover:text-white" >CCPA Privacy Policy</Link>
                             </li>
                             <li>
-                                <Link to={"/gdpr"} className="text-gray-300 hover:text-gray-600">GDPR Data Protection</Link>
+                                <Link to={"/gdpr"} className="text-gray-300 hover:text-white">GDPR Data Protection</Link>
                             </li>
                             <li>
-                                <Link to={"/termsandconditions"} className="text-gray-300 hover:text-gray-600">Terms & Conditions</Link>
+                                <Link to={"/termsandconditions"} className="text-gray-300 hover:text-white">Terms & Conditions</Link>
                             </li>
                             <li>
-                                <Link to={"/privacypolicy"} className="text-gray-300 hover:text-gray-600">Privacy Policy</Link>
+                                <Link to={"/privacypolicy"} className="text-gray-300 hover:text-white">Privacy Policy</Link>
                             </li>
                             <li>
-                                <Link to={"/refundpolicy"} className="text-gray-300 hover:text-gray-600">Cancellation / Refund policy</Link>
+                                <Link to={"/refundpolicy"} className="text-gray-300 hover:text-white">Cancellation / Refund policy</Link>
                             </li>
                         </nav>
                     </div>
@@ -56,19 +56,19 @@ const Footer = () => {
                         <h2 className="title-font font-medium text-white tracking-widest text-lg mb-3 text-start">Featured Insights</h2>
                         <nav className="list-none mb-10 text-start ">
                             <li>
-                                <Link to={"/pressreleased"} className="text-gray-300 hover:text-gray-600">Press Release</Link>
+                                <Link to={"/pressreleased"} className="text-gray-300 hover:text-white">Press Release</Link>
                             </li>
                             <li>
-                                <Link to={"/"} className="text-gray-300 hover:text-gray-600">Case Studies</Link>
+                                <Link to={"/"} className="text-gray-300 hover:text-white">Case Studies</Link>
                             </li>
                             <li>
-                                <Link to={"/contact"} className="text-gray-300 hover:text-gray-600">Contact us</Link>
+                                <Link to={"/contact"} className="text-gray-300 hover:text-white">Contact us</Link>
                             </li>
                             <li>
-                                <Link to={"/about_us"} className="text-gray-300 hover:text-gray-600">About us</Link>
+                                <Link to={"/about_us"} className="text-gray-300 hover:text-white">About us</Link>
                             </li>
                             <li>
-                                <Link to={"/career"} className="text-gray-300 hover:text-gray-600">Career</Link>
+                                <Link to={"/career"} className="text-gray-300 hover:text-white">Career</Link>
                             </li>
                         </nav>
                     </div>
@@ -76,14 +76,14 @@ const Footer = () => {
                         <h2 className="title-font font-medium text-white tracking-widest text-lg mb-3 text-start">Need help or have a question?</h2>
                         <nav className="list-none mb-10 text-start ">
                             <li>
-                                <a className="text-gray-300 hover:text-gray-600">Kharadi,pune,Maharashtra, <br />India,411014</a>
+                                <a className="text-gray-300  hover:text-white">Kharadi,pune,Maharashtra, <br />India,411014</a>
                             </li>
-                            <li className="text-gray-300 hover:text-gray-600">
+                            <li className="text-gray-300 hover:text-white">
                                 <p>info@koinetmedia.com</p>
                             </li>
 
                             <li>
-                                <p className="text-gray-300 hover:text-gray-600">
+                                <p className="text-gray-300 hover:text-white">
                                     +91 90215 68448</p>
                             </li>
                         </nav>
@@ -93,7 +93,7 @@ const Footer = () => {
             <div className="bg-gray-300 ">
                 <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
                     <p className="text-black text-sm text-center sm:text-left">© 2024 koinetmedia —
-                        <a href="https://twitter.com/knyttneve" rel="noopener noreferrer" className="text-gray-600 ml-1" target="_blank">@koinetmedia</a>
+                        <a href="https://twitter.com/knyttneve" rel="noopener noreferrer" className="text-red-600 ml-1" target="_blank">@koinetmedia</a>
                     </p>
                     <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
                         <a className="text-black">
