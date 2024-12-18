@@ -116,7 +116,7 @@ function ViewInfographics() {
                     <div className="relative p-4 w-full max-w-md sm:max-w-lg md:max-w-2xl max-h-full">
                         <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
                             {/* Modal Body */}
-                            <div className="bg-blue-200 p-4 sm:p-6 md:p-8 space-y-4">
+                            <div className="bg-blue-200 p-4 sm:p-2 md:p-8 space-y-4">
                                 <button
                                     onClick={handleCloseModal}
                                     type="button"
