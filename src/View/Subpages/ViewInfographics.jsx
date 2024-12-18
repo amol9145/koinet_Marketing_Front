@@ -142,9 +142,9 @@ function ViewInfographics() {
                                 <h3 className="text-xl sm:text-2xl font-semibold mb-4">
                                     Get in <span className="text-blue-800">Touch</span> with Us
                                 </h3>
-                                <p className="mb-3 text-sm sm:text-base">
+                                {/* <p className="mb-3 text-sm sm:text-base">
                                     Were here to help! Complete the form, and our team will contact you soon.
-                                </p>
+                                </p> */}
 
                                 <form className="space-y-4" ref={form} onSubmit={handleSendEmail}>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
