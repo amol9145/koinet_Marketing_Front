@@ -115,9 +115,18 @@ function Infographics() {
                                         <p className="mb-2 text-black text-sm sm:text-base">{item.category}</p>
                                     </Link>
                                     <div className="flex text-center items-center justify-center">
+                                        {/* Facebook Share */}
                                         <button
                                             type="button"
                                             className="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 me-2 mb-2"
+                                            onClick={() =>
+                                                window.open(
+                                                    `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                                                        'https://yourwebsite.com'
+                                                    )}`,
+                                                    '_blank'
+                                                )
+                                            }
                                         >
                                             <svg
                                                 className="w-4 h-4 me-2"
@@ -128,11 +137,21 @@ function Infographics() {
                                             >
                                                 <path d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z" />
                                             </svg>
-                                            share
+                                            Share
                                         </button>
+
+                                        {/* LinkedIn Share */}
                                         <button
                                             type="button"
                                             className="text-white bg-[#0077B5] hover:bg-[#0077B5]/90 focus:ring-4 focus:outline-none focus:ring-[#0077B5]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#0077B5]/55 me-2 mb-2"
+                                            onClick={() =>
+                                                window.open(
+                                                    `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+                                                        'https://yourwebsite.com'
+                                                    )}`,
+                                                    '_blank'
+                                                )
+                                            }
                                         >
                                             <svg
                                                 className="w-4 h-4 me-2"
@@ -146,22 +165,31 @@ function Infographics() {
                                             Share
                                         </button>
 
+                                        {/* Twitter Share */}
                                         <button
                                             type="button"
-                                            className="text-white bg-[#E1306C] hover:bg-[#E1306C]/90 focus:ring-4 focus:outline-none focus:ring-[#E1306C]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#E1306C]/55 me-2 mb-2"
+                                            className="text-white bg-[#1DA1F2] hover:bg-[#1DA1F2]/90 focus:ring-4 focus:outline-none focus:ring-[#1DA1F2]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1DA1F2]/55 me-2 mb-2"
+                                            onClick={() =>
+                                                window.open(
+                                                    'https://twitter.com/intent/tweet?text=Check%20this%20out!',
+                                                    '_blank'
+                                                )
+                                            }
                                         >
                                             <svg
                                                 className="w-4 h-4 me-2"
                                                 aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 fill="currentColor"
-                                                viewBox="0 0 448 512"
+                                                viewBox="0 0 512 512"
                                             >
-                                                <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9S160.5 370.9 224.1 370.9 339 319.6 339 255.9 287.7 141 224.1 141zm0 186.6c-39.6 0-71.7-32.1-71.7-71.7s32.1-71.7 71.7-71.7 71.7 32.1 71.7 71.7-32.1 71.7-71.7 71.7zM370.5 136.1c0 14.9-12.1 27-27 27s-27-12.1-27-27 12.1-27 27-27 27 12.1 27 27zM398.8 76.5C375.7 53.4 345.8 40 311.8 40H136.2c-34 0-63.9 13.4-87 36.5-23.1 23.1-35.8 52.9-35.8 84.7v204.2c0 31.8 12.7 61.6 35.8 84.7 23.1 23.1 53 36.5 87 36.5h175.6c34 0 63.9-13.4 87-36.5 23.1-23.1 35.8-52.9 35.8-84.7V161.2c0-31.8-12.7-61.6-35.8-84.7z" />
+                                                <path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 132.105-44.832-46.832-1.299-86.193-31.188-99.792-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.299 27.614-3.573-48.081-9.747-84.143-51.98-84.143-103.001v-1.299c13.969 7.797 30.214 12.67 47.431 13.32-28.264-18.843-46.832-51.005-46.832-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.502 46.833-104.334 104.334-104.334 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.833-13.32 67.234-25.34-7.798 24.366-24.366 44.833-46.832 57.827 21.117-2.273 41.52-8.122 60.367-16.243-14.292 20.791-32.161 39.308-52.628 54.253z" />
                                             </svg>
                                             Share
                                         </button>
+
                                     </div>
+
                                 </div>
                             </div>
                         ))}

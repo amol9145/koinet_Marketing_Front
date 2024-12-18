@@ -102,121 +102,115 @@ function ViewInfographics() {
 
     return (
         <>
-            <div >
-                {/* Trigger Button */}
-                <button
-                    onClick={handleOpenModal}
-                    className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    type="button"
-                >
-                    Download Sample Report
-                </button>
+            <button
+                onClick={handleOpenModal}
+                className="block w-full sm:w-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                type="button"
+            >
+                Download Sample Report
+            </button>
 
-                {/* Modal */}
-                {isModalOpen && (
-                    <div
-                        className=" fixed top-0 left-0 right-0 bottom-0 z-50 flex justify-center items-center bg-gray-800 bg-opacity-50"
-                    >
-                        <div className="relative p-4 w-full max-w-2xl max-h-full ">
-                            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-
-
-                                {/* Modal Body */}
-                                <div className="bg-blue-200 md:p-2 space-y-4">
-                                    <button
-                                        onClick={handleCloseModal}
-                                        type="button"
-                                        className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+            {/* Modal */}
+            {isModalOpen && (
+                <div className="fixed top-0 left-0 right-0 bottom-0 z-50 flex justify-center items-center bg-gray-800 bg-opacity-50">
+                    <div className="relative p-4 w-full max-w-md sm:max-w-lg md:max-w-2xl max-h-full">
+                        <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                            {/* Modal Body */}
+                            <div className="bg-blue-200 p-4 sm:p-6 md:p-8 space-y-4">
+                                <button
+                                    onClick={handleCloseModal}
+                                    type="button"
+                                    className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                >
+                                    <svg
+                                        className="w-3 h-3"
+                                        aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 14 14"
                                     >
-                                        <svg
-                                            className="w-3 h-3"
-                                            aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 14 14"
-                                        >
-                                            <path
-                                                stroke="currentColor"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth="2"
-                                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                                            />
-                                        </svg>
-                                        <span className="sr-only">Close modal</span>
-                                    </button>
-                                    <h3 className="text-2xl font-semibold mb-4">
-                                        Get in <span className="text-blue-800">Touch</span> with Us
-                                    </h3>
-                                    <p className="mb-3">
-                                        Were here to help! Fill out the form below, and our market research team will get back to you shortly.
-                                    </p>
+                                        <path
+                                            stroke="currentColor"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                                        />
+                                    </svg>
+                                    <span className="sr-only">Close modal</span>
+                                </button>
+                                <h3 className="text-xl sm:text-2xl font-semibold mb-4">
+                                    Get in <span className="text-blue-800">Touch</span> with Us
+                                </h3>
+                                <p className="mb-3 text-sm sm:text-base">
+                                    Were here to help! Fill out the form below, and our market research team will get back to you shortly.
+                                </p>
 
-                                    <form className="space-y-4" ref={form} onSubmit={handleSendEmail}>
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                            <div>
-                                                <label className="block font-medium mb-1">Name</label>
-                                                <input
-                                                    type="text"
-                                                    className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-1 transition duration-200"
-                                                    placeholder="Your Name"
-                                                    name="user_name"
-                                                    required
-                                                />
-                                            </div>
-                                            <div>
-                                                <label className="block font-medium mb-1">Company Name</label>
-                                                <input
-                                                    type="text"
-                                                    className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-1 transition duration-200"
-                                                    placeholder="Your Business Email"
-                                                    required
-                                                />
-                                            </div>
-                                        </div>
-
+                                <form className="space-y-4" ref={form} onSubmit={handleSendEmail}>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div>
-                                            <label className="block font-medium mb-1">Business Email</label>
+                                            <label className="block font-medium mb-1">Name</label>
                                             <input
-                                                type="email"
-                                                className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-1 transition duration-200"
+                                                type="text"
+                                                className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-2 sm:p-1 transition duration-200"
+                                                placeholder="Your Name"
+                                                name="user_name"
+                                                required
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block font-medium mb-1">Company Name</label>
+                                            <input
+                                                type="text"
+                                                className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-2 sm:p-1 transition duration-200"
                                                 placeholder="Your Business Email"
-                                                name="user_email"
                                                 required
                                             />
                                         </div>
-                                        <div>
-                                            <label className="block font-medium mb-1">Phone Number</label>
-                                            <input
-                                                type="tel"
-                                                className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-1 transition duration-200"
-                                                placeholder="+91-1234567890"
-                                                required
-                                            />
-                                        </div>
-                                        <div>
-                                            <label className="block font-medium mb-1">Message</label>
-                                            <textarea
-                                                className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-1 transition duration-200"
-                                                placeholder="Your Message"
-                                                rows="4"
-                                                required
-                                            ></textarea>
-                                        </div>
+                                    </div>
 
-                                        <button
-                                            type="submit"
-                                            className=" w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-                                        >
-                                            Download Sample Report
-                                        </button>
-                                    </form>
-                                </div>
+                                    <div>
+                                        <label className="block font-medium mb-1">Business Email</label>
+                                        <input
+                                            type="email"
+                                            className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-2 sm:p-1 transition duration-200"
+                                            placeholder="Your Business Email"
+                                            name="user_email"
+                                            required
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block font-medium mb-1">Phone Number</label>
+                                        <input
+                                            type="tel"
+                                            className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-2 sm:p-1 transition duration-200"
+                                            placeholder="+91-1234567890"
+                                            required
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block font-medium mb-1">Message</label>
+                                        <textarea
+                                            className="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 p-2 sm:p-1 transition duration-200"
+                                            placeholder="Your Message"
+                                            rows="4"
+                                            required
+                                        ></textarea>
+                                    </div>
+
+                                    <button
+                                        type="submit"
+                                        className="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center sm:me-2 sm:mb-2"
+                                    >
+                                        Download Sample Report
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
-                )}
-            </div>
+                </div>
+            )}
+
             <section className="relative mt-5 flex flex-col items-center overflow-hidden">
                 {/* Check if infographic exists */}
                 {infographic && (
@@ -434,14 +428,14 @@ function ViewInfographics() {
                                     {/* Modal */}
                                     <div className="mb-4">
                                         <Link to={"/contact"} className=" relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
-                                        <span className="  relative px-5 py-2.5 transition-all ease-in duration-75 bg-white text-black rounded-md group-hover:bg-opacity-0">
+                                            <span className="  relative px-5 py-2.5 transition-all ease-in duration-75 bg-white text-black rounded-md group-hover:bg-opacity-0">
                                                 Request Customization
                                             </span>
                                         </Link>
                                     </div>
                                     <div className="mb-4">
                                         <Link to={"/contact"} className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
-                                        <span className="  relative px-5 py-2.5 transition-all ease-in duration-75 bg-white text-black rounded-md group-hover:bg-opacity-0">
+                                            <span className="  relative px-5 py-2.5 transition-all ease-in duration-75 bg-white text-black rounded-md group-hover:bg-opacity-0">
                                                 Speak to Consultant
                                             </span>
                                         </Link>
