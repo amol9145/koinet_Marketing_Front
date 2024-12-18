@@ -214,15 +214,15 @@ function Home() {
                     className={`relative z-20 mx-auto text-center transition-all duration-1000 ease-in-out ${isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-10 scale-90"
                         }`}
                 >
-                    <p className="mb-5 lg:text-5xl md:text-5xl text-3xl font-bold text-white animate-slideDown tracking-wide">
-                        Want to Expand into
+                    <p className="mb-5 lg:text-5xl md:text-4xl text-3xl font-bold text-white animate-slideDown tracking-wide">
+                    Want to Expand into Emerging Markets
                     </p>
                     <p className="mb-5 text-2xl font-bold text-yellow-400 animate-slideUp tracking-wider">
                         A NEW MARKET?
                     </p>
                     <h1 className="mb-4 text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-none text-white animate-float">
-                        We <span className="text-red-600 glow">invest</span> in the world’s{" "}
-                        <span className="text-red-600 glow">potential</span>
+                        We <span className="text-red-600 glow">Invest</span> in the World’s{" "}
+                        <span className="text-red-600 glow">Potential</span>
                     </h1>
                     <p className="mb-8 text-base md:text-lg lg:text-xl font-bold text-yellow-400 sm:px-8 lg:px-48 animate-zoomIn">
                         One-stop solution to uncover data from 13+ industries with 50+ countries mapped
