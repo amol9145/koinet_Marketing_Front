@@ -114,13 +114,13 @@ function ViewInfographics() {
             {isModalOpen && (
                 <div className="fixed top-0 left-0 right-0 bottom-0 z-50 flex justify-center items-center bg-gray-800 bg-opacity-50">
                     <div className="relative p-4 w-full max-w-md sm:max-w-lg md:max-w-2xl max-h-full">
-                        <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <div className="relative bg-white rounded-lg shadow ">
                             {/* Modal Body */}
-                            <div className="bg-blue-200 p-4 sm:p-2 md:p-8 space-y-4">
+                            <div className="bg-blue-200 p-4 sm:p-2 md:p-8 space-y-2">
                                 <button
                                     onClick={handleCloseModal}
                                     type="button"
-                                    className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                    className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
                                 >
                                     <svg
                                         className="w-3 h-3"
