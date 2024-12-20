@@ -1,19 +1,46 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { baseUrl } from "../../Constant/ConstantFiles";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError(null); // Clear previous errors
+
+    try {
+      const response = await axios.post(`${baseUrl}/login`, {
+        email,
+        password,
+      });
+
+      if (response.status === 200) {
+        // Save token to localStorage
+        localStorage.setItem("token", response.data.token);
+
+        // Navigate to dashboard
+        navigate("/Dashboard");
+      }
+    } catch (err) {
+      // Set error message
+      setError(err.response?.data?.message || "Login failed. Try again.");
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r p-5 relative overflow-hidden mt-9">
-      {/* Animated Background */}
-      <div className="absolute inset-0 "></div>
-
       {/* Content */}
-      <div className="bg-white shadow-2xl  p-4 w-full max-w-md relative z-10">
+      <div className="bg-white border-2 rounded-lg shadow-lg p-4 w-full max-w-md relative z-10">
         <div className="flex justify-center mb-6">
           <div className="bg-gradient-to-br from-indigo-300 to-blue-200 p-4 rounded-full shadow-lg">
             <svg
@@ -38,19 +65,25 @@ const Login = () => {
         <p className="text-sm text-gray-500 text-center mb-6">
           Sign in to access your personalized dashboard.
         </p>
-        <form>
+        <form onSubmit={handleLogin}>
           <div className="mb-4">
             <input
               type="email"
               placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-200 shadow-sm"
+              required
             />
           </div>
           <div className="mb-4 relative">
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-200 shadow-sm"
+              required
             />
             <span
               onClick={togglePasswordVisibility}
@@ -99,7 +132,7 @@ const Login = () => {
               )}
             </span>
           </div>
-
+          {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
           <button
             type="submit"
             className="w-full bg-gradient-to-r from-blue-400 to-indigo-400 text-white py-3 rounded-lg shadow-lg hover:opacity-90 focus:ring-4 focus:ring-blue-300 transition"
