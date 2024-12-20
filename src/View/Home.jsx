@@ -182,12 +182,12 @@ function Home() {
     ];
     return (
         <>
+            {/* Hero 1 */}
             <section
-                className=" overflow-hidden bg-cover bg-center flex items-center justify-center"
+                className="hidden md:flex overflow-hidden bg-cover bg-center items-center justify-center"
                 style={{
-                    backgroundImage: ` url(${HomePage})`,
+                    backgroundImage: `url(${HomePage})`,
                     height: "100vh",
-
                 }}
             >
                 <div className="py-12 px-6 md:py-24 md:px-12 mx-auto w-full text-center lg:text-left">
@@ -211,9 +211,11 @@ function Home() {
                     </div>
                 </div>
             </section>
-            {/* Hero Section */}
-            {/* <section className=" sm_device_height relative flex justify-center items-center sm:h-[60vh] md:h-[100vh] lg:h-screen bg-cover bg-center overflow-hidden bg-fixed">
 
+            {/* Hero 2 */}
+            <section
+                className="block md:hidden sm_device_height relative flex justify-center items-center sm:h-[60vh] bg-cover bg-center overflow-hidden bg-fixed"
+            >
                 <div className="absolute inset-0">
                     <svg
                         className="w-full h-full"
@@ -229,20 +231,55 @@ function Home() {
                         </defs>
                         <rect x="0" y="0" width="100%" height="100%" fill="url(#radialGradient)" />
 
-                        <circle cx="400" cy="300" r="50" fill="none" stroke="white" strokeWidth="3">
-                            <animate attributeName="r" from="50" to="800" dur="2s" repeatCount="indefinite" />
-                            <animate attributeName="opacity" from="1" to="0" dur="4s" repeatCount="indefinite" />
+                        <circle
+                            cx="400"
+                            cy="300"
+                            r="50"
+                            fill="none"
+                            stroke="white"
+                            strokeWidth="3"
+                        >
+                            <animate
+                                attributeName="r"
+                                from="50"
+                                to="800"
+                                dur="2s"
+                                repeatCount="indefinite"
+                            />
+                            <animate
+                                attributeName="opacity"
+                                from="1"
+                                to="0"
+                                dur="4s"
+                                repeatCount="indefinite"
+                            />
                         </circle>
-                        <circle cx="400" cy="300" r="100" fill="none" stroke="white" strokeWidth="2">
-                            <animate attributeName="r" from="100" to="800" dur="6s" repeatCount="indefinite" />
-                            <animate attributeName="opacity" from="1" to="0" dur="6s" repeatCount="indefinite" />
+                        <circle
+                            cx="400"
+                            cy="300"
+                            r="100"
+                            fill="none"
+                            stroke="white"
+                            strokeWidth="2"
+                        >
+                            <animate
+                                attributeName="r"
+                                from="100"
+                                to="800"
+                                dur="6s"
+                                repeatCount="indefinite"
+                            />
+                            <animate
+                                attributeName="opacity"
+                                from="1"
+                                to="0"
+                                dur="6s"
+                                repeatCount="indefinite"
+                            />
                         </circle>
                     </svg>
                 </div>
-                <div
-                    className={`relative z-20 mx-auto text-center transition-all duration-1000 ease-in-out ${isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-10 scale-90"
-                        }`}
-                >
+                <div className="relative z-20 mx-auto text-center transition-all duration-1000 ease-in-out opacity-100 translate-y-0 scale-100">
                     <p className="mb-5 lg:text-5xl md:text-4xl text-3xl font-bold text-white animate-slideDown tracking-wide">
                         Want to Expand into Emerging Markets
                     </p>
@@ -254,11 +291,12 @@ function Home() {
                         <span className="text-red-600 glow">Potential</span>
                     </h1>
                     <p className="mb-8 text-base md:text-lg lg:text-xl font-bold text-yellow-400 sm:px-8 lg:px-48 animate-zoomIn">
-                        One-stop solution to uncover data from 13+ industries with 50+ countries mapped
+                        One-stop solution to uncover data from 13+ industries with 50+ countries
+                        mapped
                     </p>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black"></div>
-            </section> */}
+            </section>
 
             {/* INTRO SECTION */}
             <section className="text-gray-800 body-fontrelative overflow-hidden ">
