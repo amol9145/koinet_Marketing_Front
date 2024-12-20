@@ -12,6 +12,7 @@ import {
     Tab,
     TabPanel,
 } from "@material-tailwind/react";
+import HomePage from "../assets/HomePage.png"
 
 
 
@@ -23,6 +24,7 @@ function Home() {
 
 
     const [isVisible, setIsVisible] = useState(false);
+    console.log(isVisible)
 
     useEffect(() => {
         const timer = setTimeout(() => setIsVisible(true), 100); // Simulates an animation delay
@@ -180,9 +182,38 @@ function Home() {
     ];
     return (
         <>
+            <section
+                className=" overflow-hidden bg-cover bg-center flex items-center justify-center"
+                style={{
+                    backgroundImage: ` url(${HomePage})`,
+                    height: "100vh",
+
+                }}
+            >
+                <div className="py-12 px-6 md:py-24 md:px-12 mx-auto w-full text-center lg:text-left">
+                    <div className="lg:w-4/5 mx-auto flex flex-col lg:flex-row items-center lg:items-start">
+                        <div className="w-full lg:w-1/2 text-center lg:text-left">
+                            <p className="mb-5 text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-wide">
+                                Want to Expand into Emerging Markets
+                            </p>
+                            <p className="mb-5 text-2xl font-bold text-yellow-400 tracking-wider">
+                                A NEW MARKET?
+                            </p>
+                            <h1 className="mb-4 text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight leading-none text-white">
+                                We <span className="text-red-600">Invest</span> in the World’s{" "}
+                                <span className="text-red-600">Potential</span>
+                            </h1>
+                            <p className="mb-8 text-base md:text-lg lg:text-xl text-yellow-400">
+                                One-stop solution to uncover data from 13+ industries with 50+
+                                countries mapped.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
             {/* Hero Section */}
-            <section  className=" sm_device_height relative flex justify-center items-center sm:h-[60vh] md:h-[100vh] lg:h-screen bg-cover bg-center overflow-hidden bg-fixed">
-                {/* Animated Background SVG */}
+            {/* <section className=" sm_device_height relative flex justify-center items-center sm:h-[60vh] md:h-[100vh] lg:h-screen bg-cover bg-center overflow-hidden bg-fixed">
+
                 <div className="absolute inset-0">
                     <svg
                         className="w-full h-full"
@@ -197,7 +228,7 @@ function Home() {
                             </radialGradient>
                         </defs>
                         <rect x="0" y="0" width="100%" height="100%" fill="url(#radialGradient)" />
-                        {/* Pulse Rings */}
+
                         <circle cx="400" cy="300" r="50" fill="none" stroke="white" strokeWidth="3">
                             <animate attributeName="r" from="50" to="800" dur="2s" repeatCount="indefinite" />
                             <animate attributeName="opacity" from="1" to="0" dur="4s" repeatCount="indefinite" />
@@ -208,14 +239,12 @@ function Home() {
                         </circle>
                     </svg>
                 </div>
-
-                {/* Animated Content */}
                 <div
                     className={`relative z-20 mx-auto text-center transition-all duration-1000 ease-in-out ${isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-10 scale-90"
                         }`}
                 >
                     <p className="mb-5 lg:text-5xl md:text-4xl text-3xl font-bold text-white animate-slideDown tracking-wide">
-                    Want to Expand into Emerging Markets
+                        Want to Expand into Emerging Markets
                     </p>
                     <p className="mb-5 text-2xl font-bold text-yellow-400 animate-slideUp tracking-wider">
                         A NEW MARKET?
@@ -228,10 +257,8 @@ function Home() {
                         One-stop solution to uncover data from 13+ industries with 50+ countries mapped
                     </p>
                 </div>
-
-                {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black"></div>
-            </section>
+            </section> */}
 
             {/* INTRO SECTION */}
             <section className="text-gray-800 body-fontrelative overflow-hidden ">

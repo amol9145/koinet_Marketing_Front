@@ -168,7 +168,7 @@ function Infographics() {
                                         {/* Twitter Share */}
                                         <button
                                             type="button"
-                                            className="text-white bg-[#1DA1F2] hover:bg-[#1DA1F2]/90 focus:ring-4 focus:outline-none focus:ring-[#1DA1F2]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1DA1F2]/55 me-2 mb-2"
+                                            className="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300  font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 mb-2"
                                             onClick={() =>
                                                 window.open(
                                                     'https://twitter.com/intent/tweet?text=Check%20this%20out!',
