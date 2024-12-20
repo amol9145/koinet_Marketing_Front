@@ -133,11 +133,10 @@ const Login = () => {
             </span>
           </div>
           {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
-          <button
-            type="submit"
-            className="w-full bg-gradient-to-r from-blue-400 to-indigo-400 text-white py-3 rounded-lg shadow-lg hover:opacity-90 focus:ring-4 focus:ring-blue-300 transition"
-          >
-            Log-In
+          <button type="submit" className=" w-full mt-3 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+            <span className=" text-white relative px-5 py-2.5 transition-all ease-in duration-75  rounded-md group-hover:bg-opacity-0">
+              Log-In
+            </span>
           </button>
         </form>
       </div>
