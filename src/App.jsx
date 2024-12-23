@@ -12,6 +12,7 @@ import OrdersList from "./Dashboard/OrdersList";
 import OrderDetails from "./Dashboard/OrderDetails";
 import Register from "./View/Subpages/Register";
 
+
 // Lazy loading components
 const Home = lazy(() => import("./View/Home"));
 const GDPR = lazy(() => import("./View/footer/GDPR"));
@@ -36,6 +37,9 @@ const CreateReport = lazy(() => import("./Dashboard/Createreports"));
 const HomeDashboard = lazy(() => import("./Dashboard/HomeDashboard"));
 
 function App() {
+  const isAuthenticated = () => {
+    return localStorage.getItem('token') // Example: check if a token exists
+  };
   return (
     <BrowserRouter>
       <HeadNavbar />
@@ -62,15 +66,21 @@ function App() {
           <Route path="/infographics/viewInfographics/:id" element={<ViewInfographics />} />
           <Route path="/whoweare" element={<WhoWeAre />} />
           <Route path="/advisory" element={<Advisory />} />
-          <Route path="/dashboard" element={<HomeDashboard />} />
-          <Route path="/create_report" element={<CreateReports />} />
-          <Route path="/create_press_release" element={<CreatePressRelease />} />
-          <Route path="/createinfographics" element={<CreateInfographics />} />
           <Route path="/report_billing/:id" element={<Billing />} />
           <Route path="/view_press_release/:id" element={<ViewPressRelease />} />
-          <Route path="/order_list" element={<OrdersList />} />
-          <Route path="/order_details/:id" element={<OrderDetails />} />
           <Route path="/register" element={<Register />} />
+          {isAuthenticated() && (
+            <>
+              <Route path="/dashboard" element={<HomeDashboard />} />
+              <Route path="/create_report" element={<CreateReports />} />
+              <Route path="/create_press_release" element={<CreatePressRelease />} />
+              <Route path="/createinfographics" element={<CreateInfographics />} />
+              <Route path="/order_list" element={<OrdersList />} />
+              <Route path="/order_details/:id" element={<OrderDetails />} />
+            </>
+          )}
+
+
         </Routes>
       </Suspense>
       <Footer />

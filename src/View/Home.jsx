@@ -13,16 +13,10 @@ import {
     TabPanel,
 } from "@material-tailwind/react";
 import HomePage from "../assets/HomePage.png"
-
-
-
 function Home() {
     const [currentIndex, setCurrentIndex] = useState(0);
     // const [visibleCards, setVisibleCards] = useState([0, 1, 2]);
     const [activeIndex, setActiveIndex] = useState(null);
-
-
-
     const [isVisible, setIsVisible] = useState(false);
     console.log(isVisible)
 
@@ -30,11 +24,6 @@ function Home() {
         const timer = setTimeout(() => setIsVisible(true), 100); // Simulates an animation delay
         return () => clearTimeout(timer);
     }, []);
-
-
-
-
-
     const toggleAccordion = (index) => {
         setActiveIndex(activeIndex === index ? null : index);
     };

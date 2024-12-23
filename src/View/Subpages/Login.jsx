@@ -29,7 +29,7 @@ const Login = () => {
         localStorage.setItem("token", response.data.token);
 
         // Navigate to dashboard
-        navigate("/Dashboard");
+        navigate("/dashboard");
       }
     } catch (err) {
       // Set error message

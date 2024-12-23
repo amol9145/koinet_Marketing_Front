@@ -185,7 +185,7 @@ const ViewPressRelease = () => {
             <div className="mt-10 bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300">
                 <h3 className="text-2xl font-semibold text-sky-900 mb-4">Recent Market Research Reports</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    {pressReleases.map((release, index) => (
+                    {pressReleases.slice(0, 2).map((release, index) => (
                         <div key={index} className="bg-gray-50 rounded-lg p-4 shadow-sm hover:shadow-md transition duration-200">
                             <h4 className="text-lg font-medium text-gray-800">{release.title}</h4>
                             <p className="text-sm text-gray-500">
