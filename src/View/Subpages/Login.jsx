@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "../../Constant/ConstantFiles";
 
@@ -8,7 +7,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -27,9 +25,8 @@ const Login = () => {
       if (response.status === 200) {
         // Save token to localStorage
         localStorage.setItem("token", response.data.token);
-
         // Navigate to dashboard
-        navigate("/dashboard");
+        window.location.href = "/dashboard";
       }
     } catch (err) {
       // Set error message

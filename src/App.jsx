@@ -36,10 +36,29 @@ const Allexpertise = lazy(() => import("./View/Subpages/Allexpertise"));
 const CreateReport = lazy(() => import("./Dashboard/Createreports"));
 const HomeDashboard = lazy(() => import("./Dashboard/HomeDashboard"));
 
+
+
 function App() {
+
   const isAuthenticated = () => {
-    return localStorage.getItem('token') // Example: check if a token exists
+    return localStorage.getItem('token');
   };
+
+  // Check if redirection has already happened
+  const hasRedirected = localStorage.getItem('hasRedirected');
+
+  setTimeout(() => {
+    if (!isAuthenticated() && !hasRedirected) {
+      localStorage.setItem('hasRedirected', 'true'); // Mark as redirected
+      window.location.href = "/login";
+    }
+  }, 100);
+
+  // Clear the redirect flag on successful authentication
+  if (isAuthenticated() && hasRedirected) {
+    localStorage.removeItem('hasRedirected');
+  }
+
   return (
     <BrowserRouter>
       <HeadNavbar />

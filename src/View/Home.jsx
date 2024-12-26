@@ -24,6 +24,7 @@ function Home() {
         const timer = setTimeout(() => setIsVisible(true), 100); // Simulates an animation delay
         return () => clearTimeout(timer);
     }, []);
+
     const toggleAccordion = (index) => {
         setActiveIndex(activeIndex === index ? null : index);
     };
