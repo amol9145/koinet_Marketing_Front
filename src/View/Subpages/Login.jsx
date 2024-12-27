@@ -25,7 +25,7 @@ const Login = () => {
       })
       .catch(() => { });
   };
-  
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r p-5 relative overflow-hidden mt-9">
