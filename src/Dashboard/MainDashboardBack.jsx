@@ -300,31 +300,31 @@ const MainDashboardBack = () => {
                 <h1 className="text-3xl font-bold mb-8 text-start text-white bg-blue-700 py-4">Dashboard</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                     <div
-                        className="bg-white p-4 rounded-lg shadow-md transition-transform transform hover:scale-105 cursor-pointer"
+                        className="bg-white p-2 rounded-lg shadow-md transition-transform transform hover:scale-105 cursor-pointer"
                         onClick={() => toggleModal('reports')}
                     >
-                        <h2 className="text-lg font-semibold text-gray-800">Total Reports</h2>
+                        <h2 className="text-sm font-semibold text-gray-800">Total Reports</h2>
                         <p className="text-4xl font-bold text-indigo-500">{reportCount}</p>
                     </div>
                     <div
-                        className="bg-white p-4 rounded-lg shadow-md transition-transform transform hover:scale-105 cursor-pointer"
+                        className="bg-white p-2 rounded-lg shadow-md transition-transform transform hover:scale-105 cursor-pointer"
                         onClick={() => toggleModal('press')}
                     >
-                        <h2 className="text-lg font-semibold text-gray-800">Press Releases</h2>
+                        <h2 className="text-sm font-semibold text-gray-800">Press Releases</h2>
                         <p className="text-4xl font-bold text-indigo-500">{pressReleaseCount}</p>
                     </div>
                     <div
-                        className="bg-white p-4 rounded-lg shadow-md transition-transform transform hover:scale-105 cursor-pointer"
+                        className="bg-white p-2 rounded-lg shadow-md transition-transform transform hover:scale-105 cursor-pointer"
                         onClick={() => toggleModal('infographics')}
                     >
-                        <h2 className="text-lg font-semibold text-gray-800">Infographics</h2>
+                        <h2 className="text-sm font-semibold text-gray-800">Infographics</h2>
                         <p className="text-4xl font-bold text-indigo-500">{infographicCount}</p>
                     </div>
                     <div
-                        className="bg-white p-4 rounded-lg shadow-md transition-transform transform hover:scale-105 cursor-pointer"
+                        className="bg-white p-2 rounded-lg shadow-md transition-transform transform hover:scale-105 cursor-pointer"
                         onClick={() => toggleModal('contact')}
                     >
-                        <h2 className="text-lg font-semibold text-gray-800">Contact Form Submissions</h2>
+                        <h2 className="text-sm font-semibold text-gray-800">Contact Form Submissions</h2>
                         <p className="text-4xl font-bold text-indigo-500">{contactSubmissionsCount}</p>
                     </div>
                 </div>
