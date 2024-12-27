@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../../redux/slices/loginuser/authuser";
 
 const Login = () => {
@@ -9,7 +7,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const { error } = useSelector((state) => state.auth);
 
   const togglePasswordVisibility = () => {
@@ -21,7 +19,8 @@ const Login = () => {
     dispatch(loginUser({ email, password }))
       .unwrap()
       .then(() => {
-        navigate("/dashboard");
+        window.location.href = "/dashboard";
+        // navigate("/dashboard");
       })
       .catch(() => { });
   };
