@@ -51,10 +51,8 @@ function App() {
       localStorage.removeItem('hasRedirected');
     }
   };
-
   // Execute after a short delay
   setTimeout(handleRedirection, 100);
-
 
   return (
     <BrowserRouter>
