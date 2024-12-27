@@ -5,6 +5,7 @@ import { loginUser } from "../../../redux/slices/loginuser/authuser";
 const Login = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Add loading state
   const dispatch = useDispatch();
   const { error } = useSelector((state) => state.auth);
 
@@ -20,10 +21,15 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    setIsLoading(true); // Set loading to true when login is submitted
     dispatch(loginUser(credentials))
       .unwrap()
-      .then(() => window.location.href = "/dashboard")
-      .catch(() => { });
+      .then(() => {
+        window.location.href = "/dashboard";
+      })
+      .catch(() => {
+        setIsLoading(false); // Set loading to false if there's an error
+      });
   };
 
   const renderPasswordIcon = () => (
@@ -123,9 +129,10 @@ const Login = () => {
           <button
             type="submit"
             className="w-full mt-3 inline-flex items-center justify-center p-0.5 mb-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-200"
+            disabled={isLoading} // Disable button while loading
           >
             <span className="text-white relative px-5 py-2.5 transition-all ease-in duration-75 rounded-md group-hover:bg-opacity-0">
-              Log-In
+              {isLoading ? "Login..." : "Log-In"} {/* Display Login... while loading */}
             </span>
           </button>
         </form>

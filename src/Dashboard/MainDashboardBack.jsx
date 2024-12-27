@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Bar, Doughnut } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
@@ -10,6 +10,11 @@ import {
     Legend,
     ArcElement,
 } from 'chart.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchReports } from '../../redux/slices/ReportSlice';
+import { fetchPressReleases } from '../../redux/slices/PressRelesead';
+import { fetchInfographics } from '../../redux/slices/Infographicsslice';
+import { fetchContactData } from '../../redux/slices/GetContactForm';
 
 
 
@@ -24,11 +29,27 @@ ChartJS.register(
 );
 
 const MainDashboardBack = () => {
+    const dispatch = useDispatch();
+    const { data: reports } = useSelector((state) => state.reports);
+    const { data: pressReleases } = useSelector((state) => state.pressReleases);
+    const { data: infographics } = useSelector((state) => state.infographics);
+    const { data: contacts } = useSelector((state) => state.contactForm);
+
+
+    useEffect(() => {
+        dispatch(fetchPressReleases());
+        dispatch(fetchReports());
+        dispatch(fetchInfographics());
+        dispatch(fetchContactData());
+    }, [dispatch]);
+
+
+    ;
     // Sample data for demonstration
-    const reportCount = 50;
-    const pressReleaseCount = 20;
-    const infographicCount = 30;
-    const contactSubmissionsCount = 15;
+    const reportCount = reports.length;
+    const pressReleaseCount = pressReleases.length;
+    const infographicCount = infographics.length;
+    const contactSubmissionsCount = contacts.length;
 
     const monthlySalesData = [10, 20, 30, 25, 40, 50, 35, 60, 70, 55, 45, 80];
     const monthlyRevenueData = [1000, 2000, 1500, 3000, 2500, 4000, 3500, 4500, 6000, 5000, 7000, 8000];

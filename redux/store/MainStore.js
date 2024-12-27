@@ -9,7 +9,8 @@ import viewpressReleaseReducer from "../slices/ViewPressReleased";
 import createinfographicsReducer from "../slices/createinfographics/NewInfographicsslice";
 import createpressReleaseReducer from "../slices/createpressreleased/createpressreleased";
 import createreportReducer from "../slices/createreport/createnewreport";
-import authReducer from "../slices/loginuser/authuser"
+import authReducer from "../slices/loginuser/authuser";
+import contactFormReducer from "../slices/GetContactForm"
 
 const store = configureStore({
     reducer: {
@@ -24,6 +25,8 @@ const store = configureStore({
         createpressRelease: createpressReleaseReducer,
         createnewreport: createreportReducer,
         auth: authReducer,
+        contactForm: contactFormReducer,
+
     },
 });
 
