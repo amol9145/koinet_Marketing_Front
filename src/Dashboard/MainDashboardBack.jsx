@@ -35,35 +35,24 @@ const MainDashboardBack = () => {
     const { data: infographics } = useSelector((state) => state.infographics);
     const { data: contacts } = useSelector((state) => state.contactForm);
 
-
     useEffect(() => {
         dispatch(fetchPressReleases());
         dispatch(fetchReports());
         dispatch(fetchInfographics());
         dispatch(fetchContactData());
     }, [dispatch]);
-
-
     ;
     // Sample data for demonstration
     const reportCount = reports.length;
     const pressReleaseCount = pressReleases.length;
     const infographicCount = infographics.length;
     const contactSubmissionsCount = contacts.length;
-
     const monthlySalesData = [10, 20, 30, 25, 40, 50, 35, 60, 70, 55, 45, 80];
     const monthlyRevenueData = [1000, 2000, 1500, 3000, 2500, 4000, 3500, 4500, 6000, 5000, 7000, 8000];
     const monthlyDownloadsData = [5, 15, 10, 20, 25, 30, 35, 40, 45, 50, 55, 60]; // Downloads data
-
     // Modal state management
     const [modalType, setModalType] = useState(null); // 'reports', 'press', 'infographics', 'contact'
     const [isModalOpen, setIsModalOpen] = useState(false);
-
-
-
-
-
-
     const data = {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [
@@ -292,9 +281,7 @@ const MainDashboardBack = () => {
             },
         ],
     };
-
     return (
-
         <>
             <div className="container mx-auto p-5">
                 <h1 className="text-3xl font-bold mb-8 text-start text-white bg-blue-700 py-4">Dashboard</h1>
