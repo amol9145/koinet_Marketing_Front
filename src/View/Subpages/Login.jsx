@@ -3,33 +3,71 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../../redux/slices/loginuser/authuser";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
-
   const { error } = useSelector((state) => state.auth);
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCredentials((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
+
+  const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
 
   const handleLogin = (e) => {
     e.preventDefault();
-    dispatch(loginUser({ email, password }))
+    dispatch(loginUser(credentials))
       .unwrap()
-      .then(() => {
-        window.location.href = "/dashboard";
-        // navigate("/dashboard");
-      })
+      .then(() => window.location.href = "/dashboard")
       .catch(() => { });
   };
 
+  const renderPasswordIcon = () => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-5 w-5"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
+      {showPassword ? (
+        <>
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+          />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-.465 1.428-1.402 2.684-2.616 3.575M12 19c-4.478 0-8.268-2.943-9.542-7-.465-1.428-1.402-2.684-2.616-3.575"
+          />
+        </>
+      ) : (
+        <>
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7-.465-1.428-1.402-2.684-2.616-3.575"
+          />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M21 12c0-3.828-3.134-7-7-7-3.867 0-7 3.172-7 7 0 3.828 3.134 7 7 7 1.367 0 2.647-.407 3.735-1.105"
+          />
+        </>
+      )}
+    </svg>
+  );
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r p-5 relative overflow-hidden mt-9">
-      {/* Content */}
-      <div className="bg-white border-2 rounded-lg shadow-lg p-4 w-full max-w-md relative z-10">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r p-5 mt-9">
+      <div className="bg-white border-2 rounded-lg shadow-lg p-4 w-full max-w-md">
         <div className="flex justify-center mb-6">
           <div className="bg-gradient-to-br from-indigo-300 to-blue-200 p-4 rounded-full shadow-lg">
             <svg
@@ -48,9 +86,7 @@ const Login = () => {
             </svg>
           </div>
         </div>
-        <h2 className="text-xl font-bold text-gray-800 text-center mb-2">
-          Welcome Back!
-        </h2>
+        <h2 className="text-xl font-bold text-gray-800 text-center mb-2">Welcome Back!</h2>
         <p className="text-sm text-gray-500 text-center mb-6">
           Sign in to access your personalized dashboard.
         </p>
@@ -58,9 +94,10 @@ const Login = () => {
           <div className="mb-4">
             <input
               type="email"
+              name="email"
               placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={credentials.email}
+              onChange={handleChange}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-200 shadow-sm"
               required
             />
@@ -68,9 +105,10 @@ const Login = () => {
           <div className="mb-4 relative">
             <input
               type={showPassword ? "text" : "password"}
+              name="password"
               placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={credentials.password}
+              onChange={handleChange}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-200 shadow-sm"
               required
             />
@@ -78,52 +116,15 @@ const Login = () => {
               onClick={togglePasswordVisibility}
               className="absolute right-3 top-3 text-gray-500 cursor-pointer"
             >
-              {showPassword ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-.465 1.428-1.402 2.684-2.616 3.575M12 19c-4.478 0-8.268-2.943-9.542-7-.465-1.428-1.402-2.684-2.616-3.575"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7-.465-1.428-1.402-2.684-2.616-3.575"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 12c0-3.828-3.134-7-7-7-3.867 0-7 3.172-7 7 0 3.828 3.134 7 7 7 1.367 0 2.647-.407 3.735-1.105"
-                  />
-                </svg>
-              )}
+              {renderPasswordIcon()}
             </span>
           </div>
           {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
-          <button type="submit" className=" w-full mt-3 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
-            <span className=" text-white relative px-5 py-2.5 transition-all ease-in duration-75  rounded-md group-hover:bg-opacity-0">
+          <button
+            type="submit"
+            className="w-full mt-3 inline-flex items-center justify-center p-0.5 mb-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-200"
+          >
+            <span className="text-white relative px-5 py-2.5 transition-all ease-in duration-75 rounded-md group-hover:bg-opacity-0">
               Log-In
             </span>
           </button>
