@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../../redux/slices/loginuser/authuser";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false); // Add loading state
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { error } = useSelector((state) => state.auth);
 
   const togglePasswordVisibility = () => {
@@ -16,21 +18,14 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    setLoading(true); // Set loading to true when the login button is clicked
-
     dispatch(loginUser({ email, password }))
       .unwrap()
       .then(() => {
-        // On successful login, store token in localStorage and navigate to dashboard
-        window.location.href = "/dashboard"; // Navigate to dashboard
+        navigate("/dashboard");
       })
-      .catch((err) => {
-        console.error("Login failed:", err);
-      })
-      .finally(() => {
-        setLoading(false); // Set loading to false after the request is finished
-      });
+      .catch(() => { });
   };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r p-5 relative overflow-hidden mt-9">
@@ -128,14 +123,9 @@ const Login = () => {
             </span>
           </div>
           {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
-          <button
-            type="submit"
-            className={`w-full mt-3 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 ${loading ? "opacity-50 cursor-not-allowed" : ""
-              }`}
-            disabled={loading} // Disable button while loading
-          >
-            <span className="text-white relative px-5 py-2.5 transition-all ease-in duration-75 rounded-md group-hover:bg-opacity-0">
-              {loading ? "Logging In..." : "Log-In"}
+          <button type="submit" className=" w-full mt-3 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+            <span className=" text-white relative px-5 py-2.5 transition-all ease-in duration-75  rounded-md group-hover:bg-opacity-0">
+              Log-In
             </span>
           </button>
         </form>
