@@ -39,25 +39,22 @@ const HomeDashboard = lazy(() => import("./Dashboard/HomeDashboard"));
 
 
 function App() {
-
-  const isAuthenticated = () => {
-    return localStorage.getItem('token');
-  };
-
-  // Check if redirection has already happened
+  const isAuthenticated = () => localStorage.getItem('token');
   const hasRedirected = localStorage.getItem('hasRedirected');
 
-  setTimeout(() => {
+  // Handle redirection logic
+  const handleRedirection = () => {
     if (!isAuthenticated() && !hasRedirected) {
-      localStorage.setItem('hasRedirected', 'true'); // Mark as redirected
+      localStorage.setItem('hasRedirected', 'true');
       window.location.href = "/login";
+    } else if (isAuthenticated() && hasRedirected) {
+      localStorage.removeItem('hasRedirected');
     }
-  }, 100);
+  };
 
-  // Clear the redirect flag on successful authentication
-  if (isAuthenticated() && hasRedirected) {
-    localStorage.removeItem('hasRedirected');
-  }
+  // Execute after a short delay
+  setTimeout(handleRedirection, 100);
+
 
   return (
     <BrowserRouter>

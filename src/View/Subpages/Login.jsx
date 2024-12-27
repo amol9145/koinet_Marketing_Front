@@ -1,38 +1,31 @@
 import { useState } from "react";
-import axios from "axios";
-import { baseUrl } from "../../Constant/ConstantFiles";
+import { useDispatch, useSelector } from "react-redux";
+
+import { useNavigate } from "react-router-dom";
+import { loginUser } from "../../../redux/slices/loginuser/authuser";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { error } = useSelector((state) => state.auth);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    setError(null); // Clear previous errors
-
-    try {
-      const response = await axios.post(`${baseUrl}/login`, {
-        email,
-        password,
-      });
-
-      if (response.status === 200) {
-        // Save token to localStorage
-        localStorage.setItem("token", response.data.token);
-        // Navigate to dashboard
-        window.location.href = "/dashboard";
-      }
-    } catch (err) {
-      // Set error message
-      setError(err.response?.data?.message || "Login failed. Try again.");
-    }
+    dispatch(loginUser({ email, password }))
+      .unwrap()
+      .then(() => {
+        navigate("/dashboard");
+      })
+      .catch(() => { });
   };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r p-5 relative overflow-hidden mt-9">

@@ -107,10 +107,35 @@ function LatestReport() {
                         <option value="Agriculture and Agri Inputs">Agriculture and Agri Inputs</option>
                         <option value="Animal Nutrition & Health">Animal Nutrition & Health</option>
                         <option value="Automotive and Transportation">Automotive and Transportation</option>
-                        <option value="Building & Construction, Infrastructure">
-                            Building & Construction, Infrastructure
-                        </option>
+                        <option value="Building & Construction, Infrastructure">Building & Construction, Infrastructure</option>
+                        <option value="Aviation">Aviation</option>
+                        <option value="Battery">Battery</option>
+                        <option value="Biotechnology">Biotechnology</option>
+                        <option value="Chemical And Materials">Chemical And Materials</option>
+                        <option value="Coating">Coating</option>
+                        <option value="Construction">Construction</option>
+                        <option value="Consumer Goods">Consumer Goods</option>
+                        <option value="Cryptocurrency">Cryptocurrency</option>
+                        <option value="Diabetes">Diabetes</option>
+                        <option value="DNA">DNA</option>
+                        <option value="Electronics And Telecommunication">Electronics And Telecommunication</option>
+                        <option value="Energy And Mining">Energy And Mining</option>
+                        <option value="Food And Beverage">Food And Beverage</option>
+                        <option value="Healthcare">Healthcare</option>
+                        <option value="Heavy Industry">Heavy Industry</option>
+                        <option value="Medical Device">Medical Device</option>
+                        <option value="Packaging">Packaging</option>
+                        <option value="Pharmaceutical">Pharmaceutical</option>
+                        <option value="Polymer">Polymer</option>
+                        <option value="Security">Security</option>
+                        <option value="Semiconductor">Semiconductor</option>
+                        <option value="Sensors">Sensors</option>
+                        <option value="Technology And Media">Technology And Media</option>
+                        <option value="Vaccines">Vaccines</option>
+                        <option value="Vegan">Vegan</option>
+                        <option value="Warehouse Automation">Warehouse Automation</option>
                     </select>
+
                 </form>
             </section>
             <hr className="bg-gray-950 py-2" />

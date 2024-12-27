@@ -9,6 +9,7 @@ import viewpressReleaseReducer from "../slices/ViewPressReleased";
 import createinfographicsReducer from "../slices/createinfographics/NewInfographicsslice";
 import createpressReleaseReducer from "../slices/createpressreleased/createpressreleased";
 import createreportReducer from "../slices/createreport/createnewreport";
+import authReducer from "../slices/loginuser/authuser"
 
 const store = configureStore({
     reducer: {
@@ -22,6 +23,7 @@ const store = configureStore({
         createinfographics: createinfographicsReducer,
         createpressRelease: createpressReleaseReducer,
         createnewreport: createreportReducer,
+        auth: authReducer,
     },
 });
 
