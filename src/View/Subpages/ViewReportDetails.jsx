@@ -68,100 +68,88 @@ function ViewReportDetails() {
             setLoading(false);
         }
     };
- const handlePayment = async () => {
-    if (!selectedLicense || !reportDetails) {
-        alert("Please select a license before proceeding.");
-        return;
-    }
 
-    // Retrieve user token from local storage
-    const token = localStorage.getItem('userToken'); // Ensure you have user authentication in place
-    if (!token) {
-        alert("User is not authenticated. Please log in.");
-        return;
-    }
+    const handlePayment = async () => {
+        if (!selectedLicense || !reportDetails) {
+            alert("Please select a license before proceeding.");
+            return;
+        }
 
-    // Fetch user's IP address
-    let ipAddress;
-    try {
-        const ipResponse = await axios.get('https://api.ipify.org?format=json');
-        ipAddress = ipResponse.data.ip;
-    } catch (error) {
-        console.error("Failed to fetch IP address:", error);
-        alert("Unable to verify your IP address. Please try again.");
-        return;
-    }
+        // Retrieve user token from local storage
+        const token = localStorage.getItem('userToken'); // Ensure you have user authentication in place
+  
 
-    let amount, currency;
-    if (selectedLicense === "single-user") {
-        amount = reportDetails.singleUserPrice * 100; // Convert to paise
-        currency = reportDetails.singleUserCurrency || "INR";
-    } else if (selectedLicense === "multi-user") {
-        amount = reportDetails.multiUserPrice * 100; // Convert to paise
-        currency = reportDetails.multiUserCurrency || "INR";
-    } else if (selectedLicense === "enterprise") {
-        amount = reportDetails.enterprisePrice * 100; // Convert to paise
-        currency = reportDetails.enterpriseCurrency || "INR";
-    }
 
-    try {
-        // Create Razorpay order with token and IP
-        const createOrderResponse = await axios.post(`${baseUrl}/create-order`, {
-            amount,
-            currency,
-            licenseType: selectedLicense,
-            token,
-            ipAddress,
-        });
+        let amount, currency;
+        if (selectedLicense === "single-user") {
+            amount = reportDetails.singleUserPrice * 100; // Convert to paise
+            currency = reportDetails.singleUserCurrency || "INR";
+        } else if (selectedLicense === "multi-user") {
+            amount = reportDetails.multiUserPrice * 100; // Convert to paise
+            currency = reportDetails.multiUserCurrency || "INR";
+        } else if (selectedLicense === "enterprise") {
+            amount = reportDetails.enterprisePrice * 100; // Convert to paise
+            currency = reportDetails.enterpriseCurrency || "INR";
+        }
 
-        const { id: order_id, amount: orderAmount, currency: orderCurrency } = createOrderResponse.data.data;
+        try {
+            // Create Razorpay order with token and IP
+            const createOrderResponse = await axios.post(`${baseUrl}/create-order`, {
+                amount,
+                currency,
+                licenseType: selectedLicense,
+                token,
 
-        const options = {
-            key: "rzp_test_cUDdmmAIerYlSG",
-            amount: orderAmount,
-            currency: orderCurrency,
-            name: "Report Purchase",
-            description: `Purchase ${selectedLicense} license`,
-            order_id,
-            handler: async (response) => {
-                const { razorpay_payment_id, razorpay_signature } = response;
+            });
 
-                try {
-                    const verifyResponse = await axios.post(`${baseUrl}/verify-payment`, {
-                        razorpay_order_id: order_id,
-                        razorpay_payment_id,
-                        razorpay_signature,
-                        token,
-                        ipAddress,
-                    });
+            const { id: order_id, amount: orderAmount, currency: orderCurrency } = createOrderResponse.data.data;
 
-                    alert(verifyResponse.data.message);
-                } catch (error) {
-                    console.error("Payment verification failed:", error);
-                    alert("Payment verification failed! Please contact support.");
-                }
-            },
-            prefill: {
-                name: "Customer Name",
-                email: "customer@example.com",
-            },
-            theme: {
-                color: "#3399cc",
-            },
-        };
+            const options = {
+                key: "rzp_test_cUDdmmAIerYlSG",
+                amount: orderAmount,
+                currency: orderCurrency,
+                name: "Report Purchase",
+                description: `Purchase ${selectedLicense} license`,
+                order_id,
+                handler: async (response) => {
+                    const { razorpay_payment_id, razorpay_signature } = response;
 
-        const razorpayInstance = new Razorpay(options);
-        razorpayInstance.open();
+                    try {
+                        const verifyResponse = await axios.post(`${baseUrl}/verify-payment`, {
+                            razorpay_order_id: order_id,
+                            razorpay_payment_id,
+                            razorpay_signature,
+                            token,
 
-        razorpayInstance.on("payment.failed", (response) => {
-            console.error("Payment failed:", response.error);
-            alert("Payment failed! Please try again.");
-        });
-    } catch (error) {
-        console.error("Error creating order:", error);
-        alert("Unable to create payment order. Please try again later.");
-    }
-};
+                        });
+
+                        alert(verifyResponse.data.message);
+                    } catch (error) {
+                        console.error("Payment verification failed:", error);
+                        alert("Payment verification failed! Please contact support.");
+                    }
+                },
+                prefill: {
+                    name: "Customer Name",
+                    email: "customer@example.com",
+                },
+                theme: {
+                    color: "#3399cc",
+                },
+            };
+
+            const razorpayInstance = new Razorpay(options);
+            razorpayInstance.open();
+
+            razorpayInstance.on("payment.failed", (response) => {
+                console.error("Payment failed:", response.error);
+                alert("Payment failed! Please try again.");
+            });
+        } catch (error) {
+            console.error("Error creating order:", error);
+            alert("Unable to create payment order. Please try again later.");
+        }
+    };
 
 
     if (!reportDetails) {
