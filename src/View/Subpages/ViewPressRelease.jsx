@@ -105,6 +105,11 @@ const ViewPressRelease = () => {
                                 <h3 className="text-2xl font-semibold mb-4">Get in <span className="text-blue-800">Touch</span> with Us</h3>
                                 <p className="mb-4">Were here to help! Fill out the form below, and our market research team will get back to you shortly.</p>
                                 <form className="space-y-4" ref={form} onSubmit={handleSendEmail}>
+                                    <input
+                                        type="hidden"
+                                        name="report_title"
+                                        value={pressRelease.category}
+                                    />
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div>
                                             <label className="block font-medium mb-1">Name</label>
