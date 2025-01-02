@@ -209,6 +209,11 @@ function ViewReportDetails() {
                                     </p>
 
                                     <form className="space-y-4" ref={form} onSubmit={sendEmail}>
+                                        <input
+                                            type="hidden"
+                                            name="report_title"
+                                            value={reportDetails.category}
+                                        />
                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             <div>
                                                 <label className="block font-medium mb-1">Name</label>
