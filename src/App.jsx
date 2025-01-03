@@ -11,6 +11,7 @@ import ViewPressRelease from "./View/Subpages/ViewPressRelease";
 import OrdersList from "./Dashboard/OrdersList";
 import OrderDetails from "./Dashboard/OrderDetails";
 import Register from "./View/Subpages/Register";
+import InfoBilling from "./View/Subpages/InfoBilling";
 
 
 // Lazy loading components
@@ -68,6 +69,7 @@ function App() {
           <Route path="/whoweare" element={<WhoWeAre />} />
           <Route path="/advisory" element={<Advisory />} />
           <Route path="/latest_reports/viewreportdetails/report_billing/:id" element={<Billing />} />
+          <Route path="/latest_reports/viewinfographics/report_billing/:id" element={<InfoBilling />} />
           <Route path="/view_press_release/:id" element={<ViewPressRelease />} />
           <Route path="/register" element={<Register />} />
           {isAuthenticated() && (

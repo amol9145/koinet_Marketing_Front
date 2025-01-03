@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useRazorpay } from "react-razorpay";
+
 // import emailjs from "emailjs-com";
 import { fetchInfographicById } from "../../../redux/slices/ViewInfographics";
 import { toast } from "react-toastify";
@@ -11,7 +11,7 @@ import { sendEmail } from "../../../redux/slices/ViewPressReleased";
 function ViewInfographics() {
     const { id } = useParams(); // Extract `id` from the URL params
     const dispatch = useDispatch();
-    const { Razorpay } = useRazorpay();
+    const navigate = useNavigate();
 
     // Redux state
     const { data: infographic, loading, error } = useSelector(
@@ -55,43 +55,30 @@ function ViewInfographics() {
 
 
     // Payment handler
-    const handlePayment = () => {
-        if (!selectedLicense || !infographic) {
-            alert("Please select a license before proceeding.");
+
+    const handleRedirect = () => {
+        if (!selectedLicense) {
+            toast.error("Please select a license type before proceeding.");
             return;
         }
 
-        // Determine amount based on the selected license
-        let amount;
+        // Determine the price based on the selected license
+        let price = 0;
         if (selectedLicense === "single-user") {
-            amount = infographic.singleUserPrice * 100; // Convert to paise
+            price = infographic.singleUserPrice;
         } else if (selectedLicense === "multi-user") {
-            amount = infographic.multiUserPrice * 100; // Convert to paise
+            price = infographic.multiUserPrice;
         } else if (selectedLicense === "enterprise") {
-            amount = infographic.enterprisePrice * 100; // Convert to paise
+            price = infographic.enterprisePrice;
         }
 
-        const options = {
-            key: "rzp_test_cUDdmmAIerYlSG", // Replace with your Razorpay test/live key
-            amount, // Amount in paise
-            currency: "INR",
-            name: "Report Purchase",
-            description: `Purchase ${selectedLicense} license`,
-            handler: (response) => {
-                alert(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
-                // Handle post-payment actions like saving payment details in DB
+        navigate(`/latest_reports/viewinfographics/report_billing/${infographic._id}`, {
+            state: {
+                infographic,
+                selectedLicense,
+                price,  // Send the price here
             },
-            prefill: {
-                name: "Customer Name", // Replace with actual user data
-                email: "customer@example.com", // Replace with actual user data
-            },
-            theme: {
-                color: "#3399cc",
-            },
-        };
-
-        const razorpayInstance = new Razorpay(options);
-        razorpayInstance.open();
+        });
     };
 
     // Render conditions
@@ -359,7 +346,7 @@ function ViewInfographics() {
                                     REPORT BUYING OPTIONS
                                 </p>
                                 <div className="mt-5">
-                                    <ul className="text-sm font-medium text-black bg-white border border-gray-200 rounded-lg  dark:border-gray-600  transition-all duration-300 ease-in-out  ">
+                                    <ul className="text-sm font-medium text-black bg-white border border-gray-200 rounded-lg dark:border-gray-600 dark:text-white transition-all duration-300 ease-in-out hover:bg-gray-100">
                                         <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
                                             <div className="flex items-center ps-3">
                                                 <input
@@ -370,7 +357,7 @@ function ViewInfographics() {
                                                     onChange={(e) => setSelectedLicense(e.target.value)}
                                                     className="w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                                 />
-                                                <label className="w-full py-3 ms-2 text-sm font-medium  text-black">
+                                                <label className="w-full py-3 ms-2 text-sm font-medium text-black">
                                                     Single-User License: US$ {infographic.singleUserPrice}
                                                 </label>
                                             </div>
@@ -385,12 +372,12 @@ function ViewInfographics() {
                                                     onChange={(e) => setSelectedLicense(e.target.value)}
                                                     className="w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                                 />
-                                                <label className="w-full py-3 ms-2 text-sm font-medium  text-black">
+                                                <label className="w-full py-3 ms-2 text-sm font-medium text-black">
                                                     Multi-User License: US$ {infographic.multiUserPrice}
                                                 </label>
                                             </div>
                                         </li>
-                                        <li className="w-full border-b border-gray-200 rounded-t-lg ">
+                                        <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
                                             <div className="flex items-center ps-3">
                                                 <input
                                                     id="enterprise-checkbox"
@@ -406,8 +393,11 @@ function ViewInfographics() {
                                             </div>
                                         </li>
                                     </ul>
-                                    <button onClick={handlePayment} className=" mt-3 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
-                                        <span className="  relative px-5 py-2.5 transition-all ease-in duration-75 bg-white text-black rounded-md group-hover:bg-opacity-0">
+                                    <button
+                                        className="mt-3 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800"
+                                        onClick={handleRedirect}
+                                    >
+                                        <span className="relative px-5 py-2.5 transition-all ease-in duration-75 text-black bg-white rounded-md group-hover:bg-opacity-0">
                                             Buy Now
                                         </span>
                                     </button>
