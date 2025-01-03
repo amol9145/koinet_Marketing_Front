@@ -10,7 +10,8 @@ import createinfographicsReducer from "../slices/createinfographics/NewInfograph
 import createpressReleaseReducer from "../slices/createpressreleased/createpressreleased";
 import createreportReducer from "../slices/createreport/createnewreport";
 import authReducer from "../slices/loginuser/authuser";
-import contactFormReducer from "../slices/GetContactForm"
+import contactFormReducer from "../slices/GetContactForm";
+import reportDetailsReducer from "../slices/createreport/ViewReportDetails"
 
 const store = configureStore({
     reducer: {
@@ -26,6 +27,7 @@ const store = configureStore({
         createnewreport: createreportReducer,
         auth: authReducer,
         contactForm: contactFormReducer,
+        reportDetails: reportDetailsReducer,
 
     },
 });

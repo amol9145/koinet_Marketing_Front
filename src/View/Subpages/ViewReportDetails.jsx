@@ -1,166 +1,80 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, useParams } from "react-router-dom"; // For accessing URL params
-import axios from "axios"; // For making API calls
-// import ReCAPTCHA from "react-google-recaptcha";
-import { baseUrl } from "../../Constant/ConstantFiles";
-import { useRazorpay } from "react-razorpay";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchReportDetails, sendEmail } from "../../../redux/slices/createreport/ViewReportDetails";
 import { toast } from "react-toastify";
 
-
 function ViewReportDetails() {
-    const { Razorpay } = useRazorpay();
-    const { id } = useParams(); // Get the report ID from the URL
-    const [reportDetails, setReportDetails] = useState(null);
+
+    const { id } = useParams();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const { reportDetails, loading } = useSelector((state) => state.reportDetails);
     const [activeTab, setActiveTab] = useState("summary");
     const [selectedLicense, setSelectedLicense] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-
-    const [loading, setLoading] = useState(false); // State for loading status
-
+    console.log(reportDetails)
     const form = useRef();
-    // Function to open the modal
-    const handleOpenModal = () => {
-        setIsModalOpen(true);
-    };
-    // Function to close the modal
-    const handleCloseModal = () => {
-        setIsModalOpen(false);
-    };
 
-
+    // Open Modal
+    const handleOpenModal = () => setIsModalOpen(true);
+    const handleCloseModal = () => setIsModalOpen(false);
 
     useEffect(() => {
-        // Fetch report details by ID
-        const fetchReportDetails = async () => {
-            try {
-                const response = await axios.get(`${baseUrl}/get_report/${id}`);
-                setReportDetails(response.data.data); // Store fetched data in state
-            } catch (error) {
-                console.error("Error fetching report:", error);
-            }
-        };
-
         if (id) {
-            fetchReportDetails();
+            dispatch(fetchReportDetails(id));
         }
-    }, [id, baseUrl]);
+    }, [id, dispatch]);
 
-    const sendEmail = async (e) => {
+    const handleSendEmail = async (e) => {
         e.preventDefault();
-
-        setLoading(true);
-
-
         const formData = new FormData(form.current);
-
-        // Append the link to the form data
         formData.append("user_link", "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf");
-
         try {
-            const response = await axios.post(`${baseUrl}/send-email`, Object.fromEntries(formData));
-            toast.success(response.data.message);
+            await dispatch(sendEmail(Object.fromEntries(formData))).unwrap();
+            toast.success("Email sent successfully");
             form.current.reset();
-
         } catch (error) {
-            toast.error(error);
-            console.error(error);
-        } finally {
-            setLoading(false);
+            toast.error(error || "Failed to send email");
         }
     };
 
-    const handlePayment = async () => {
-        if (!selectedLicense || !reportDetails) {
-            alert("Please select a license before proceeding.");
-            return;
-        }
-
-        // Retrieve user token from local storage
-        const token = localStorage.getItem('userToken'); // Ensure you have user authentication in place
-  
-
-
-        let amount, currency;
-        if (selectedLicense === "single-user") {
-            amount = reportDetails.singleUserPrice * 100; // Convert to paise
-            currency = reportDetails.singleUserCurrency || "INR";
-        } else if (selectedLicense === "multi-user") {
-            amount = reportDetails.multiUserPrice * 100; // Convert to paise
-            currency = reportDetails.multiUserCurrency || "INR";
-        } else if (selectedLicense === "enterprise") {
-            amount = reportDetails.enterprisePrice * 100; // Convert to paise
-            currency = reportDetails.enterpriseCurrency || "INR";
-        }
-
-        try {
-            // Create Razorpay order with token and IP
-            const createOrderResponse = await axios.post(`${baseUrl}/create-order`, {
-                amount,
-                currency,
-                licenseType: selectedLicense,
-                token,
-
-            });
-
-            const { id: order_id, amount: orderAmount, currency: orderCurrency } = createOrderResponse.data.data;
-
-            const options = {
-                key: "rzp_test_cUDdmmAIerYlSG",
-                amount: orderAmount,
-                currency: orderCurrency,
-                name: "Report Purchase",
-                description: `Purchase ${selectedLicense} license`,
-                order_id,
-                handler: async (response) => {
-                    const { razorpay_payment_id, razorpay_signature } = response;
-
-                    try {
-                        const verifyResponse = await axios.post(`${baseUrl}/verify-payment`, {
-                            razorpay_order_id: order_id,
-                            razorpay_payment_id,
-                            razorpay_signature,
-                            token,
-
-                        });
-
-                        alert(verifyResponse.data.message);
-                    } catch (error) {
-                        console.error("Payment verification failed:", error);
-                        alert("Payment verification failed! Please contact support.");
-                    }
-                },
-                prefill: {
-                    name: "Customer Name",
-                    email: "customer@example.com",
-                },
-                theme: {
-                    color: "#3399cc",
-                },
-            };
-
-            const razorpayInstance = new Razorpay(options);
-            razorpayInstance.open();
-
-            razorpayInstance.on("payment.failed", (response) => {
-                console.error("Payment failed:", response.error);
-                alert("Payment failed! Please try again.");
-            });
-        } catch (error) {
-            console.error("Error creating order:", error);
-            alert("Unable to create payment order. Please try again later.");
-        }
-    };
-
-
-    if (!reportDetails) {
+    if (loading || !reportDetails) {
         return <p>Loading...</p>;
     }
+
     function formatDate(dateString) {
         const options = { day: '2-digit', month: 'short', year: 'numeric' };
         const date = new Date(dateString);
-        return date.toLocaleDateString('en-GB', options); // "en-GB" ensures DD MMM YYYY format
+        return date.toLocaleDateString('en-GB', options);
     }
 
+    // Conditional redirect based on license selection
+    const handleRedirect = () => {
+        if (!selectedLicense) {
+            toast.error("Please select a license type before proceeding.");
+            return;
+        }
+
+        // Determine the price based on the selected license
+        let price = 0;
+        if (selectedLicense === "single-user") {
+            price = reportDetails.singleUserPrice;
+        } else if (selectedLicense === "multi-user") {
+            price = reportDetails.multiUserPrice;
+        } else if (selectedLicense === "enterprise") {
+            price = reportDetails.enterprisePrice;
+        }
+
+        navigate(`/latest_reports/viewreportdetails/report_billing/${reportDetails._id}`, {
+            state: {
+                reportDetails,
+                selectedLicense,
+                price,  // Send the price here
+            },
+        });
+    };
     return (
         <>
             <div >
@@ -213,7 +127,7 @@ function ViewReportDetails() {
                                         Were here to help! Fill out the form below, and our market research team will get back to you shortly.
                                     </p>
 
-                                    <form className="space-y-4" ref={form} onSubmit={sendEmail}>
+                                    <form className="space-y-4" ref={form} onSubmit={handleSendEmail}>
                                         <input
                                             type="hidden"
                                             name="report_title"
@@ -398,14 +312,13 @@ function ViewReportDetails() {
                             </div>
                         </div>
 
-                        {/* Report Buying Options Card (Different Color) */}
                         <div className="w-full sm:w-1/2 lg:w-1/4 p-4 transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl hover:shadow-teal-500/50 bg-gradient-to-tl from-indigo-100 to-purple-200 rounded-lg">
                             <div className="h-full text-center bg-white p-5 rounded-lg shadow-lg">
                                 <p className="bg-gradient-to-r from-indigo-400 to-purple-500 text-white p-3 rounded-full text-xs font-semibold tracking-widest uppercase title-font shadow-md">
                                     REPORT BUYING OPTIONS
                                 </p>
                                 <div className="mt-5">
-                                    <ul className="text-sm font-medium text-black bg-white border border-gray-200 rounded-lg  dark:border-gray-600 dark:text-white transition-all duration-300 ease-in-out hover:bg-gray-100 ">
+                                    <ul className="text-sm font-medium text-black bg-white border border-gray-200 rounded-lg dark:border-gray-600 dark:text-white transition-all duration-300 ease-in-out hover:bg-gray-100">
                                         <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
                                             <div className="flex items-center ps-3">
                                                 <input
@@ -416,7 +329,7 @@ function ViewReportDetails() {
                                                     onChange={(e) => setSelectedLicense(e.target.value)}
                                                     className="w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                                 />
-                                                <label className="w-full py-3 ms-2 text-sm font-medium text-black ">
+                                                <label className="w-full py-3 ms-2 text-sm font-medium text-black">
                                                     Single-User License: US$ {reportDetails.singleUserPrice}
                                                 </label>
                                             </div>
@@ -431,7 +344,7 @@ function ViewReportDetails() {
                                                     onChange={(e) => setSelectedLicense(e.target.value)}
                                                     className="w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                                 />
-                                                <label className="w-full py-3 ms-2 text-sm font-medium text-black ">
+                                                <label className="w-full py-3 ms-2 text-sm font-medium text-black">
                                                     Multi-User License: US$ {reportDetails.multiUserPrice}
                                                 </label>
                                             </div>
@@ -446,15 +359,17 @@ function ViewReportDetails() {
                                                     onChange={(e) => setSelectedLicense(e.target.value)}
                                                     className="w-4 h-4 text-teal-500 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                                 />
-                                                <label className="w-full py-3 ms-2 text-sm font-medium text-black ">
+                                                <label className="w-full py-3 ms-2 text-sm font-medium text-black">
                                                     Enterprise License: US$ {reportDetails.enterprisePrice}
                                                 </label>
                                             </div>
                                         </li>
                                     </ul>
-
-                                    <button onClick={handlePayment} className="mt-3 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
-                                        <span className="relative px-5 py-2.5 transition-all ease-in duration-75 text-black bg-white  rounded-md group-hover:bg-opacity-0">
+                                    <button
+                                        className="mt-3 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800"
+                                        onClick={handleRedirect}
+                                    >
+                                        <span className="relative px-5 py-2.5 transition-all ease-in duration-75 text-black bg-white rounded-md group-hover:bg-opacity-0">
                                             Buy Now
                                         </span>
                                     </button>
@@ -465,7 +380,6 @@ function ViewReportDetails() {
                         {/* Download Sample Reports & Customization Options Card */}
                         <div className="w-full sm:w-1/2 lg:w-1/4 p-4 transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl hover:shadow-teal-500/50 bg-gradient-to-tl from-teal-100 to-cyan-200 rounded-lg">
                             <div className="bg-white p-5 rounded-lg shadow-lg">
-
                                 <div>
                                     {/* Button to open the modal */}
                                     <div className="mb-1">

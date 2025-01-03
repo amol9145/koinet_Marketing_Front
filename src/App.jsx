@@ -67,7 +67,7 @@ function App() {
           <Route path="/infographics/viewInfographics/:id" element={<ViewInfographics />} />
           <Route path="/whoweare" element={<WhoWeAre />} />
           <Route path="/advisory" element={<Advisory />} />
-          <Route path="/report_billing/:id" element={<Billing />} />
+          <Route path="/latest_reports/viewreportdetails/report_billing/:id" element={<Billing />} />
           <Route path="/view_press_release/:id" element={<ViewPressRelease />} />
           <Route path="/register" element={<Register />} />
           {isAuthenticated() && (
