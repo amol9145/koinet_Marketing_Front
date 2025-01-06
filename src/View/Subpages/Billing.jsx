@@ -118,8 +118,6 @@ const Billing = () => {
                                     report_title: reportDetails.title,
                                 })
                             ).unwrap();
-
-                            toast.success("Email sent successfully!");
                         } catch (emailError) {
                             console.error("Failed to send email:", emailError);
                             toast.error("Failed to send confirmation email.");

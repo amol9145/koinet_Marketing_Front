@@ -103,7 +103,6 @@ const InfoBilling = () => {
                         });
 
                         alert(verifyResponse.data.message);
-
                         // Send Email After Successful Payment
                         try {
                             await dispatch(
@@ -113,9 +112,7 @@ const InfoBilling = () => {
                                     user_link: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
                                     report_title: infographic.title,
                                 })
-                            ).unwrap();
-
-                            toast.success("Email sent successfully!");
+                            ).unwrap();                          
                         } catch (emailError) {
                             console.error("Failed to send email:", emailError);
                             toast.error("Failed to send confirmation email.");
