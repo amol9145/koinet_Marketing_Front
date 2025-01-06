@@ -3,9 +3,13 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { baseUrl } from "../../Constant/ConstantFiles";
 import Razorpay from "react-razorpay/dist/razorpay";
+import { sendEmail } from "../../../redux/slices/createreport/ViewReportDetails";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
 
 const InfoBilling = () => {
     const location = useLocation();
+    const dispatch = useDispatch();
     const { infographic, selectedLicense } = location.state || {};
     const [billingDetails, setBillingDetails] = useState({
         firstName: "",
@@ -63,6 +67,9 @@ const InfoBilling = () => {
         } else if (selectedLicense === "enterprise") {
             amount = infographic.enterprisePrice * 100;
             currency = infographic.enterpriseCurrency || "INR";
+        } else {
+            alert("Please select a valid license type.");
+            return;
         }
 
         try {
@@ -96,6 +103,24 @@ const InfoBilling = () => {
                         });
 
                         alert(verifyResponse.data.message);
+
+                        // Send Email After Successful Payment
+                        try {
+                            await dispatch(
+                                sendEmail({
+                                    user_name: `${billingDetails.firstName} ${billingDetails.lastName}`,
+                                    user_email: billingDetails.email,
+                                    user_link: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+                                    report_title: infographic.title,
+                                })
+                            ).unwrap();
+
+                            toast.success("Email sent successfully!");
+                        } catch (emailError) {
+                            console.error("Failed to send email:", emailError);
+                            toast.error("Failed to send confirmation email.");
+                        }
+
                     } catch (error) {
                         console.error("Payment verification failed:", error);
                         alert("Payment verification failed! Please contact support.");
