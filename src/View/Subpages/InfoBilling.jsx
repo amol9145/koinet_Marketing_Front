@@ -191,7 +191,7 @@ const InfoBilling = () => {
                     >
                         {!isFormValid()
                             ? "Complete all required fields to proceed with the purchase"
-                            : "Proceed to Payment"}
+                            : `Proceed to Payment : $${price}`}
                     </button>
 
 

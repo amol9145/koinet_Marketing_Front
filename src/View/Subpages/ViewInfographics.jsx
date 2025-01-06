@@ -12,7 +12,6 @@ function ViewInfographics() {
     const { id } = useParams(); // Extract `id` from the URL params
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
     // Redux state
     const { data: infographic, loading, error } = useSelector(
         (state) => state.viewinfographic
@@ -41,7 +40,6 @@ function ViewInfographics() {
         e.preventDefault();
         const formData = new FormData(form.current);
         formData.append("user_link", "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf");
-
         try {
             await dispatch(sendEmail(Object.fromEntries(formData))); // Assuming sendEmail dispatch works asynchronously
             toast.success("Email sent successfully");
