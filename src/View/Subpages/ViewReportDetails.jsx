@@ -14,7 +14,7 @@ function ViewReportDetails() {
     const [activeTab, setActiveTab] = useState("summary");
     const [selectedLicense, setSelectedLicense] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    console.log(reportDetails)
+    // console.log(reportDetails)
     const form = useRef();
 
     // Open Modal

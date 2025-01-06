@@ -3,9 +3,13 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { baseUrl } from "../../Constant/ConstantFiles";
 import Razorpay from "react-razorpay/dist/razorpay";
+import { sendEmail } from "../../../redux/slices/createreport/ViewReportDetails";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
 
 const Billing = () => {
     const location = useLocation();
+    const dispatch = useDispatch();
     const { reportDetails, selectedLicense } = location.state || {};
     const [billingDetails, setBillingDetails] = useState({
         firstName: "",
@@ -33,8 +37,6 @@ const Billing = () => {
         ? `${selectedLicense.charAt(0).toUpperCase() + selectedLicense.slice(1)} License`
         : "No License Selected";
 
-
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setBillingDetails((prev) => ({
@@ -53,18 +55,25 @@ const Billing = () => {
             return;
         }
 
-        const token = localStorage.getItem('userToken');
+        const token = localStorage.getItem("userToken");
         let amount, currency;
 
-        if (selectedLicense === "single-user") {
-            amount = reportDetails.singleUserPrice * 100; // Convert to paise
-            currency = reportDetails.singleUserCurrency || "INR";
-        } else if (selectedLicense === "multi-user") {
-            amount = reportDetails.multiUserPrice * 100;
-            currency = reportDetails.multiUserCurrency || "INR";
-        } else if (selectedLicense === "enterprise") {
-            amount = reportDetails.enterprisePrice * 100;
-            currency = reportDetails.enterpriseCurrency || "INR";
+        switch (selectedLicense) {
+            case "single-user":
+                amount = reportDetails.singleUserPrice * 100;
+                currency = reportDetails.singleUserCurrency || "INR";
+                break;
+            case "multi-user":
+                amount = reportDetails.multiUserPrice * 100;
+                currency = reportDetails.multiUserCurrency || "INR";
+                break;
+            case "enterprise":
+                amount = reportDetails.enterprisePrice * 100;
+                currency = reportDetails.enterpriseCurrency || "INR";
+                break;
+            default:
+                alert("Please select a valid license type.");
+                return;
         }
 
         try {
@@ -98,6 +107,23 @@ const Billing = () => {
                         });
 
                         alert(verifyResponse.data.message);
+
+                        // Send Email After Successful Payment
+                        try {
+                            await dispatch(
+                                sendEmail({
+                                    user_name: `${billingDetails.firstName} ${billingDetails.lastName}`,
+                                    user_email: billingDetails.email,
+                                    user_link: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+                                    report_title: reportDetails.title,
+                                })
+                            ).unwrap();
+
+                            toast.success("Email sent successfully!");
+                        } catch (emailError) {
+                            console.error("Failed to send email:", emailError);
+                            toast.error("Failed to send confirmation email.");
+                        }
                     } catch (error) {
                         console.error("Payment verification failed:", error);
                         alert("Payment verification failed! Please contact support.");
