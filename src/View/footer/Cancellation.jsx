@@ -34,8 +34,8 @@ function Cancellation() {
                         </li>
                         <li>
                             <strong>The Website:</strong> Refers to{" "}
-                            <a href="https://intentmarketresearch.com/" className="text-blue-600 underline">
-                                https://intentmarketresearch.com/
+                            <a href="#" className="text-blue-600 underline">
+                                https://koinetmarketresearch.com
                             </a>
                             .
                         </li>

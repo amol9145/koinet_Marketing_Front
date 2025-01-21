@@ -19,16 +19,16 @@ const Footer = () => {
                         <h2 className="title-font font-medium text-white tracking-widest text-lg mb-3 text-start">Services</h2>
                         <nav className="list-none mb-10 text-start ">
                             <li>
-                                <a className="text-gray-300 cursor-pointer hover:text-white" >Latest Reports</a>
+                                <Link to={"/latest_reports"} className="text-gray-300 cursor-pointer hover:text-white" >Latest Reports</Link>
                             </li>
                             <li>
-                                <a className="text-gray-300 cursor-pointer hover:text-white">Advisory Services</a>
+                                <Link to={"/advisory"} className="text-gray-300 cursor-pointer hover:text-white">Advisory Services</Link>
                             </li>
                             <li>
-                                <a className="text-gray-300 cursor-pointer hover:text-white">Emerging Technologies</a>
+                                <Link to={"#"} className="text-gray-300 cursor-pointer hover:text-white">Emerging Technologies</Link>
                             </li>
                             <li>
-                                <a className="text-gray-300 cursor-pointer hover:text-white">Customer Research</a>
+                                <Link to={"#"} className="text-gray-300 cursor-pointer hover:text-white">Customer Research</Link>
                             </li>
                         </nav>
                     </div>

@@ -12,6 +12,7 @@ import createreportReducer from "../slices/createreport/createnewreport";
 import authReducer from "../slices/loginuser/authuser";
 import contactFormReducer from "../slices/GetContactForm";
 import reportDetailsReducer from "../slices/createreport/ViewReportDetails"
+import updateReportReducer from "../slices/createreport/updateEmailsallow"
 
 const store = configureStore({
     reducer: {
@@ -28,6 +29,7 @@ const store = configureStore({
         auth: authReducer,
         contactForm: contactFormReducer,
         reportDetails: reportDetailsReducer,
+        updateReportDetails: updateReportReducer
 
     },
 });

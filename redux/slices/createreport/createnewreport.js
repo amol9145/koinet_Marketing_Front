@@ -3,7 +3,6 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { baseUrl } from '../../../src/Constant/ConstantFiles';
 
-
 // Async thunk for the API call
 export const createReport = createAsyncThunk(
     'createnewreport/create',

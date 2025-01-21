@@ -18,8 +18,9 @@ const Billing = () => {
         designation: "",
         email: "",
         phone: "",
+        additionalEmails: [], // State to store additional emails
     });
-
+    // console.log(reportDetails)
     if (!reportDetails || !selectedLicense) {
         return <p>No report details or license selected.</p>;
     }
@@ -45,8 +46,47 @@ const Billing = () => {
         }));
     };
 
+    const handleEmailChange = (e, index) => {
+        const { value } = e.target;
+        setBillingDetails((prev) => {
+            const updatedEmails = [...prev.additionalEmails];
+            updatedEmails[index] = value;
+            return { ...prev, additionalEmails: updatedEmails };
+        });
+    };
+
+    const addEmailField = () => {
+        setBillingDetails((prev) => ({
+            ...prev,
+            additionalEmails: [...prev.additionalEmails, ""],
+        }));
+    };
+
+    const removeEmailField = (index) => {
+        setBillingDetails((prev) => {
+            const updatedEmails = prev.additionalEmails.filter((_, i) => i !== index);
+            return { ...prev, additionalEmails: updatedEmails };
+        });
+    };
+
     const isFormValid = () => {
-        return Object.values(billingDetails).every((value) => value.trim() !== "");
+        return Object.values(billingDetails).every((value) => value) &&
+            (selectedLicense !== "multi-user" && selectedLicense !== "enterprise" || billingDetails.additionalEmails.every(email => email.trim() !== ""));
+    };
+
+    const handleUpdateBillingDetails = async () => {
+        try {
+            const response = await axios.put(
+                `${baseUrl}/reports_update/${reportDetails._id}`, // Use the correct report ID
+                billingDetails
+            );
+            if (response.status === 200) {
+                toast.success("Billing details updated successfully!");
+            }
+        } catch (error) {
+            console.error("Error updating billing details:", error);
+            toast.error("Failed to update billing details. Please try again.");
+        }
     };
 
     const handlePayment = async () => {
@@ -55,36 +95,34 @@ const Billing = () => {
             return;
         }
 
-        const token = localStorage.getItem("userToken");
         let amount, currency;
 
-        switch (selectedLicense) {
-            case "single-user":
-                amount = reportDetails.singleUserPrice * 100;
-                currency = reportDetails.singleUserCurrency || "INR";
-                break;
-            case "multi-user":
-                amount = reportDetails.multiUserPrice * 100;
-                currency = reportDetails.multiUserCurrency || "INR";
-                break;
-            case "enterprise":
-                amount = reportDetails.enterprisePrice * 100;
-                currency = reportDetails.enterpriseCurrency || "INR";
-                break;
-            default:
-                alert("Please select a valid license type.");
-                return;
+        if (selectedLicense === "single-user") {
+            amount = reportDetails.singleUserPrice * 100; // Convert to paise
+            currency = reportDetails.singleUserCurrency || "INR";
+        } else if (selectedLicense === "multi-user") {
+            amount = reportDetails.multiUserPrice * 100;
+            currency = reportDetails.multiUserCurrency || "INR";
+        } else if (selectedLicense === "enterprise") {
+            amount = reportDetails.enterprisePrice * 100;
+            currency = reportDetails.enterpriseCurrency || "INR";
+        } else {
+            alert("Please select a valid license type.");
+            return;
         }
 
         try {
             const createOrderResponse = await axios.post(`${baseUrl}/create-order`, {
                 amount,
                 currency,
-                licenseType: selectedLicense,
-                token,
+                licenseType: selectedLicense, // Pass selected license type
             });
 
-            const { id: order_id, amount: orderAmount, currency: orderCurrency } = createOrderResponse.data.data;
+            const { data } = createOrderResponse.data;
+            const { id: order_id, amount: orderAmount, currency: orderCurrency } = data;
+            const { token } = createOrderResponse.data; // Extract token from response
+
+            localStorage.setItem("paymentToken", token);
 
             const options = {
                 key: "rzp_test_cUDdmmAIerYlSG",
@@ -101,26 +139,32 @@ const Billing = () => {
                             razorpay_order_id: order_id,
                             razorpay_payment_id,
                             razorpay_signature,
-                            token,
+                            token, // Use token from localStorage
                             amount: orderAmount,
                             currency: orderCurrency,
                         });
 
                         alert(verifyResponse.data.message);
-
-                        // Send Email After Successful Payment
-                        try {
-                            await dispatch(
-                                sendEmail({
-                                    user_name: `${billingDetails.firstName} ${billingDetails.lastName}`,
-                                    user_email: billingDetails.email,
-                                    user_link: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
-                                    report_title: reportDetails.title,
-                                })
-                            ).unwrap();
-                        } catch (emailError) {
-                            console.error("Failed to send email:", emailError);
-                            toast.error("Failed to send confirmation email.");
+                        handleUpdateBillingDetails()
+                        const storedToken = localStorage.getItem("paymentToken");
+                        if (storedToken) {
+                            try {
+                                await dispatch(
+                                    sendEmail({
+                                        user_name: `${billingDetails.firstName} ${billingDetails.lastName}`,
+                                        user_email: billingDetails.email,
+                                        user_link: `https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf?token=${storedToken}&license=${selectedLicense}`,
+                                        report_title: reportDetails.title,
+                                        additionalEmails: billingDetails.additionalEmails,
+                                    })
+                                ).unwrap();
+                            } catch (emailError) {
+                                console.error("Failed to send email:", emailError);
+                                toast.error("Failed to send confirmation email.");
+                            }
+                        } else {
+                            console.error("Token is missing in localStorage!");
+                            toast.error("Token is missing. Please try again.");
                         }
                     } catch (error) {
                         console.error("Payment verification failed:", error);
@@ -171,54 +215,78 @@ const Billing = () => {
                         <div className="p-4 border-b bg-sky-900 text-white text-lg font-semibold">Billing Details</div>
                         <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                             {Object.keys(billingDetails).map((field) => (
-                                <input
-                                    key={field}
-                                    name={field}
-                                    value={billingDetails[field]}
-                                    onChange={handleChange}
-                                    type={field === "email" ? "email" : "text"}
-                                    placeholder={field.replace(/([A-Z])/g, " $1").trim()}
-                                    className="border w-full rounded-lg p-3 focus:outline-sky-500"
-                                />
+                                field !== "additionalEmails" && (
+                                    <input
+                                        key={field}
+                                        name={field}
+                                        value={billingDetails[field]}
+                                        onChange={handleChange}
+                                        type={field === "email" ? "email" : "text"}
+                                        placeholder={field.replace(/([A-Z])/g, " $1").trim()}
+                                        className="border w-full rounded-lg p-3 focus:outline-sky-500"
+                                    />
+                                )
                             ))}
+
+                            {/* Add emails for multi-user or enterprise licenses */}
+                            {(selectedLicense === "multi-user" || selectedLicense === "enterprise") && (
+                                <div>
+                                    <h4 className="font-semibold ">Additional Emails</h4>
+                                    {billingDetails.additionalEmails.map((email, index) => (
+                                        <div key={index} className="flex items-center gap-2 mt-2">
+                                            <input
+                                                type="email"
+                                                value={email}
+                                                onChange={(e) => handleEmailChange(e, index)}
+                                                placeholder={`Email ${index + 1}`}
+                                                className="border w-full rounded-lg p-2 focus:outline-sky-500"
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={() => removeEmailField(index)}
+                                                className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
+                                            >
+                                                Remove
+                                            </button>
+                                        </div>
+                                    ))}
+                                    <button
+                                        type="button"
+                                        onClick={addEmailField}
+                                        className="mt-2 text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800 "
+                                    >
+                                        Add Emails
+                                    </button>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
 
-                {/* Right Section */}
+                {/* Payment Section */}
                 <div className="w-full lg:w-1/3">
-                    {/* Order Summary Section */}
-                    <div className="border rounded-lg shadow-lg bg-white text-black mb-6">
-                        <div className="p-4 bg-sky-900 text-white text-lg font-semibold">Order Summary</div>
+                    <div className="border rounded-lg shadow-lg bg-white text-black p-4 mb-6">
+                        <div className="p-4 border-b bg-sky-900 text-white text-lg font-semibold">Payment</div>
                         <div className="p-4">
-                            <div className="flex justify-between mb-2">
-                                <span>License Type</span>
-                                <span>{licenseDisplay}</span>
-                            </div>
-                            <div className="flex justify-between mb-2">
-                                <span>Items In Cart</span>
-                                <span>1</span>
-                            </div>
-                            <div className="flex justify-between mb-2">
-                                <span>Price</span>
-                                <span>${price}</span>
-                            </div>
-                        </div>
-                    </div>
+                            <p className="font-semibold text-xl">License Type: {licenseDisplay}</p>
+                            <p className="font-semibold text-lg mt-4">
+                                Total Price: ${price}
+                            </p>
 
-                    {/* Checkout Button */}
-                    <button
-                        onClick={handlePayment}
-                        disabled={!isFormValid()}
-                        className={`w-full mt-3 px-5 py-2.5 text-white rounded-lg ${isFormValid()
-                            ? "bg-gradient-to-br from-pink-500 to-orange-400 hover:from-pink-600 hover:to-orange-500"
-                            : "bg-gray-400 cursor-not-allowed"
-                            }`}
-                    >
-                        {!isFormValid()
-                            ? "Complete all required fields to proceed with the purchase"
-                            : `Proceed to Payment : $${price}`}
-                    </button>
+                        </div>
+                        <button
+                            onClick={handlePayment}
+                            disabled={!isFormValid()}
+                            className={`w-full mt-3 px-5 py-2.5 text-white rounded-lg ${isFormValid()
+                                ? "bg-gradient-to-br from-pink-500 to-orange-400 hover:from-pink-600 hover:to-orange-500"
+                                : "bg-gray-400 cursor-not-allowed"
+                                }`}
+                        >
+                            {!isFormValid()
+                                ? "Complete all required fields to proceed with the purchase"
+                                : `Proceed to Payment : $${price}`}
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

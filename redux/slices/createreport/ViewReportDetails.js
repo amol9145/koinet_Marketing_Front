@@ -1,40 +1,44 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { toast } from 'react-toastify';
-import { baseUrl } from '../../../src/Constant/ConstantFiles';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { baseUrl } from "../../../src/Constant/ConstantFiles";
 
 // Thunk for fetching report details
 export const fetchReportDetails = createAsyncThunk(
-    'reportDetails/fetchReportDetails',
+    "reportDetails/fetchReportDetails",
     async(id, { rejectWithValue }) => {
         try {
-            const response = await axios.get(`${baseUrl}/get_report/${id}`);
+            const response = await axios.get(`${baseUrl}/reports/${id}`);
             return response.data.data;
         } catch (error) {
-            console.error('Error fetching report:', error);
-            return rejectWithValue(error.response.data.message || 'Failed to fetch report details');
+            console.error("Error fetching report:", error);
+            return rejectWithValue(
+                error.response.data.message || "Failed to fetch report details"
+            );
         }
     }
 );
 
 // Thunk for sending email
 export const sendEmail = createAsyncThunk(
-    'reportDetails/sendEmail',
+    "reportDetails/sendEmail",
     async(formData, { rejectWithValue }) => {
         try {
             const response = await axios.post(`${baseUrl}/send-email`, formData);
             toast.success(response.data.message);
             return response.data.message;
         } catch (error) {
-            toast.error('Failed to send email');
-            return rejectWithValue(error.response.data.message || 'Failed to send email');
+            toast.error("Failed to send email");
+            return rejectWithValue(
+                error.response.data.message || "Failed to send email"
+            );
         }
     }
 );
 
 // Thunk for handling payment
 export const handlePayment = createAsyncThunk(
-    'reportDetails/handlePayment',
+    "reportDetails/handlePayment",
     async({ reportDetails, selectedLicense, token }, { rejectWithValue }) => {
         try {
             let amount, currency;
@@ -58,14 +62,16 @@ export const handlePayment = createAsyncThunk(
 
             return response.data.data;
         } catch (error) {
-            console.error('Error creating order:', error);
-            return rejectWithValue(error.response.data.message || 'Failed to create payment order');
+            console.error("Error creating order:", error);
+            return rejectWithValue(
+                error.response.data.message || "Failed to create payment order"
+            );
         }
     }
 );
 
 const reportDetailsSlice = createSlice({
-    name: 'reportDetails',
+    name: "reportDetails",
     initialState: {
         reportDetails: null,
         emailStatus: null,
